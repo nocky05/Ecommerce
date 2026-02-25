@@ -1,0 +1,36 @@
+{
+    "priceAdjustment": {
+        "type": "percentage",
+        "value": 0,
+        "comment": "0 = pas de changement, 20 = +20%, -10 = -10%"
+    },
+    "deliveryRules": {
+        "local_stock": [
+            "Accessoires pour musiciens",
+            "Batteries & percussions"
+        ],
+        "european_order": [
+            "Piano & Clavier",
+            "Instruments à vent",
+            "Guitares & basses",
+            "Sonorisation",
+            "Studio & Enregistrement"
+        ]
+    },
+    "deliveryTimes": {
+        "local_stock": "24-48h",
+        "european_order": "2-3 semaines"
+    },
+    "customPrices": {
+        "comment": "Ajoutez ici des prix personnalisés par nom de produit",
+        "example": {
+            "A-Stand Flex Silver Millenium": 18000
+        }
+    },
+    "customDescriptions": {
+        "comment": "Ajoutez ici des descriptions personnalisées par nom de produit",
+        "example": {
+            "A-Stand Flex Silver Millenium": "Support de guitare professionnel ultra-stable"
+        }
+    }
+}
