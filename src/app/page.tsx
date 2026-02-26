@@ -219,7 +219,7 @@ export default function HomePage() {
                 style={{ mixBlendMode: 'screen', opacity: 0.5, objectFit: 'cover' }}
                 priority
               />
-              <div className="absolute d-flex flex-column items-center justify-center font-black rounded-full"
+              <div className="absolute d-flex flex-column items-center justify-center font-bold rounded-full"
                 style={{
                   top: '20%',
                   right: '10%',
