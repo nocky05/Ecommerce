@@ -69,7 +69,6 @@ export default function ShopContent() {
     const [error, setError] = useState<string | null>(null);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(5000000);
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
     const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>({});
@@ -77,6 +76,7 @@ export default function ShopContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const searchQueryFromUrl = searchParams.get('search') || "";
+    const selectedCategory = searchParams.get('category');
 
     const fetchProducts = async () => {
         setIsLoading(true);
@@ -94,7 +94,6 @@ export default function ShopContent() {
             if (!res.ok) throw new Error("Failed to fetch products");
             const data = await res.json();
 
-            // Compatibility mapping
             const mappedProducts = data.products.map((p: any) => ({
                 ...p,
                 oldPrice: p.old_price,
@@ -118,30 +117,14 @@ export default function ShopContent() {
             params.delete('category');
         }
         params.delete('search');
+        params.set('page', '1'); // Reset pagination in URL
         router.push(`/shop?${params.toString()}`);
     };
 
+    // Reset page and fetch when URL or filters change
     useEffect(() => {
-        const categoryParam = searchParams.get('category');
-        setSelectedCategory(categoryParam);
         setCurrentPage(1);
-    }, [searchParams]);
-
-    const fetchCategoryCounts = async () => {
-        try {
-            const res = await fetch('/api/categories');
-            if (res.ok) {
-                const data = await res.json();
-                setCategoryCounts(data);
-            }
-        } catch (error) {
-            console.error("Error fetching category counts:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchCategoryCounts();
-    }, []);
+    }, [selectedCategory, searchQueryFromUrl]);
 
     useEffect(() => {
         fetchProducts();
