@@ -343,7 +343,7 @@ export default function ShopContent() {
                                                 </div>
                                             </Link>
                                             <div className="shop-card-content">
-                                                <h3 style={{ fontSize: '14px', fontWeight: '600', minHeight: '40px', marginBottom: '8px' }}>{product.name}</h3>
+                                                <h3 className="line-clamp-2" style={{ fontSize: '14px', fontWeight: '600', minHeight: '40px', marginBottom: '8px' }}>{product.name}</h3>
                                                 <div style={{ display: 'flex', color: '#fbc02d', fontSize: '11px', marginBottom: '8px', gap: '2px' }}>
                                                     {[1, 2, 3, 4, 5].map((s) => (
                                                         <span key={s}>{s <= Math.round(product.rating || 0) ? "★" : "☆"}</span>
@@ -358,7 +358,7 @@ export default function ShopContent() {
                                                 </div>
                                             </div>
                                             <div className="shop-card-actions">
-                                                <button onClick={() => addToCart(product)} className="btn-add-cart" style={{ flex: 1, background: 'black', color: 'white', border: 'none', borderRadius: '4px', padding: '10px' }}>AJOUTER AU PANIER</button>
+                                                <button onClick={() => addToCart(product)} className="btn-add-cart">AJOUTER AU PANIER</button>
                                             </div>
                                         </div>
                                     ))}

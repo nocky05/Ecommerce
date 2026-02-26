@@ -353,7 +353,7 @@ export default function HomePage() {
           {filteredProducts.map((prod, i) => (
             <div key={i} className="card p-4">
               <Link href={`/product/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <div className="relative mb-4 bg-light overflow-hidden p-6" style={{ height: '200px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="card-image-wrapper mb-4">
                   <span className="absolute badge badge-red font-bold px-2 py-1" style={{ top: '15px', left: '15px', zIndex: 10 }}>
                     {prod.discount > 0 ? `${prod.discount}% PROMO` : (prod.promoLabel || "NOUVEAUTÉ")}
                   </span>
@@ -362,7 +362,7 @@ export default function HomePage() {
                     alt={prod.name}
                     fill
                     className="img-contain"
-                    style={{ objectFit: 'contain', padding: '20px' }}
+                    style={{ objectFit: 'contain', padding: '15px' }}
                   />
                 </div>
               </Link>
@@ -383,26 +383,10 @@ export default function HomePage() {
                   <span className="price-now" style={{ color: '#b22222', fontSize: '1.1rem', fontWeight: '800' }}>{prod.price.toLocaleString()}F</span>
                 </div>
 
-                <div className="card-actions" style={{ marginTop: '10px', display: 'flex', gap: '10px' }}>
+                <div className="card-actions">
                   <button
                     onClick={() => addToCart(prod)}
                     className="btn-add-cart"
-                    style={{
-                      flex: 1,
-                      background: 'black',
-                      color: 'white',
-                      border: 'none',
-                      padding: '8px 12px',
-                      borderRadius: '4px',
-                      fontWeight: '600',
-                      fontSize: '13px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px',
-                      cursor: 'pointer',
-                      transition: 'background 0.2s'
-                    }}
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-2.61L23 6H6" /></svg>
                     Ajouter
@@ -411,20 +395,11 @@ export default function HomePage() {
                     onClick={() => toggleWishlist(prod)}
                     className="btn-like"
                     style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '4px',
-                      border: '1px solid #ddd',
                       background: isInWishlist(prod.id) ? '#b22222' : 'white',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
                       color: isInWishlist(prod.id) ? 'white' : '#666',
-                      transition: 'all 0.2s'
                     }}
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill={isInWishlist(prod.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill={isInWishlist(prod.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.82-8.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
                   </button>
                 </div>
               </div>
