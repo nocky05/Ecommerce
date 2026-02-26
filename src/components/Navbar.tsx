@@ -124,26 +124,78 @@ export default function Navbar() {
       {/* 2. Main Header - Blue */}
       <div className="py-6 py-4-mobile" style={{ background: '#007BFF', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
         <div className="container header-main-grid">
-          {/* Logo & Hamburger Section */}
-          <div className="d-flex items-center gap-3">
-            <button
-              className="d-block-mobile"
-              style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0.25rem' }}
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
-            </button>
-            <Link href="/" className="d-flex items-center gap-2" style={{ textDecoration: 'none' }}>
-              <div className="bg-white rounded-full d-flex items-center justify-center logo-icon-box" style={{ width: '45px', height: '45px' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007BFF" strokeWidth="3">
-                  <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
-                </svg>
+          {/* Row 1 on mobile: Logo + Icons together */}
+          <div className="header-top-row d-flex items-center" style={{ gap: '0' }}>
+            {/* Logo & Hamburger Section */}
+            <div className="d-flex items-center gap-3">
+              <button
+                className="d-block-mobile"
+                style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0.25rem' }}
+                onClick={() => setMobileMenuOpen(true)}
+              >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+              </button>
+              <Link href="/" className="d-flex items-center gap-2" style={{ textDecoration: 'none' }}>
+                <div className="bg-white rounded-full d-flex items-center justify-center logo-icon-box" style={{ width: '45px', height: '45px' }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007BFF" strokeWidth="3">
+                    <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
+                  </svg>
+                </div>
+                <span className="text-2xl font-black text-white logo-text">Music<span style={{ color: '#FFD200' }}>Market</span></span>
+              </Link>
+            </div>
+
+            {/* Action Zone - Right (inside top row on mobile) */}
+            <div className="d-flex items-center justify-end user-actions-container" style={{ gap: '2rem', color: 'white' }}>
+              <div className="d-flex items-center gap-3 group hidden-mobile">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                <div className="text-[9px] font-black uppercase d-flex flex-row items-center gap-2 transition">
+                  {user ? (
+                    <div className="d-flex items-center gap-3">
+                      <Link href="/profile" className="hover:text-yellow-300 transition block" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        {profile?.full_name || user.email?.split("@")[0]}
+                      </Link>
+                      <span style={{ opacity: 0.3, fontWeight: 'normal' }}>|</span>
+                      <button
+                        onClick={signOut}
+                        style={{ background: 'transparent', border: 'none', color: 'inherit', padding: 0.5, cursor: 'pointer', fontSize: '9px', fontWeight: '900', textTransform: 'uppercase' }}
+                        className="hover:text-yellow-300 transition"
+                      >
+                        Déconnexion
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <Link href="/login" className="hover:text-yellow-300 transition block" style={{ textDecoration: 'none', color: 'inherit' }}>Connexion</Link>
+                      <span style={{ opacity: 0.3, fontWeight: 'normal' }}>|</span>
+                      <Link href="/register" className="hover:text-yellow-300 transition block" style={{ textDecoration: 'none', color: 'inherit' }}>Enregistrement</Link>
+                    </>
+                  )}
+                </div>
               </div>
-              <span className="text-2xl font-black text-white logo-text">Music<span style={{ color: '#FFD200' }}>Market</span></span>
-            </Link>
+
+              {/* Mobile-only User Icon */}
+              <Link href={user ? "/profile" : "/login"} className="relative cursor-pointer text-white d-block-mobile" style={{ textDecoration: 'none' }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+              </Link>
+
+              <Link href="/wishlist" className="relative cursor-pointer text-white" style={{ textDecoration: 'none' }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                <span className="absolute bg-black text-white text-[9px] font-black d-flex items-center justify-center rounded-full shadow-sm"
+                  style={{ top: '-4px', right: '-8px', width: '16px', height: '16px', border: '1px solid #007BFF' }}>{totalWishlistItems}</span>
+              </Link>
+              <Link href="/cart" className="d-flex items-center gap-2 cursor-pointer text-white" style={{ textDecoration: 'none' }}>
+                <div className="relative">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
+                  <span className="absolute bg-black text-white text-[9px] font-black d-flex items-center justify-center rounded-full shadow-sm"
+                    style={{ top: '-4px', right: '-8px', width: '16px', height: '16px', border: '1px solid #007BFF' }}>{totalItems}</span>
+                </div>
+                <span className="text-[11px] font-black uppercase ml-1 hidden-mobile">{subtotal.toLocaleString()}F CFA</span>
+              </Link>
+            </div>
           </div>
 
-          {/* Search Bar - Center */}
+          {/* Row 2 on mobile: Search Bar (full width) */}
           <form
             onSubmit={handleSearch}
             className="d-flex relative search-form-container"
@@ -237,55 +289,6 @@ export default function Navbar() {
               </svg>
             </button>
           </form>
-
-          {/* Action Zone - Right */}
-          <div className="d-flex items-center justify-end user-actions-container" style={{ gap: '2rem', color: 'white' }}>
-            <div className="d-flex items-center gap-3 group hidden-mobile">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-              <div className="text-[9px] font-black uppercase d-flex flex-row items-center gap-2 transition">
-                {user ? (
-                  <div className="d-flex items-center gap-3">
-                    <Link href="/profile" className="hover:text-yellow-300 transition block" style={{ textDecoration: 'none', color: 'inherit' }}>
-                      {profile?.full_name || user.email?.split("@")[0]}
-                    </Link>
-                    <span style={{ opacity: 0.3, fontWeight: 'normal' }}>|</span>
-                    <button
-                      onClick={signOut}
-                      style={{ background: 'transparent', border: 'none', color: 'inherit', padding: 0.5, cursor: 'pointer', fontSize: '9px', fontWeight: '900', textTransform: 'uppercase' }}
-                      className="hover:text-yellow-300 transition"
-                    >
-                      Déconnexion
-                    </button>
-                  </div>
-                ) : (
-                  <>
-                    <Link href="/login" className="hover:text-yellow-300 transition block" style={{ textDecoration: 'none', color: 'inherit' }}>Connexion</Link>
-                    <span style={{ opacity: 0.3, fontWeight: 'normal' }}>|</span>
-                    <Link href="/register" className="hover:text-yellow-300 transition block" style={{ textDecoration: 'none', color: 'inherit' }}>Enregistrement</Link>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Mobile-only User Icon */}
-            <Link href={user ? "/profile" : "/login"} className="relative cursor-pointer text-white d-block-mobile" style={{ textDecoration: 'none' }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-            </Link>
-
-            <Link href="/wishlist" className="relative cursor-pointer text-white" style={{ textDecoration: 'none' }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
-              <span className="absolute bg-black text-white text-[9px] font-black d-flex items-center justify-center rounded-full shadow-sm"
-                style={{ top: '-4px', right: '-8px', width: '16px', height: '16px', border: '1px solid #007BFF' }}>{totalWishlistItems}</span>
-            </Link>
-            <Link href="/cart" className="d-flex items-center gap-2 cursor-pointer text-white" style={{ textDecoration: 'none' }}>
-              <div className="relative">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
-                <span className="absolute bg-black text-white text-[9px] font-black d-flex items-center justify-center rounded-full shadow-sm"
-                  style={{ top: '-4px', right: '-8px', width: '16px', height: '16px', border: '1px solid #007BFF' }}>{totalItems}</span>
-              </div>
-              <span className="text-[11px] font-black uppercase ml-1 hidden-mobile">{subtotal.toLocaleString()}F CFA</span>
-            </Link>
-          </div>
         </div>
       </div>
 
@@ -294,6 +297,7 @@ export default function Navbar() {
         <div className="container d-flex items-center">
           {/* Categories Button */}
           <div className="relative group" style={{ minWidth: '280px' }}>
+
             <div
               className="d-flex items-center gap-3 px-6 h-[56px] bg-white cursor-pointer transition"
               onClick={() => setCategoriesOpen(!categoriesOpen)}
@@ -357,56 +361,58 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Hamburger Menu Overlay */}
-      {mobileMenuOpen && (
-        <div className="absolute inset-0 d-block-mobile" style={{ position: 'fixed', zIndex: 2000, background: 'rgba(0,0,0,0.5)' }} onClick={() => setMobileMenuOpen(false)}>
-          <div
-            className="h-full bg-white flex-col-mobile"
-            style={{ width: '80%', maxWidth: '300px', transform: 'translateX(0)', transition: 'transform 0.3s ease-in-out', display: 'flex', flexDirection: 'column' }}
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="py-4 px-6" style={{ background: '#007BFF', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span className="text-xl font-black">Menu</span>
-              <button onClick={() => setMobileMenuOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6 6 18M6 6l12 12" /></svg>
-              </button>
-            </div>
-            <div className="flex-1 overflow-y-auto" style={{ borderRight: '1px solid #eee' }}>
-              <div className="py-4 px-6 border-b" style={{ borderBottom: '1px solid #f0f0f0' }}>
-                {user ? (
-                  <div className="d-flex items-center gap-3 text-sm">
-                    <Link href="/profile" className="font-bold text-gray-900 block" style={{ textDecoration: 'none' }} onClick={() => setMobileMenuOpen(false)}>
-                      {profile?.full_name || user.email?.split("@")[0]}
-                    </Link>
-                    <span style={{ opacity: 0.3 }}>|</span>
-                    <button onClick={() => { signOut(); setMobileMenuOpen(false); }} style={{ background: 'transparent', border: 'none', color: '#b22222', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold' }}>
-                      Déconnexion
-                    </button>
-                  </div>
-                ) : (
-                  <div className="d-flex items-center gap-4 text-sm font-bold">
-                    <Link href="/login" style={{ textDecoration: 'none', color: '#007BFF' }} onClick={() => setMobileMenuOpen(false)}>Connexion</Link>
-                    <Link href="/register" style={{ textDecoration: 'none', color: '#007BFF' }} onClick={() => setMobileMenuOpen(false)}>S'inscrire</Link>
-                  </div>
-                )}
+      {
+        mobileMenuOpen && (
+          <div className="absolute inset-0 d-block-mobile" style={{ position: 'fixed', zIndex: 2000, background: 'rgba(0,0,0,0.5)' }} onClick={() => setMobileMenuOpen(false)}>
+            <div
+              className="h-full bg-white flex-col-mobile"
+              style={{ width: '80%', maxWidth: '300px', transform: 'translateX(0)', transition: 'transform 0.3s ease-in-out', display: 'flex', flexDirection: 'column' }}
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="py-4 px-6" style={{ background: '#007BFF', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span className="text-xl font-black">Menu</span>
+                <button onClick={() => setMobileMenuOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6 6 18M6 6l12 12" /></svg>
+                </button>
               </div>
+              <div className="flex-1 overflow-y-auto" style={{ borderRight: '1px solid #eee' }}>
+                <div className="py-4 px-6 border-b" style={{ borderBottom: '1px solid #f0f0f0' }}>
+                  {user ? (
+                    <div className="d-flex items-center gap-3 text-sm">
+                      <Link href="/profile" className="font-bold text-gray-900 block" style={{ textDecoration: 'none' }} onClick={() => setMobileMenuOpen(false)}>
+                        {profile?.full_name || user?.email?.split("@")[0]}
+                      </Link>
+                      <span style={{ opacity: 0.3 }}>|</span>
+                      <button onClick={() => { signOut(); setMobileMenuOpen(false); }} style={{ background: 'transparent', border: 'none', color: '#b22222', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold' }}>
+                        Déconnexion
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="d-flex items-center gap-4 text-sm font-bold">
+                      <Link href="/login" style={{ textDecoration: 'none', color: '#007BFF' }} onClick={() => setMobileMenuOpen(false)}>Connexion</Link>
+                      <Link href="/register" style={{ textDecoration: 'none', color: '#007BFF' }} onClick={() => setMobileMenuOpen(false)}>S'inscrire</Link>
+                    </div>
+                  )}
+                </div>
 
-              <div className="py-2 flex-col-mobile" style={{ display: 'flex', flexDirection: 'column' }}>
-                {mainLinks.map(link => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="px-6 py-4 text-base font-black uppercase tracking-wide border-b"
-                    style={{ textDecoration: 'none', display: 'block', color: '#111', borderBottom: '1px solid #f0f0f0' }}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                <div className="py-2 flex-col-mobile" style={{ display: 'flex', flexDirection: 'column' }}>
+                  {mainLinks.map(link => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="px-6 py-4 text-base font-black uppercase tracking-wide border-b"
+                      style={{ textDecoration: 'none', display: 'block', color: '#111', borderBottom: '1px solid #f0f0f0' }}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </header>
   );
 }
