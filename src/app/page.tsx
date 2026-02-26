@@ -30,14 +30,14 @@ export default function HomePage() {
   const categories_tabs = ["Tous les produits", "Guitares", "Pianos", "Batteries", "Sono", "Studio"];
 
   const instruments_categories = [
-    { name: "Pianos", category: "PIANOS & CLAVIERS", image: "/images/products/product-4-yamaha-dgx-670---piano-num-rique-88-touches.jpg" },
-    { name: "Guitares", category: "GUITARES & BASSES", image: "/images/products/product-1-harley-benton-hqs-el-10-46---jeu-de-6-cordes-pour-.jpg" },
+    { name: "Pianos", category: "PIANOS & CLAVIERS", image: "/images/products/product-4-yamaha-dgx-670-piano-numerique-88-touches.jpg" },
+    { name: "Guitares", category: "GUITARES & BASSES", image: "/images/products/product-1-harley-benton-hqs-el-10-46-jeu-de-6-cordes-pour.jpg" },
     { name: "Batteries", category: "BATTERIES & PERCUSSIONS", image: "/images/products/product-14-alesis-nitro-mesh-kit.jpg" },
     { name: "Violons", category: "VIOLONS & ORCHESTRE", image: "/images/products/product-117-ensemble-violon-sunrise-1414p-4-4.jpg" },
-    { name: "Sono", category: "SONORISATION", image: "/images/products/product-213-mackie-cr3-5-3-5----enceintes-de-studio-amplifi-es.jpg" },
+    { name: "Sono", category: "SONORISATION", image: "/images/products/product-213-mackie-cr3-5-3-5-enceintes-de-studio-amplifieries.jpg" },
     { name: "Synthés", category: "PIANOS & CLAVIERS", image: "/images/products/product-9-akai-professional-mpk-mini-mk3.jpg" },
-    { name: "DJ Gear", category: "ÉQUIPEMENT DJ", image: "/images/products/product-109-denon-dj-sc-live-4-standalone-dj-controller---cont.jpg" },
-    { name: "Micros", category: "MICROPHONES", image: "/images/products/product-24-audio-technica-at2020---micro---condensateur-cardi.jpg" },
+    { name: "DJ Gear", category: "ÉQUIPEMENT DJ", image: "/images/products/product-109-denon-dj-sc-live-4-standalone-dj-controller-cont.jpg" },
+    { name: "Micros", category: "MICROPHONES", image: "/images/products/product-24-audio-technica-at2020-micro-condensateur-cardi.jpg" },
   ];
 
   useEffect(() => {
