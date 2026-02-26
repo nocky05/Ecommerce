@@ -1549,3 +1549,70 @@ body {
   gap: 50px;
   margin-bottom: 80px;
 }
+
+/* FINAL MOBILE OVERRIDES */
+@media (max-width: 768px) {
+
+  body,
+  html {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative;
+  }
+
+  .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    max-width: 100vw !important;
+    overflow-x: hidden;
+  }
+
+  .section-header-flex {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+    margin-bottom: 2rem;
+  }
+
+  .tabs-nav {
+    display: flex !important;
+    gap: 1.25rem !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    width: 100% !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid #eee !important;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start !important;
+  }
+
+  .tabs-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .view-all-btn-mobile {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 200px;
+    margin: 0 auto !important;
+    text-align: center;
+    order: 2;
+  }
+
+  .header-main-grid {
+    gap: 0.5rem !important;
+    padding: 0 !important;
+  }
+
+  .logo-text {
+    font-size: 1.1rem !important;
+  }
+
+  .search-form-container {
+    margin-top: 10px !important;
+  }
+}
