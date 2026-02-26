@@ -1578,12 +1578,12 @@ body {
 
   .tabs-nav {
     display: flex !important;
-    gap: 1.25rem !important;
+    gap: 1.5rem !important;
     overflow-x: auto !important;
     white-space: nowrap !important;
     width: 100% !important;
-    padding-bottom: 10px !important;
-    margin-bottom: 0 !important;
+    padding: 0.5rem 0 10px 0 !important;
+    margin-bottom: 1rem !important;
     border-bottom: 1px solid #eee !important;
     -webkit-overflow-scrolling: touch;
     justify-content: flex-start !important;
@@ -1593,12 +1593,18 @@ body {
     display: none;
   }
 
+  .tabs-btn {
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    flex-shrink: 0 !important;
+  }
+
   .view-all-btn-mobile {
     position: relative !important;
     display: block !important;
     width: 100% !important;
     max-width: 200px;
-    margin: 0 auto !important;
+    margin: 1rem auto !important;
     text-align: center;
     order: 2;
   }
@@ -1606,6 +1612,7 @@ body {
   .header-main-grid {
     gap: 0.5rem !important;
     padding: 0 !important;
+    grid-template-columns: 1fr auto !important;
   }
 
   .logo-text {
@@ -1614,5 +1621,16 @@ body {
 
   .search-form-container {
     margin-top: 10px !important;
+    width: 100% !important;
+  }
+
+  .search-form-container > div:nth-child(2) span {
+    display: none !important;
+  }
+
+  .search-form-container > div:nth-child(2) {
+    min-width: 45px !important;
+    padding: 0 5px !important;
+    justify-content: center !important;
   }
 }
