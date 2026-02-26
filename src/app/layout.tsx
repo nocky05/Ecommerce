@@ -1,10 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: '--font-inter',
+});
+
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  variable: '--font-poppins',
+});
+
+const montserrat = Montserrat({
+  weight: ['700'],
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+});
 
 export const metadata: Metadata = {
   title: "MusicMarket | Votre Spécialiste Musique en Côte d'Ivoire",
@@ -32,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="scroll-smooth">
-      <body className={`${inter.className} antialiased min-h-screen`}>
+      <body className={`${inter.variable} ${poppins.variable} ${montserrat.variable} font-inter antialiased min-h-screen`}>
         <Providers>
           <ClientLayoutWrapper>
             {children}

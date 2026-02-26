@@ -203,9 +203,9 @@ export default function HomePage() {
           <div className="hero-main relative overflow-hidden text-white" style={{ background: '#0a0a0a' }}>
             <div className="hero-content" style={{ position: 'relative', zIndex: 10 }}>
               <span className="text-primary font-bold uppercase tracking-widest text-xs mb-4 d-flex">PROMOTION EXCLUSIVE</span>
-              <h1 className="text-5xl font-black mb-6" style={{ lineHeight: 1.1 }}>{heroBanner.title}</h1>
-              <p className="text-gray-400 mb-8" style={{ fontSize: '1.1rem' }}>{heroBanner.description}</p>
-              <Link href={heroBanner.button_link} className="btn btn-primary px-10 py-4 d-flex items-center gap-2 font-black uppercase tracking-widest" style={{ textDecoration: 'none', width: 'fit-content', borderRadius: '12px', fontSize: '13px', boxShadow: '0 10px 25px rgba(0, 123, 255, 0.3)' }}>
+              <h1 className="text-5xl font-bold mb-6" style={{ lineHeight: 1.1 }}>{heroBanner.title}</h1>
+              <p className="text-gray-400 mb-8" style={{ fontSize: '1.1rem', lineHeight: 1.6 }}>{heroBanner.description}</p>
+              <Link href={heroBanner.button_link} className="btn btn-primary px-10 py-4 d-flex items-center gap-2 font-bold uppercase tracking-widest" style={{ textDecoration: 'none', width: 'fit-content', borderRadius: '12px', fontSize: '13px', boxShadow: '0 10px 25px rgba(0, 123, 255, 0.3)' }}>
                 DÉCOUVRIR LES OFFRES
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </Link>
@@ -244,8 +244,8 @@ export default function HomePage() {
               <div key={i} className="side-card" style={{ background: card.bg_color, color: card.text_color }}>
                 <div className="side-card-content">
                   <h3 className="text-xl font-bold mb-2" style={{ color: 'inherit' }}>{card.title}</h3>
-                  {card.subtitle && <p className="font-black mb-4" style={{ fontSize: '14px', color: card.text_color === '#fff' ? 'var(--primary)' : 'inherit', opacity: 0.9 }}>{card.subtitle}</p>}
-                  <Link href={card.link} className="btn btn-primary text-xs font-black uppercase tracking-widest" style={{ width: 'fit-content', padding: '0.8rem 1.5rem', textDecoration: 'none', borderRadius: '8px' }}>DÉCOUVRIR →</Link>
+                  {card.subtitle && <p className="font-bold mb-4" style={{ fontSize: '14px', color: card.text_color === '#fff' ? 'var(--primary)' : 'inherit', opacity: 0.9 }}>{card.subtitle}</p>}
+                  <Link href={card.link} className="btn btn-primary text-xs font-bold uppercase tracking-widest" style={{ width: 'fit-content', padding: '0.8rem 1.5rem', textDecoration: 'none', borderRadius: '8px' }}>DÉCOUVRIR →</Link>
                 </div>
                 <div className="side-card-image" style={{ opacity: card.bg_color === '#000' ? 0.7 : 0.9 }}>
                   <Image
@@ -332,7 +332,7 @@ export default function HomePage() {
         <div className="mb-8">
           <div className="section-badge" style={{ marginBottom: '1.5rem' }}>MEILLEURE VENTE</div>
           <div className="d-flex items-center justify-between" style={{ flexWrap: 'wrap', gap: '0.5rem' }}>
-            <h2 className="text-3xl font-black" style={{ margin: 0 }}>Meilleurs Prix</h2>
+            <h2 style={{ margin: 0 }}>Meilleurs Prix</h2>
             <Link href="/shop" className="btn btn-dark hidden-mobile" style={{ fontSize: '0.9rem', background: '#333', color: 'white', textDecoration: 'none' }}>Tout voir</Link>
           </div>
 
@@ -342,7 +342,6 @@ export default function HomePage() {
                 key={tab}
                 className={`tabs-btn ${activeTab === tab ? 'active' : ''}`}
                 onClick={() => setActiveTab(tab)}
-                style={{ fontSize: '1rem', fontWeight: activeTab === tab ? '800' : '500' }}
               >
                 {tab}
               </button>

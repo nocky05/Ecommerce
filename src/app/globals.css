@@ -16,6 +16,10 @@
   --gray-800: #1F2937;
   --gray-900: #111827;
 
+  --font-inter: 'Inter', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+
   --container-max: 1300px;
   --radius: 6px;
   --header-height: 145px;
@@ -35,11 +39,23 @@ button {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-inter);
   background-color: var(--white);
   color: var(--gray-900);
-  line-height: 1.5;
+  line-height: 1.6;
   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-poppins);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 0;
 }
 
 .input-field {
@@ -908,10 +924,10 @@ body {
 /* Tabs Navigation */
 .tabs-nav {
   display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
   border-bottom: 1px solid var(--gray-200);
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.1rem;
 }
 
 .categories-container {
@@ -931,21 +947,24 @@ body {
 .tabs-btn {
   background: none;
   border: none;
-  font-size: 0.875rem;
-  font-weight: 700;
+  font-family: var(--font-poppins);
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--gray-500);
   cursor: pointer;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.8rem;
   position: relative;
   transition: var(--transition);
+  text-transform: capitalize;
 }
 
 .tabs-btn:hover {
-  color: var(--primary);
+  color: var(--secondary);
 }
 
 .tabs-btn.active {
   color: var(--primary);
+  font-weight: 600;
 }
 
 .tabs-btn.active::after {
@@ -954,7 +973,7 @@ body {
   bottom: -1px;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background-color: var(--primary);
 }
 
@@ -1170,8 +1189,9 @@ body {
   color: var(--primary);
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
+  font-family: var(--font-inter);
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
