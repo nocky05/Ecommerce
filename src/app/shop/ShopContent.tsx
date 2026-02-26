@@ -130,6 +130,22 @@ export default function ShopContent() {
         fetchProducts();
     }, [selectedCategory, searchQueryFromUrl, minPrice, maxPrice, currentPage]);
 
+    const fetchCategoryCounts = async () => {
+        try {
+            const res = await fetch('/api/categories');
+            if (res.ok) {
+                const data = await res.json();
+                setCategoryCounts(data);
+            }
+        } catch (error) {
+            console.error("Error fetching category counts:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchCategoryCounts();
+    }, []);
+
     const featuredProducts = products.slice(0, 3);
 
     return (
@@ -279,7 +295,7 @@ export default function ShopContent() {
                                 <div style={{ fontSize: '48px', marginBottom: '20px' }}>🔍</div>
                                 <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '10px' }}>Aucun produit trouvé</h3>
                                 <p style={{ color: '#666' }}>Essayez d'ajuster vos filtres ou votre recherche.</p>
-                                <button onClick={() => { setSelectedCategory(null); setMinPrice(0); setMaxPrice(5000000); router.push('/shop'); }} style={{ marginTop: '30px', padding: '12px 30px', background: 'black', color: 'white', border: 'none', borderRadius: '30px', fontWeight: '700', cursor: 'pointer' }}>VOIR TOUS LES PRODUITS</button>
+                                <button onClick={() => { setMinPrice(0); setMaxPrice(5000000); router.push('/shop'); }} style={{ marginTop: '30px', padding: '12px 30px', background: 'black', color: 'white', border: 'none', borderRadius: '30px', fontWeight: '700', cursor: 'pointer' }}>VOIR TOUS LES PRODUITS</button>
                             </div>
                         ) : (
                             <>
