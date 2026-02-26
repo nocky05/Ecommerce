@@ -300,6 +300,23 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
+
+  /* Responsive fixes for Promo Banner on Tablet */
+  .promo-banner {
+    padding: 1.5rem 2rem !important;
+  }
+
+  .promo-banner h2 {
+    font-size: 2.5rem !important;
+  }
+
+  .promo-banner .discount-large {
+    font-size: 3.5rem !important;
+  }
+
+  .grid-8 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 }
 
 .d-block-mobile {
@@ -929,7 +946,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 6rem;
+  padding: 1.5rem 4rem;
   color: white;
   border-radius: var(--radius);
   margin: 4rem 0;
@@ -977,7 +994,7 @@ body {
 }
 
 .promo-banner h2 {
-  font-size: 5rem;
+  font-size: clamp(2rem, 5vw, 4.5rem);
   font-weight: 900;
   line-height: 0.9;
   margin: 0;
@@ -1006,7 +1023,7 @@ body {
 }
 
 .promo-banner .discount-large {
-  font-size: 7rem;
+  font-size: clamp(3rem, 7vw, 6.5rem);
   font-weight: 900;
   color: white;
   display: flex;

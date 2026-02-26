@@ -22,7 +22,7 @@ export async function GET(request: Request) {
             general: { name: "MusicMarket Côte d'Ivoire", email: "contact@musicmarket.ci" },
             homepage: {
                 side_cards: [
-                    { title: "Pianos Yamaha Série P", subtitle: "", image: "/images/products/product-4-yamaha-dgx-670---piano-num-rique-88-touches.jpg", link: "/shop?category=PIANOS%20%26%20CLAVIERS", bg_color: "#f8f9fa", text_color: "#111" },
+                    { title: "Pianos Yamaha Série P", subtitle: "", image: "/images/products/product-4-yamaha-dgx-670-piano-numerique-88-touches.jpg", link: "/shop?category=PIANOS%20%26%20CLAVIERS", bg_color: "#f8f9fa", text_color: "#111" },
                     { title: "Home Studio Focusrite", subtitle: "Dès 111 000F", image: "/images/products/product-150-focusrite-scarlett-2i2-4e-g-n.jpg", link: "/shop?category=STUDIO%20%26%20ENREGISTREMENT", bg_color: "#000", text_color: "#fff" }
                 ],
                 promo_banner: {
