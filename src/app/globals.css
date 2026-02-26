@@ -1010,9 +1010,9 @@ h6 {
   flex: 1;
   background-color: var(--secondary);
   color: white;
-  padding: 0.6rem 1rem;
+  padding: 0.7rem 1.2rem;
   border-radius: var(--radius);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
   text-align: center;
   text-decoration: none;
@@ -1020,6 +1020,13 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+}
+
+.btn-add-cart svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .btn-add-cart:hover {
@@ -1704,6 +1711,19 @@ h6 {
     opacity: 1 !important;
     visibility: visible !important;
     transform: translateY(0) !important;
+    padding: 0 0.5rem 0.5rem !important;
+    /* Réduire le padding sur mobile */
+  }
+
+  .btn-add-cart {
+    padding: 0.5rem !important;
+    font-size: 0.7rem !important;
+    gap: 4px !important;
+  }
+
+  .btn-add-cart svg {
+    width: 14px !important;
+    height: 14px !important;
   }
 
   /* Barre de recherche */
