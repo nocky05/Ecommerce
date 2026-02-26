@@ -143,16 +143,16 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                     {/* Right: Product Info */}
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <div style={{ marginBottom: '25px' }}>
-                            <h1 style={{ fontSize: '28px', fontWeight: '800', color: '#111', marginBottom: '10px', lineHeight: '1.2' }}>{product.name}</h1>
+                            <h1 style={{ fontFamily: 'var(--font-poppins)', fontSize: '28px', fontWeight: '800', color: '#111', marginBottom: '10px', lineHeight: '1.2' }}>{product.name}</h1>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
                                 <div style={{ display: 'flex', color: '#fbc02d', fontSize: '14px' }}>
                                     {[1, 2, 3, 4, 5].map((s) => (
                                         <span key={s}>{s <= Math.round(averageRating) ? "★" : "☆"}</span>
                                     ))}
                                 </div>
-                                <span style={{ fontSize: '12px', color: '#999', fontWeight: '600' }}>({reviews.length} avis)</span>
+                                <span style={{ fontFamily: 'var(--font-inter)', fontSize: '12px', color: '#999', fontWeight: '600' }}>({reviews.length} avis)</span>
                             </div>
-                            <Link href={`/shop?category=${encodeURIComponent(product.category)}`} style={{ fontSize: '12px', fontWeight: '800', color: '#007BFF', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                            <Link href={`/shop?category=${encodeURIComponent(product.category)}`} style={{ fontFamily: 'var(--font-inter)', fontSize: '12px', fontWeight: '800', color: '#007BFF', textDecoration: 'none', textTransform: 'uppercase', letterSpacing: '1px' }}>
                                 {product.category}
                             </Link>
                         </div>
@@ -172,52 +172,53 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                         </div>
 
                         {/* Add to Cart Area */}
-                        <div className="product-actions-mobile" style={{ display: 'flex', gap: '15px', marginBottom: '40px' }}>
-                            <div style={{ display: 'flex', border: '1px solid #eee', borderRadius: '4px', height: '50px', background: '#fff' }}>
-                                <button style={{ width: '40px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '18px' }}>-</button>
-                                <div style={{ width: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '15px', textAlign: 'center' }}>1</div>
-                                <button style={{ width: '40px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '18px' }}>+</button>
+                        <div className="product-actions-mobile" style={{ display: 'flex', gap: '15px', marginBottom: '40px', alignItems: 'center', flexWrap: 'wrap' }}>
+                            <div style={{ display: 'flex', border: '1px solid #ddd', borderRadius: '4px', height: '54px', background: '#fff' }}>
+                                <button
+                                    className="qty-btn"
+                                    style={{ width: '45px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '20px', fontWeight: 'bold' }}
+                                >-</button>
+                                <div style={{ width: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '18px', textAlign: 'center' }}>1</div>
+                                <button
+                                    className="qty-btn"
+                                    style={{ width: '45px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '20px', fontWeight: 'bold' }}
+                                >+</button>
                             </div>
                             <button
                                 onClick={() => addToCart(product)}
+                                className="btn-add-cart force-visible"
                                 style={{
-                                    flex: 2,
-                                    background: 'black',
-                                    color: 'white',
-                                    border: 'none',
+                                    height: '54px',
                                     borderRadius: '4px',
-                                    fontWeight: '900',
-                                    fontSize: '13px',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '1px',
-                                    cursor: 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    gap: '10px'
+                                    padding: '0 30px',
+                                    fontSize: '15px',
+                                    flex: 1,
+                                    minWidth: '240px'
                                 }}
                             >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
-                                Ajouter au panier
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '22px', height: '22px' }}>
+                                    <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-2.61L23 6H6" />
+                                </svg>
+                                <strong style={{ marginLeft: '10px' }}>AJOUTER AU PANIER</strong>
                             </button>
                             <button
                                 onClick={() => toggleWishlist(product)}
+                                className="btn-like force-visible"
                                 style={{
-                                    width: '50px',
-                                    height: '50px',
+                                    width: '54px',
+                                    height: '54px',
                                     borderRadius: '4px',
-                                    border: '1px solid #ddd',
                                     background: isInWishlist(product.id) ? '#b22222' : 'white',
+                                    color: isInWishlist(product.id) ? 'white' : '#666',
+                                    flexShrink: 0,
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    cursor: 'pointer',
-                                    color: isInWishlist(product.id) ? 'white' : '#666',
-                                    transition: 'all 0.2s'
+                                    border: '1px solid #ddd'
                                 }}
-                                title={isInWishlist(product.id) ? "Retirer des favoris" : "Ajouter aux favoris"}
                             >
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill={isInWishlist(product.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill={isInWishlist(product.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
                             </button>
                         </div>
 
@@ -381,20 +382,70 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                         </div>
                         <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '30px' }}>
                             {relatedProducts.map(prod => (
-                                <Link href={`/product/${prod.id}`} key={prod.id} style={{ textDecoration: 'none', color: 'inherit' }} className="shop-card">
-                                    <div className="shop-card-image-wrapper" style={{ position: 'relative' }}>
-                                        <Image
-                                            src={prod.image}
-                                            alt={prod.name}
-                                            fill
-                                            style={{ objectFit: 'contain', padding: '15px' }}
-                                        />
-                                    </div>
+                                <div key={prod.id} className="shop-card">
+                                    <Link href={`/product/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <div className="shop-card-image-wrapper">
+                                            <Image
+                                                src={prod.image}
+                                                alt={prod.name}
+                                                fill
+                                                style={{ objectFit: 'contain', padding: '15px' }}
+                                            />
+                                            <button
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    toggleWishlist(prod);
+                                                }}
+                                                className="btn-like"
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '10px',
+                                                    right: '10px',
+                                                    zIndex: 10,
+                                                    background: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '50%',
+                                                    width: '32px',
+                                                    height: '32px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                                                    cursor: 'pointer',
+                                                    color: isInWishlist(prod.id) ? '#e63946' : '#999'
+                                                }}
+                                            >
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill={isInWishlist(prod.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+                                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.82-8.82 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </Link>
                                     <div className="shop-card-content">
-                                        <h4 style={{ fontSize: '13px', fontWeight: '600', color: '#333', marginBottom: '8px', lineHeight: '1.4' }} className="line-clamp-2">{prod.name}</h4>
+                                        <Link href={`/product/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                            <h4 style={{ fontSize: '13px', fontWeight: '600', color: '#333', marginBottom: '8px', lineHeight: '1.4' }} className="line-clamp-2">{prod.name}</h4>
+                                        </Link>
                                         <div style={{ color: '#b22222', fontWeight: '800', fontSize: '15px' }}>{prod.price.toLocaleString()}F CFA</div>
                                     </div>
-                                </Link>
+                                    <div className="shop-card-actions force-visible" style={{ padding: '15px', marginTop: 'auto', display: 'flex' }}>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                addToCart(prod);
+                                            }}
+                                            className="btn-add-cart force-visible"
+                                            style={{ width: '100%', height: '48px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                                        >
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '18px', height: '18px' }}>
+                                                <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-2.61L23 6H6" />
+                                            </svg>
+                                            <span style={{ fontSize: '13px', fontWeight: '900', marginLeft: '8px' }}>AJOUTER AU PANIER</span>
+                                        </button>
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>

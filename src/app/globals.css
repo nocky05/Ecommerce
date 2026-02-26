@@ -989,87 +989,26 @@ h6 {
 }
 
 /* Interactive Product Cards */
-.card-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: auto;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: none !important;
-  transition: all 0.3s ease;
-}
-
-.card:hover .card-actions,
-.shop-card:hover .shop-card-actions {
+.card-actions,
+.shop-card-actions,
+.force-visible {
+  display: flex !important;
   opacity: 1 !important;
   visibility: visible !important;
   transform: none !important;
 }
 
-.btn-add-cart {
-  flex: 1;
-  background-color: var(--secondary);
-  color: white;
-  padding: 0.7rem 1.2rem;
-  border-radius: var(--radius);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: none;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.btn-add-cart svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-
-.btn-add-cart:hover {
-  background-color: #000;
-}
-
-.btn-like {
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--gray-200);
-  border-radius: 50%;
-  background: white;
-  color: var(--gray-500);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.btn-like:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-.price-now {
-  color: #2D6A4F;
-  font-weight: 800;
-  font-size: 1.125rem;
-}
-
-/* Shop Product Card Animations */
 .shop-card {
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   background: white;
   border: 1px solid #f0f0f0;
   border-radius: 8px;
-  overflow: visible;
-  height: auto;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 420px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative;
 }
 
 .shop-card:hover {
@@ -1099,13 +1038,7 @@ h6 {
   transform: scale(1.1);
 }
 
-.shop-card-actions {
-  display: flex;
-  gap: 10px;
-  padding: 0 1.25rem 1.25rem;
-  opacity: 1;
-  margin-top: auto;
-}
+/* removed opacity 0 to prevent issues */
 
 .shop-card:hover .shop-card-actions {
   opacity: 1;
