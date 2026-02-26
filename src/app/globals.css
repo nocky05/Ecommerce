@@ -989,6 +989,7 @@ h6 {
 }
 
 /* Interactive Product Cards */
+/* Interactive Product Cards */
 .card-actions,
 .shop-card-actions,
 .force-visible {
@@ -996,6 +997,60 @@ h6 {
   opacity: 1 !important;
   visibility: visible !important;
   transform: none !important;
+  width: 100% !important;
+}
+
+.btn-add-cart {
+  flex: 1;
+  background-color: var(--secondary);
+  color: white;
+  padding: 0.8rem 1.5rem !important;
+  border-radius: var(--radius);
+  font-size: 0.9rem !important;
+  font-weight: 800 !important;
+  text-align: center;
+  text-decoration: none;
+  transition: var(--transition);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px !important;
+  min-height: 50px !important;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.btn-add-cart svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0;
+}
+
+.btn-add-cart:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+}
+
+.btn-like {
+  width: 50px !important;
+  height: 50px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  background: white;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.btn-like:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
 }
 
 .shop-card {
@@ -1005,7 +1060,7 @@ h6 {
   border-radius: 8px;
   overflow: visible !important;
   height: auto !important;
-  min-height: 420px !important;
+  min-height: 440px !important;
   display: flex !important;
   flex-direction: column !important;
   position: relative;

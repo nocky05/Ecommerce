@@ -173,7 +173,7 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
 
                         {/* Add to Cart Area */}
                         <div className="product-actions-mobile" style={{ display: 'flex', gap: '15px', marginBottom: '40px', alignItems: 'center', flexWrap: 'wrap' }}>
-                            <div style={{ display: 'flex', border: '1px solid #ddd', borderRadius: '4px', height: '54px', background: '#fff' }}>
+                            <div style={{ display: 'flex', border: '1px solid #ddd', borderRadius: '4px', height: '52px', background: '#fff' }}>
                                 <button
                                     className="qty-btn"
                                     style={{ width: '45px', border: 'none', background: 'none', cursor: 'pointer', fontSize: '20px', fontWeight: 'bold' }}
@@ -187,35 +187,20 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                             <button
                                 onClick={() => addToCart(product)}
                                 className="btn-add-cart force-visible"
-                                style={{
-                                    height: '54px',
-                                    borderRadius: '4px',
-                                    padding: '0 30px',
-                                    fontSize: '15px',
-                                    flex: 1,
-                                    minWidth: '240px'
-                                }}
+                                style={{ minWidth: '240px', flex: 1 }}
                             >
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '22px', height: '22px' }}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                     <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
                                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-2.61L23 6H6" />
                                 </svg>
-                                <strong style={{ marginLeft: '10px' }}>AJOUTER AU PANIER</strong>
+                                <strong>AJOUTER AU PANIER</strong>
                             </button>
                             <button
                                 onClick={() => toggleWishlist(product)}
                                 className="btn-like force-visible"
                                 style={{
-                                    width: '54px',
-                                    height: '54px',
-                                    borderRadius: '4px',
                                     background: isInWishlist(product.id) ? '#b22222' : 'white',
-                                    color: isInWishlist(product.id) ? 'white' : '#666',
-                                    flexShrink: 0,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    border: '1px solid #ddd'
+                                    color: isInWishlist(product.id) ? 'white' : '#666'
                                 }}
                             >
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill={isInWishlist(product.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
@@ -428,7 +413,7 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                                         </Link>
                                         <div style={{ color: '#b22222', fontWeight: '800', fontSize: '15px' }}>{prod.price.toLocaleString()}F CFA</div>
                                     </div>
-                                    <div className="shop-card-actions force-visible" style={{ padding: '15px', marginTop: 'auto', display: 'flex' }}>
+                                    <div className="shop-card-actions force-visible" style={{ padding: '20px', marginTop: 'auto' }}>
                                         <button
                                             onClick={(e) => {
                                                 e.preventDefault();
@@ -436,13 +421,12 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                                                 addToCart(prod);
                                             }}
                                             className="btn-add-cart force-visible"
-                                            style={{ width: '100%', height: '48px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                         >
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '18px', height: '18px' }}>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                                 <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
                                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-2.61L23 6H6" />
                                             </svg>
-                                            <span style={{ fontSize: '13px', fontWeight: '900', marginLeft: '8px' }}>AJOUTER AU PANIER</span>
+                                            <strong>AJOUTER AU PANIER</strong>
                                         </button>
                                     </div>
                                 </div>
