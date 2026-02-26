@@ -329,23 +329,23 @@ export default function HomePage() {
       {/* Best Deals Section */}
       <section className="container py-16">
         <div className="mb-8">
-          <div className="section-badge">Meilleure Vente</div>
-          <h2 className="text-3xl font-black mb-8">Meilleurs Prix</h2>
+          <div className="section-badge" style={{ marginBottom: '1.5rem' }}>MEILLEURE VENTE</div>
+          <div className="d-flex items-center justify-between" style={{ flexWrap: 'wrap', gap: '0.5rem' }}>
+            <h2 className="text-3xl font-black" style={{ margin: 0 }}>Meilleurs Prix</h2>
+            <Link href="/shop" className="btn btn-dark hidden-mobile" style={{ fontSize: '0.9rem', background: '#333', color: 'white', textDecoration: 'none' }}>Tout voir</Link>
+          </div>
 
-          <div className="section-header-flex">
-            <div className="tabs-nav" style={{ border: 'none', marginBottom: 0 }}>
-              {categories_tabs.map(tab => (
-                <button
-                  key={tab}
-                  className={`tabs-btn ${activeTab === tab ? 'active' : ''}`}
-                  onClick={() => setActiveTab(tab)}
-                  style={{ fontSize: '1rem', fontWeight: activeTab === tab ? '800' : '500' }}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-            <Link href="/shop" className="btn btn-dark view-all-btn-mobile" style={{ fontSize: '0.9rem', background: '#333', color: 'white', textDecoration: 'none' }}>Tout voir</Link>
+          <div className="tabs-nav categories-container" style={{ border: 'none', marginBottom: 0, marginTop: '1.5rem' }}>
+            {categories_tabs.map(tab => (
+              <button
+                key={tab}
+                className={`tabs-btn ${activeTab === tab ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab)}
+                style={{ fontSize: '1rem', fontWeight: activeTab === tab ? '800' : '500' }}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -430,6 +430,12 @@ export default function HomePage() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="d-block-mobile mt-8" style={{ width: '100%' }}>
+          <Link href="/shop" className="btn btn-dark" style={{ width: '100%', padding: '14px', fontSize: '1rem', background: '#222', color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px', fontWeight: 'bold' }}>
+            Tout voir les produits
+          </Link>
         </div>
       </section>
 
