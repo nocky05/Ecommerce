@@ -378,12 +378,12 @@ export default function HomePage() {
                 <Link href={`/product/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <h4 className="text-sm font-bold line-clamp-2" style={{ minHeight: '42px', lineHeight: '1.4' }}>{prod.name}</h4>
                 </Link>
-                <div className="d-flex items-center gap-2">
+                <div className="d-flex items-center gap-2 mt-2">
                   <span className="text-gray-400 line-through text-sm">{prod.oldPrice.toLocaleString()}F</span>
                   <span className="price-now" style={{ color: '#b22222', fontSize: '1.1rem', fontWeight: '800' }}>{prod.price.toLocaleString()}F</span>
                 </div>
 
-                <div className="card-actions">
+                <div className="card-actions mt-3">
                   <button
                     onClick={() => addToCart(prod)}
                     className="btn-add-cart"
