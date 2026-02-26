@@ -117,12 +117,13 @@ export default function HomePage() {
     : displayProducts.filter(p => {
       const cat = (p.category || "").toLowerCase();
       const tab = activeTab.toLowerCase();
-      if (tab === "guitares") return cat === "guitares & basses" || cat.includes("guitare") || cat.includes("basse");
-      if (tab === "pianos") return cat === "piano & clavier" || cat.includes("piano") || cat.includes("clavier");
-      if (tab === "batteries") return cat === "batteries & percussions" || cat.includes("batterie") || cat.includes("percussion");
-      if (tab === "sono") return cat === "sonorisation" || cat.includes("enceinte") || cat.includes("mixage");
-      if (tab === "studio") return cat === "studio & enregistrement" || cat === "microphones" || cat.includes("studio") || cat.includes("micro") || cat.includes("interface");
-      return cat.includes(tab);
+      // Robust filtering handling singular/plural and key terms
+      if (tab === "guitares") return cat.includes("guitare") || cat.includes("guitar") || cat.includes("basse") || cat.includes("bass");
+      if (tab === "pianos") return cat.includes("piano") || cat.includes("clavier") || cat.includes("keyboard");
+      if (tab === "batteries") return cat.includes("batterie") || cat.includes("drum") || cat.includes("percussion");
+      if (tab === "sono") return cat.includes("sonorisation") || cat.includes("enceinte") || cat.includes("mixage") || cat.includes("speaker");
+      if (tab === "studio") return cat.includes("studio") || cat.includes("micro") || cat.includes("interface") || cat.includes("enregistrement");
+      return cat.includes(tab) || tab.includes(cat);
     }).slice(0, 8);
 
   useEffect(() => {
@@ -353,7 +354,7 @@ export default function HomePage() {
           {filteredProducts.map((prod, i) => (
             <div key={i} className="card p-4">
               <Link href={`/product/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <div className="relative aspect-square mb-4 bg-light overflow-hidden p-6" style={{ borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="relative mb-4 bg-light overflow-hidden p-6" style={{ height: '200px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <span className="absolute badge badge-red font-bold px-2 py-1" style={{ top: '15px', left: '15px', zIndex: 10 }}>
                     {prod.discount > 0 ? `${prod.discount}% PROMO` : (prod.promoLabel || "NOUVEAUTÉ")}
                   </span>

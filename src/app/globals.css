@@ -127,6 +127,7 @@ body {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 1.5rem;
+  width: 100%;
 }
 
 .d-flex {
@@ -418,8 +419,10 @@ body {
   }
 
   .container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .py-16 {
@@ -732,6 +735,9 @@ body {
   border-radius: var(--radius);
   background: white;
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card:hover {
@@ -956,7 +962,7 @@ body {
 .card-actions {
   display: flex;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin-top: auto;
 }
 
 .btn-add-cart {
