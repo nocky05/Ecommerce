@@ -332,7 +332,7 @@ export default function HomePage() {
           <div className="section-badge">Meilleure Vente</div>
           <h2 className="text-3xl font-black mb-8">Meilleurs Prix</h2>
 
-          <div className="d-flex items-center justify-between">
+          <div className="section-header-flex">
             <div className="tabs-nav" style={{ border: 'none', marginBottom: 0 }}>
               {categories_tabs.map(tab => (
                 <button
@@ -345,7 +345,7 @@ export default function HomePage() {
                 </button>
               ))}
             </div>
-            <Link href="/shop" className="btn btn-dark" style={{ fontSize: '0.9rem', background: '#333', color: 'white', textDecoration: 'none' }}>Tout voir</Link>
+            <Link href="/shop" className="btn btn-dark view-all-btn-mobile" style={{ fontSize: '0.9rem', background: '#333', color: 'white', textDecoration: 'none' }}>Tout voir</Link>
           </div>
         </div>
 
