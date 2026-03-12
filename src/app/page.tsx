@@ -196,7 +196,7 @@ export default function HomePage() {
   const isPageLoading = loading || settingsLoading;
 
   return (
-    <main className="bg-white min-h-screen" style={{ opacity: isPageLoading ? 0 : 1, transition: 'opacity 0.2s ease-in-out' }}>
+    <main className="bg-white min-h-screen">
       {/* Hero Section */}
       <section className="container py-8">
         <div className="grid-main-side">
