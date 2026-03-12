@@ -24,10 +24,12 @@ export default function LoginPage() {
 
             showNotification('Connexion réussie ! Bon retour.', 'success');
 
-            // Robust check: compare email (case-insensitive) OR check database role
-            const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+            const loginByEmail = email.toLowerCase().trim();
+            const allowedAdminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
 
-            // Get the profile role directly to be 100% sure
+            console.log('Login attempt check:', { loginByEmail, allowedAdminEmail });
+
+            // Robust check: Environment match OR Database role
             const { data: { user } } = await supabase.auth.getUser();
             const { data: profile } = await supabase
                 .from('profiles')
@@ -35,12 +37,16 @@ export default function LoginPage() {
                 .eq('id', user?.id)
                 .single();
 
-            const isEmailMatch = email.toLowerCase().trim() === adminEmail?.toLowerCase().trim() && !!adminEmail;
+            const isEmailMatch = loginByEmail === allowedAdminEmail && !!allowedAdminEmail;
             const isRoleAdmin = profile?.role === 'admin';
 
+            console.log('Admin check results:', { isEmailMatch, isRoleAdmin });
+
             if (isEmailMatch || isRoleAdmin) {
+                console.log('Redirecting to ADMIN dashboard');
                 router.push("/admin");
             } else {
+                console.log('Redirecting to standard home page');
                 router.push("/");
             }
         } catch (err: any) {
