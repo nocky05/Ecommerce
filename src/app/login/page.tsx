@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useNotification } from "@/context/NotificationContext";
@@ -16,29 +16,34 @@ export default function LoginPage() {
     const [checkingAuth, setCheckingAuth] = useState(true);
 
     // Persistant check: if already logged in as admin, redirect immediately
-    useState(() => {
+    useEffect(() => {
         const checkExistingSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session?.user) {
-                const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
-                const isEmailAdmin = session.user.email?.toLowerCase().trim() === adminEmail && !!adminEmail;
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
+                if (session?.user) {
+                    const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
+                    const isEmailAdmin = session.user.email?.toLowerCase().trim() === adminEmail && !!adminEmail;
 
-                // Also check profile role
-                const { data: profile } = await supabase
-                    .from('profiles')
-                    .select('role')
-                    .eq('id', session.user.id)
-                    .single();
+                    // Also check profile role
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('role')
+                        .eq('id', session.user.id)
+                        .single();
 
-                if (isEmailAdmin || profile?.role === 'admin') {
-                    window.location.href = "/admin";
-                    return;
+                    if (isEmailAdmin || profile?.role === 'admin') {
+                        window.location.href = "/admin";
+                        return;
+                    }
                 }
+            } catch (err) {
+                console.error("Auth check error:", err);
+            } finally {
+                setCheckingAuth(false);
             }
-            setCheckingAuth(false);
         };
         checkExistingSession();
-    });
+    }, []);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();

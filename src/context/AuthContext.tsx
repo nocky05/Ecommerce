@@ -31,30 +31,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const router = useRouter();
 
     const fetchProfile = async (userId: string, email?: string) => {
-        const { data } = await supabase
-            .from("profiles")
-            .select("*")
-            .eq("id", userId)
-            .single();
+        try {
+            const { data, error } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", userId)
+                .single();
 
-        const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-        const isAdmin = email?.toLowerCase().trim() === adminEmail?.toLowerCase().trim() && !!adminEmail;
+            const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
+            const userEmail = (email || '').toLowerCase().trim();
+            const isEmailAdmin = userEmail === adminEmail && !!adminEmail;
 
-        if (isAdmin && data && data.role !== 'admin') {
-            setProfile({ ...data, role: 'admin' });
-        } else if (isAdmin && !data) {
-            setProfile({ id: userId, role: 'admin', email });
-        } else {
-            setProfile(data);
+            if (isEmailAdmin) {
+                // If it's the admin email, force the role to admin regardless of DB value
+                const adminProfile = data ? { ...data, role: 'admin' } : { id: userId, role: 'admin', email: userEmail, full_name: 'Administrateur' };
+                setProfile(adminProfile);
+            } else {
+                setProfile(data || null);
+            }
+        } catch (err) {
+            console.error("Error fetching profile:", err);
+            setProfile(null);
         }
     };
 
     useEffect(() => {
         // Get initial session
-        supabase.auth.getSession().then(({ data: { session } }) => {
+        supabase.auth.getSession().then(async ({ data: { session } }) => {
             setSession(session);
             setUser(session?.user ?? null);
-            if (session?.user) fetchProfile(session.user.id, session.user.email);
+            if (session?.user) {
+                await fetchProfile(session.user.id, session.user.email);
+            }
             setLoading(false);
         });
 

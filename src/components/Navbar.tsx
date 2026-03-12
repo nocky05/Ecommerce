@@ -44,7 +44,9 @@ export default function Navbar() {
   const [searchCategoryOpen, setSearchCategoryOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isAdmin = profile?.role === 'admin' || user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+  const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
+  const userEmail = (user?.email || '').toLowerCase().trim();
+  const isAdmin = profile?.role === 'admin' || (userEmail === adminEmail && !!adminEmail);
   const profileLink = isAdmin ? "/admin" : "/profile";
 
   const handleSearch = (e: React.FormEvent) => {
