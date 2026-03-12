@@ -128,21 +128,41 @@ export default function AdminPage() {
             .catch(err => console.error("Failed to load homepage settings:", err));
 
         // Realtime Subscription
+        console.log("Initializing Order Realtime Subscription...");
         const channel = supabase
-            .channel('orders-realtime')
-            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, (payload) => {
-                const newOrder = payload.new;
-                setOrders(prev => [newOrder, ...prev]);
-                showNotification(`NOUVELLE COMMANDE : ${newOrder.id}`, "info");
-                // Optional: Play a subtle sound
-                try {
-                    const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-                    audio.play();
-                } catch (e) { console.warn("Audio play failed", e); }
-            })
-            .subscribe();
+            .channel('orders-realtime-admin')
+            .on('postgres_changes',
+                { event: 'INSERT', schema: 'public', table: 'orders' },
+                (payload) => {
+                    console.log('New Order Received via Realtime:', payload);
+                    const newOrder = payload.new;
+                    setOrders(prev => {
+                        // Avoid duplicates if user refreshes manually at the same time
+                        if (prev.some(o => o.id === newOrder.id)) return prev;
+                        return [newOrder, ...prev];
+                    });
+                    showNotification(`NOUVELLE COMMANDE : ${newOrder.id}`, "info");
+
+                    // Alert sound
+                    try {
+                        const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(e => console.warn("Audio play blocked by browser:", e));
+                    } catch (e) { console.warn("Audio object error:", e); }
+                }
+            )
+            .subscribe((status) => {
+                console.log('Realtime Subscription Status:', status);
+                if (status === 'SUBSCRIBED') {
+                    console.log('Connected to orders-realtime-admin');
+                }
+                if (status === 'CHANNEL_ERROR') {
+                    console.error('Realtime Channel Error. Check Supabase Replication settings!');
+                }
+            });
 
         return () => {
+            console.log("Cleaning up Realtime Channel...");
             supabase.removeChannel(channel);
         };
     }, []);
