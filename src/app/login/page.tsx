@@ -13,6 +13,32 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [checkingAuth, setCheckingAuth] = useState(true);
+
+    // Persistant check: if already logged in as admin, redirect immediately
+    useState(() => {
+        const checkExistingSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session?.user) {
+                const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
+                const isEmailAdmin = session.user.email?.toLowerCase().trim() === adminEmail && !!adminEmail;
+
+                // Also check profile role
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('role')
+                    .eq('id', session.user.id)
+                    .single();
+
+                if (isEmailAdmin || profile?.role === 'admin') {
+                    window.location.href = "/admin";
+                    return;
+                }
+            }
+            setCheckingAuth(false);
+        };
+        checkExistingSession();
+    });
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -55,6 +81,17 @@ export default function LoginPage() {
             setLoading(false);
         }
     };
+
+    if (checkingAuth) {
+        return (
+            <div className="min-h-screen d-flex items-center justify-center bg-gray-50" style={{ height: '100vh' }}>
+                <div className="text-center">
+                    <div className="spinner mb-4 mx-auto"></div>
+                    <p className="text-gray-500 font-bold">CHARGEMENT...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen" style={{

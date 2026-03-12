@@ -153,30 +153,11 @@ export default function Navbar() {
               <div className="d-flex items-center gap-3 group hidden-mobile">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                 <div className="text-[9px] font-black uppercase d-flex flex-row items-center gap-2 transition">
-                  {user ? (
+                  {user && !isAdmin ? (
                     <div className="d-flex items-center gap-3">
-                      <div className="d-flex flex-column items-end">
-                        <span style={{ fontSize: '10px', color: '#FFD200', fontWeight: '900' }}>SESSION ADMIN ACTIVÉE</span>
-                        <Link href={profileLink} className="hover:text-yellow-300 transition block font-bold" style={{ textDecoration: 'none', color: 'inherit', fontSize: '11px' }}>
-                          {profile?.full_name || user.email?.split("@")[0]}
-                        </Link>
-                      </div>
-
-                      {isAdmin && (
-                        <Link
-                          href="/admin"
-                          className="btn-dashboard-pulse"
-                          style={{
-                            background: '#FFD200', color: '#000', padding: '6px 12px', borderRadius: '6px',
-                            fontSize: '10px', fontWeight: '900', textDecoration: 'none',
-                            boxShadow: '0 4px 15px rgba(255, 210, 0, 0.4)',
-                            display: 'flex', alignItems: 'center', gap: '5px'
-                          }}
-                        >
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg>
-                          ACCÈDER AU DASHBOARD
-                        </Link>
-                      )}
+                      <Link href={profileLink} className="hover:text-yellow-300 transition block font-bold" style={{ textDecoration: 'none', color: 'inherit', fontSize: '11px' }}>
+                        {profile?.full_name || user.email?.split("@")[0]}
+                      </Link>
 
                       <span style={{ opacity: 0.3, fontWeight: 'normal' }}>|</span>
                       <button
@@ -359,23 +340,6 @@ export default function Navbar() {
 
           {/* Nav Links - Centered or follow the button */}
           <nav className="d-flex items-center flex-1 ml-4 gap-2 h-[56px] justify-center">
-            {isAdmin && (
-              <Link
-                href="/admin"
-                className="px-6 d-flex items-center text-[11px] font-black uppercase transition"
-                style={{
-                  textDecoration: 'none',
-                  height: pathname === "/admin" ? '36px' : 'h-full',
-                  background: '#FFD200',
-                  color: 'black',
-                  borderRadius: '8px',
-                  fontWeight: '900',
-                  boxShadow: '0 4px 12px rgba(255, 210, 0, 0.3)'
-                }}
-              >
-                Dashboard Admin
-              </Link>
-            )}
             {mainLinks.map(link => {
               const isActive = pathname === link.href || (link.href === "/shop" && pathname.startsWith("/shop"));
               return (
@@ -417,11 +381,10 @@ export default function Navbar() {
               </div>
               <div className="flex-1 overflow-y-auto" style={{ borderRight: '1px solid #eee' }}>
                 <div className="py-4 px-6 border-b" style={{ borderBottom: '1px solid #f0f0f0' }}>
-                  {user ? (
+                  {user && !isAdmin ? (
                     <div className="d-flex items-center gap-3 text-sm">
                       <Link href={profileLink} className="font-bold text-gray-900 block" style={{ textDecoration: 'none' }} onClick={() => setMobileMenuOpen(false)}>
                         {profile?.full_name || user?.email?.split("@")[0]}
-                        {isAdmin && <span className="ml-2" style={{ background: '#007BFF', color: 'white', padding: '1px 6px', borderRadius: '4px', fontSize: '10px' }}>ADMIN</span>}
                       </Link>
                       <span style={{ opacity: 0.3 }}>|</span>
                       <button onClick={() => { signOut(); setMobileMenuOpen(false); }} style={{ background: 'transparent', border: 'none', color: '#b22222', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold' }}>
