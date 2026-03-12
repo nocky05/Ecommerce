@@ -21,8 +21,15 @@ export default function LoginPage() {
         try {
             const { error } = await supabase.auth.signInWithPassword({ email, password });
             if (error) throw error;
+
             showNotification('Connexion réussie ! Bon retour.', 'success');
-            router.push("/");
+
+            const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+            if (email === adminEmail) {
+                router.push("/admin");
+            } else {
+                router.push("/");
+            }
         } catch (err: any) {
             setError(err.message === "Invalid login credentials"
                 ? "Email ou mot de passe incorrect."
