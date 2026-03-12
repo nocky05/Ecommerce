@@ -955,6 +955,28 @@ h6 {
   /* Chrome, Safari, Opera */
 }
 
+/* Horizontal Slider Utility */
+.slider-x {
+  display: flex !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.slider-x::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-x .slider-item {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  min-width: 100px;
+}
+
 .tabs-btn {
   background: none;
   border: none;

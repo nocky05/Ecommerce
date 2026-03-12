@@ -271,9 +271,9 @@ export default function HomePage() {
           </span>
           <h2 className="text-3xl font-black">Catégories Populaires</h2>
         </div>
-        <div className="grid grid-8 gap-6">
+        <div className="slider-x">
           {instruments_categories.map((cat, i) => (
-            <Link key={i} href={`/shop?category=${encodeURIComponent(cat.category)}`} className="d-flex flex-column items-center gap-4 cursor-pointer" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link key={i} href={`/shop?category=${encodeURIComponent(cat.category)}`} className="slider-item d-flex flex-column items-center gap-4 cursor-pointer" style={{ textDecoration: 'none', color: 'inherit' }}>
               <div className="category-round" style={{ position: 'relative' }}>
                 <Image
                   src={cat.image}
