@@ -38,10 +38,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             .single();
 
         const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-        const isAdmin = email === adminEmail && !!adminEmail;
+        const isAdmin = email?.toLowerCase().trim() === adminEmail?.toLowerCase().trim() && !!adminEmail;
 
         if (isAdmin && data && data.role !== 'admin') {
-            // Optional: update DB if needed, but for now we trust the session/env
             setProfile({ ...data, role: 'admin' });
         } else if (isAdmin && !data) {
             setProfile({ id: userId, role: 'admin', email });

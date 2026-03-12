@@ -24,8 +24,21 @@ export default function LoginPage() {
 
             showNotification('Connexion réussie ! Bon retour.', 'success');
 
+            // Robust check: compare email (case-insensitive) OR check database role
             const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-            if (email === adminEmail) {
+
+            // Get the profile role directly to be 100% sure
+            const { data: { user } } = await supabase.auth.getUser();
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('role')
+                .eq('id', user?.id)
+                .single();
+
+            const isEmailMatch = email.toLowerCase().trim() === adminEmail?.toLowerCase().trim() && !!adminEmail;
+            const isRoleAdmin = profile?.role === 'admin';
+
+            if (isEmailMatch || isRoleAdmin) {
                 router.push("/admin");
             } else {
                 router.push("/");
