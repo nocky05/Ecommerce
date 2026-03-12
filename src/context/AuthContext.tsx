@@ -30,13 +30,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
-    const fetchProfile = async (userId: string) => {
+    const fetchProfile = async (userId: string, email?: string) => {
         const { data } = await supabase
             .from("profiles")
             .select("*")
             .eq("id", userId)
             .single();
-        setProfile(data);
+
+        const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+        const isAdmin = email === adminEmail && !!adminEmail;
+
+        if (isAdmin && data && data.role !== 'admin') {
+            // Optional: update DB if needed, but for now we trust the session/env
+            setProfile({ ...data, role: 'admin' });
+        } else if (isAdmin && !data) {
+            setProfile({ id: userId, role: 'admin', email });
+        } else {
+            setProfile(data);
+        }
     };
 
     useEffect(() => {
@@ -44,7 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
             setUser(session?.user ?? null);
-            if (session?.user) fetchProfile(session.user.id);
+            if (session?.user) fetchProfile(session.user.id, session.user.email);
             setLoading(false);
         });
 
@@ -53,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setSession(session);
             setUser(session?.user ?? null);
             if (session?.user) {
-                fetchProfile(session.user.id);
+                fetchProfile(session.user.id, session.user.email);
             } else {
                 setProfile(null);
             }
