@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useNotification } from "@/context/NotificationContext";
 import { useSettings } from "@/context/SettingsContext";
+import { supabase } from "@/lib/supabase";
 
 
 const CATEGORIES = [
@@ -125,6 +126,25 @@ export default function AdminPage() {
                 }
             })
             .catch(err => console.error("Failed to load homepage settings:", err));
+
+        // Realtime Subscription
+        const channel = supabase
+            .channel('orders-realtime')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'orders' }, (payload) => {
+                const newOrder = payload.new;
+                setOrders(prev => [newOrder, ...prev]);
+                showNotification(`NOUVELLE COMMANDE : ${newOrder.id}`, "info");
+                // Optional: Play a subtle sound
+                try {
+                    const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+                    audio.play();
+                } catch (e) { console.warn("Audio play failed", e); }
+            })
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
     }, []);
 
     // Stats dynamiques calculées
@@ -1263,6 +1283,11 @@ export default function AdminPage() {
                                     <label>INFORMATIONS CLIENT</label>
                                     <p className="m-val">{selectedOrder.customer_name}</p>
                                     <p className="m-sub">{selectedOrder.customer_email}</p>
+                                    <p className="m-val" style={{ marginTop: '10px', color: '#007BFF' }}>📞 {selectedOrder.customer_phone}</p>
+                                    <div style={{ marginTop: '10px', padding: '10px', background: '#F4F7FE', borderRadius: '10px' }}>
+                                        <p style={{ fontSize: '10px', color: '#A3AED0', fontWeight: '800', marginBottom: '5px', textTransform: 'uppercase' }}>Quartier / Adresse</p>
+                                        <p className="m-val" style={{ fontSize: '12px' }}>📍 {selectedOrder.customer_city}, {selectedOrder.customer_address}</p>
+                                    </div>
                                 </div>
                                 <div className="m-section">
                                     <label>MOYEN DE PAIEMENT</label>
