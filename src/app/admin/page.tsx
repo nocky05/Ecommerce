@@ -18,7 +18,7 @@ const CATEGORIES = [
 
 export default function AdminPage() {
     const router = useRouter();
-    const { profile, loading: authLoading } = useAuth();
+    const { profile, loading: authLoading, signOut } = useAuth();
     const { settings, homepage, refreshSettings } = useSettings();
     const { showNotification } = useNotification();
     const [activeTab, setActiveTab] = useState("dashboard");
@@ -450,12 +450,40 @@ export default function AdminPage() {
                 </nav>
 
                 <div className="sb-footer">
-                    <div className="admin-pill">
+                    <div className="admin-pill mb-4" style={{ marginBottom: '1rem' }}>
                         <div className="av">A</div>
                         <div className="info">
                             <p className="n">Directeur</p>
                             <p className="r">Administrateur</p>
                         </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <button
+                            onClick={() => router.push("/")}
+                            className="sb-btn secondary"
+                            style={{
+                                width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #E9EDF7',
+                                background: 'white', color: '#1B2559', fontWeight: '800', fontSize: '12px',
+                                display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer'
+                            }}
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
+                            RETOUR AU SITE
+                        </button>
+
+                        <button
+                            onClick={signOut}
+                            className="sb-btn logout"
+                            style={{
+                                width: '100%', padding: '12px', borderRadius: '12px', border: 'none',
+                                background: '#FFF5F5', color: '#FF4D4D', fontWeight: '800', fontSize: '12px',
+                                display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer'
+                            }}
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
+                            DÉCONNEXION
+                        </button>
                     </div>
                 </div>
             </aside>
@@ -476,7 +504,35 @@ export default function AdminPage() {
                     ) : (
                         <div className="search-pill-empty"></div>
                     )}
-                    <div className="topbar-actions">
+                    <div className="topbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <button
+                            onClick={() => router.push("/")}
+                            title="Retour au site public"
+                            style={{
+                                background: '#f8fafc', border: '1px solid #e2e8f0', color: '#1a1a1a',
+                                padding: '8px 15px', borderRadius: '10px', fontSize: '11px', fontWeight: '800',
+                                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                                transition: 'all 0.2s'
+                            }}
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
+                            VOIR LE SITE
+                        </button>
+
+                        <button
+                            onClick={signOut}
+                            title="Se déconnecter"
+                            style={{
+                                background: '#fff1f2', border: '1px solid #fecaca', color: '#e11d48',
+                                padding: '8px 15px', borderRadius: '10px', fontSize: '11px', fontWeight: '800',
+                                cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                                transition: 'all 0.2s'
+                            }}
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
+                            DÉCONNEXION
+                        </button>
+
                         <div className="notif">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
                         </div>

@@ -20,10 +20,17 @@ export default function ProfilePage() {
     const [ordersLoading, setOrdersLoading] = useState(true);
 
     useEffect(() => {
-        if (!loading && !user) {
-            router.push("/login");
+        if (!loading) {
+            const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+            const isAdmin = profile?.role === 'admin' || (user?.email === adminEmail && !!adminEmail);
+
+            if (!user) {
+                router.push("/login");
+            } else if (isAdmin) {
+                router.push("/admin");
+            }
         }
-    }, [user, loading, router]);
+    }, [user, profile, loading, router]);
 
     useEffect(() => {
         if (user) {

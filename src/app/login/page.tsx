@@ -24,29 +24,26 @@ export default function LoginPage() {
 
             showNotification('Connexion réussie ! Bon retour.', 'success');
 
-            const loginByEmail = email.toLowerCase().trim();
-            const allowedAdminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
-
-            console.log('Login attempt check:', { loginByEmail, allowedAdminEmail });
-
-            // Robust check: Environment match OR Database role
+            // Explicitly fetch profile details for immediate redirection
             const { data: { user } } = await supabase.auth.getUser();
+            if (!user) throw new Error("Erreur lors de la récupération de l'utilisateur.");
+
             const { data: profile } = await supabase
                 .from('profiles')
                 .select('role')
-                .eq('id', user?.id)
+                .eq('id', user.id)
                 .single();
 
-            const isEmailMatch = loginByEmail === allowedAdminEmail && !!allowedAdminEmail;
-            const isRoleAdmin = profile?.role === 'admin';
+            const loginByEmail = email.toLowerCase().trim();
+            const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
+            const isAdmin = (loginByEmail === adminEmail && !!adminEmail) || profile?.role === 'admin';
 
-            console.log('Admin check results:', { isEmailMatch, isRoleAdmin });
+            console.log('Redirecting check:', { isAdmin, role: profile?.role });
 
-            if (isEmailMatch || isRoleAdmin) {
-                console.log('Redirecting to ADMIN dashboard');
-                router.push("/admin");
+            if (isAdmin) {
+                // Force immediate flush to admin dashboard
+                window.location.href = "/admin";
             } else {
-                console.log('Redirecting to standard home page');
                 router.push("/");
             }
         } catch (err: any) {
