@@ -196,7 +196,7 @@ export default function HomePage() {
   const isPageLoading = loading || settingsLoading;
 
   return (
-    <main className="bg-white min-h-screen" style={{ opacity: isPageLoading ? 0 : 1, transition: 'opacity 0.6s ease-in-out' }}>
+    <main className="bg-white min-h-screen" style={{ opacity: isPageLoading ? 0 : 1, transition: 'opacity 0.2s ease-in-out' }}>
       {/* Hero Section */}
       <section className="container py-8">
         <div className="grid-main-side">
@@ -311,7 +311,7 @@ export default function HomePage() {
                 </span>
               ))}
             </div>
-            <p className={`text-xl font-bold uppercase tracking-widest ${isBannerVisible ? 'animate-fade-in delay-500' : 'opacity-0'}`} style={{ color: 'white', opacity: 0.9 }}>
+            <p className={`text-xl font-bold uppercase tracking-widest ${isBannerVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ color: 'white', opacity: 0.9 }}>
               {homepage.promo_banner.subtitle}
             </p>
           </div>
@@ -320,7 +320,7 @@ export default function HomePage() {
             <div className={`discount-large ${isBannerVisible ? 'animate-slide-right' : 'opacity-0'}`} style={{ color: '#111' }}>
               {discount}<span style={{ fontSize: '3rem' }}>%</span>
             </div>
-            <Link href={homepage.promo_banner.button_link} className={`buy-now-btn ${isBannerVisible ? 'animate-fade-in delay-1000' : 'opacity-0'}`} style={{ whiteSpace: 'nowrap', border: '1px solid #111', color: '#111' }}>
+            <Link href={homepage.promo_banner.button_link} className={`buy-now-btn ${isBannerVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ whiteSpace: 'nowrap', border: '1px solid #111', color: '#111' }}>
               {homepage.promo_banner.button_text}
             </Link>
           </div>
