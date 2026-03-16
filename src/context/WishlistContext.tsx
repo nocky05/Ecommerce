@@ -34,7 +34,7 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     // 1. Initial load from LocalStorage (for guests or quick start)
     useEffect(() => {
-        const savedWishlist = localStorage.getItem('musicmarket_wishlist');
+        const savedWishlist = localStorage.getItem('chezlemusicien_wishlist');
         if (savedWishlist && !user) { // Only use LS if not logged in (to avoid flashing)
             try {
                 const parsed = JSON.parse(savedWishlist);
@@ -56,7 +56,7 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             fetchWishlistFromDB();
         } else {
             // Restore from localStorage when logging out
-            const savedWishlist = localStorage.getItem('musicmarket_wishlist');
+            const savedWishlist = localStorage.getItem('chezlemusicien_wishlist');
             if (savedWishlist) {
                 setWishlist(JSON.parse(savedWishlist));
             } else {
@@ -93,7 +93,7 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Save to localStorage ONLY for guests
     useEffect(() => {
         if (!user) {
-            localStorage.setItem('musicmarket_wishlist', JSON.stringify(wishlist));
+            localStorage.setItem('chezlemusicien_wishlist', JSON.stringify(wishlist));
         }
     }, [wishlist, user]);
 

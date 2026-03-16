@@ -30,7 +30,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Load from localStorage on mount
     useEffect(() => {
-        const savedCart = localStorage.getItem('musicmarket_cart');
+        const savedCart = localStorage.getItem('chezlemusicien_cart');
         if (savedCart) {
             try {
                 setItems(JSON.parse(savedCart));
@@ -42,7 +42,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Save to localStorage on change
     useEffect(() => {
-        localStorage.setItem('musicmarket_cart', JSON.stringify(items));
+        localStorage.setItem('chezlemusicien_cart', JSON.stringify(items));
     }, [items]);
 
     const { showNotification } = useNotification();

@@ -17,7 +17,7 @@ export default function Footer() {
                         <span className="text-2xl font-black italic tracking-tight">{settings.name.split(' ')[0]}<span style={{ color: '#FFD200' }}>{settings.name.split(' ')[1] || ""}</span></span>
                     </div>
                     <p className="text-xs text-gray-400 mb-10 leading-loose" style={{ textAlign: 'justify' }}>
-                        MUSIC MARKET est une plateforme leader spécialisée dans la vente d'instruments et équipements de musique, matériel de sonorisation, et équipements pour studio d'enregistrement et de répétition.
+                        CHEZ LE MUSICIEN est une plateforme leader spécialisée dans la vente d'instruments et équipements de musique, matériel de sonorisation, et équipements pour studio d'enregistrement et de répétition.
                     </p>
                     <div className="d-flex gap-3 mt-auto">
                         <a href={settings.facebook} target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2 rounded cursor-pointer hover:bg-primary transition"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg></a>

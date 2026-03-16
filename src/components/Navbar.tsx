@@ -146,7 +146,7 @@ export default function Navbar() {
                     <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
                   </svg>
                 </div>
-                <span className="text-2xl font-black text-white logo-text">Music<span style={{ color: '#FFD200' }}>Market</span></span>
+                <span className="text-2xl font-black text-white logo-text">Chez le <span style={{ color: '#FFD200' }}>musicien</span></span>
               </Link>
             </div>
 
