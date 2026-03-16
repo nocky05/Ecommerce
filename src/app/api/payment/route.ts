@@ -36,13 +36,13 @@ export async function POST(request: Request) {
                 currency: 'XOF',
                 customer: {
                     name: `${customer.firstName} ${customer.lastName}`,
-                    email: customer.email || 'client@musicmarket.ci',
+                    email: customer.email || 'client@chezlemusicien.ci',
                     phone: customer.phone,
                 },
-                description: `Commande MusicMarket - ${order.id}`,
+                description: `Commande Chez le musicien - ${order.id}`,
                 metadata: {
                     order_id: order.id,
-                    shop: 'MusicMarket',
+                    shop: 'Chez le musicien',
                 },
                 success_url: `${baseUrl}/checkout/success?order_id=${encodeURIComponent(order.id)}&payment=success`,
                 error_url: `${baseUrl}/checkout/payment-error?order_id=${encodeURIComponent(order.id)}&payment=failed`,

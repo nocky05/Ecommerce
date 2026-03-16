@@ -8,7 +8,7 @@ export default function AboutPage() {
             {/* Professional Hero Section */}
             <section className="bg-primary py-20 text-white text-center animate-fade-in" style={{ background: 'linear-gradient(135deg, #007BFF 0%, #0056b3 100%)' }}>
                 <div className="container">
-                    <h1 className="text-5xl font-black mb-4 uppercase tracking-widest animate-fade-up delay-100">À PROPOS DE MUSICMARKET</h1>
+                    <h1 className="text-5xl font-black mb-4 uppercase tracking-widest animate-fade-up delay-100">À PROPOS DE CHEZ LE MUSICIEN</h1>
                 </div>
             </section>
 
@@ -21,7 +21,7 @@ export default function AboutPage() {
                             <div style={{ width: '60px', height: '4px', backgroundColor: '#FFD200', marginBottom: '2.5rem' }}></div>
                             <div className="space-y-6 text-gray-700 leading-relaxed" style={{ fontSize: '1.1rem' }}>
                                 <p>
-                                    <strong className="text-primary">MusicMarket</strong> est une plateforme leader spécialisée dans la vente d’instruments et équipements de musique, matériel de sonorisation et équipements pour studio d’enregistrement.
+                                    <strong className="text-primary">Chez le musicien</strong> est une plateforme leader spécialisée dans la vente d’instruments et équipements de musique, matériel de sonorisation et équipements pour studio d’enregistrement.
                                 </p>
                                 <p>
                                     Basés à Abidjan, nous accompagnons les artistes, les églises, les salles de concert et les passionnés de musique à travers toute la Côte d'Ivoire et la sous-région.
@@ -40,7 +40,7 @@ export default function AboutPage() {
                         }}>
                             <h3 className="text-xl font-black mb-4 uppercase text-primary">Un service d'importation unique</h3>
                             <p className="mb-6 text-gray-600 leading-relaxed">
-                                Vous cherchez une pièce rare ou un modèle spécifique non disponible sur le marché local ? MusicMarket importe vos équipements en seulement <span className="font-bold text-black text-lg">10 JOURS</span>.
+                                Vous cherchez une pièce rare ou un modèle spécifique non disponible sur le marché local ? Chez le musicien importe vos équipements en seulement <span className="font-bold text-black text-lg">10 JOURS</span>.
                             </p>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                     <div className="bg-dark text-white p-12 md:p-20" style={{ borderRadius: '40px', background: '#1A1A1A' }}>
                         <div className="about-why-grid" style={{ alignItems: 'center' }}>
                             <div>
-                                <h2 className="text-4xl font-black mb-8 uppercase tracking-tight">Pourquoi choisir <span className="text-primary">MusicMarket</span> ?</h2>
+                                <h2 className="text-4xl font-black mb-8 uppercase tracking-tight">Pourquoi choisir <span className="text-primary">Chez le musicien</span> ?</h2>
                                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                     {[
                                         "Importation express en 10 jours",

@@ -78,7 +78,7 @@ export default function RegisterPage() {
                         Rejoignez-nous
                     </h1>
                     <p style={{ color: '#888', fontSize: '14px', marginBottom: '35px', lineHeight: '1.6' }}>
-                        Créez votre compte <strong style={{ color: 'var(--primary)' }}>MusicMarket</strong>
+                        Créez votre compte <strong style={{ color: 'var(--primary)' }}>Chez le musicien</strong>
                     </p>
 
                     {error && (

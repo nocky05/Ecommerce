@@ -41,8 +41,8 @@ interface SettingsContextType {
 }
 
 const defaultSettings: SiteSettings = {
-    name: "MusicMarket Côte d'Ivoire",
-    email: "contact@musicmarket.ci",
+    name: "Chez le musicien Côte d'Ivoire",
+    email: "contact@chezlemusicien.ci",
     phone: "+225 07 77 000 000",
     whatsapp: "+225 07 77 000 000",
     address: "Abidjan, Cocody Riviera, Boulevard de la Glisse",

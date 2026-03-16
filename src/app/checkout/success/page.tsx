@@ -53,7 +53,7 @@ function SuccessContent() {
                     <p style={{ fontSize: '17px', color: '#707EAE', fontWeight: '500', marginBottom: '35px', lineHeight: '1.7' }}>
                         {isMomo
                             ? <>Votre paiement via <strong style={{ color: '#007BFF' }}>GeniusPay</strong> a été confirmé avec succès. Votre commande est en cours de traitement.</>
-                            : <>Votre commande a été enregistrée. Un conseiller de <span style={{ color: '#007BFF', fontWeight: '700' }}>MusicMarket</span> vous contactera pour confirmer la livraison.</>
+                            : <>Votre commande a été enregistrée. Un conseiller de <span style={{ color: '#007BFF', fontWeight: '700' }}>Chez le musicien</span> vous contactera pour confirmer la livraison.</>
                         }
                     </p>
 

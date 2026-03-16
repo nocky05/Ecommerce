@@ -71,7 +71,7 @@ export default function ContactPage() {
             <section className="bg-primary py-16 text-white text-center animate-fade-in" style={{ background: 'linear-gradient(135deg, #007BFF 0%, #0056b3 100%)' }}>
                 <div className="container">
                     <span className="badge badge-yellow mb-4 animate-fade-up delay-100" style={{ display: 'inline-block' }}>SERVICE CLIENT EXPERT</span>
-                    <h1 className="text-5xl font-black mb-4 uppercase tracking-widest animate-fade-up delay-200">Contactez MusicMarket</h1>
+                    <h1 className="text-5xl font-black mb-4 uppercase tracking-widest animate-fade-up delay-200">Contactez Chez le musicien</h1>
                     <p className="text-lg mx-auto animate-fade-up delay-300" style={{ maxWidth: '700px', opacity: 0.9 }}>
                         Notre équipe de passionnés est à votre écoute pour vous conseiller et vous accompagner dans votre projet musical.
                     </p>
@@ -115,7 +115,7 @@ export default function ContactPage() {
 
                         <div style={{ marginTop: '2rem', padding: '2rem', backgroundColor: '#F8F9FA', borderRadius: '15px', border: '1px solid #E5E7EB' }}>
                             <p className="text-sm text-gray" style={{ lineHeight: '1.8', fontStyle: 'italic' }}>
-                                "MusicMarket s'engage à fournir le meilleur matériel sonore de la région. N'hésitez pas à nous solliciter pour des démonstrations privées au showroom."
+                                "Chez le musicien s'engage à fournir le meilleur matériel sonore de la région. N'hésitez pas à nous solliciter pour des démonstrations privées au showroom."
                             </p>
                             <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
                                 {socialIcons.map((icon, i) => (

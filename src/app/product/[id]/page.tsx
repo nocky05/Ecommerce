@@ -18,10 +18,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
         .eq('id', id)
         .single();
 
-    if (error || !product) return { title: "Produit non trouvé | MusicMarket" };
+    if (error || !product) return { title: "Produit non trouvé | Chez le musicien" };
 
     return {
-        title: `${product.name} | MusicMarket Côte d'Ivoire`,
+        title: `${product.name} | Chez le musicien Côte d'Ivoire`,
         description: product.description.slice(0, 160),
         openGraph: {
             title: product.name,

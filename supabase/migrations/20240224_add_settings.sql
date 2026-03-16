@@ -29,7 +29,7 @@ CREATE POLICY "Settings: admin update" ON public.site_settings
 INSERT INTO public.site_settings (id, data)
 VALUES ('general', '{
     "name": "MusicMarket Côte d''Ivoire", 
-    "email": "contact@musicmarket.ci",
+    "email": "contact@chezlemusicien.ci",
     "phone": "+225 07 77 000 000",
     "whatsapp": "+225 07 77 000 000",
     "address": "Abidjan, Cocody Riviera, Boulevard de la Glisse",

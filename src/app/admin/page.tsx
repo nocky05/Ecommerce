@@ -482,7 +482,7 @@ export default function AdminPage() {
             <aside className="fixed-sidebar">
                 <div className="sb-header">
                     <div className="sb-logo">M</div>
-                    <span className="sb-name">MusicMarket<span className="dot">.</span></span>
+                    <span className="sb-name">Chez le musicien<span className="dot">.</span></span>
                 </div>
 
                 <nav className="sb-nav">
@@ -1156,7 +1156,7 @@ export default function AdminPage() {
                                             <span className="main-lab">URL du Site</span>
                                             <span className="sub-lab">Adresse publique de votre boutique.</span>
                                         </div>
-                                        <div className="val-box">musicmarket.ci</div>
+                                        <div className="val-box">chezlemusicien.ci</div>
                                     </div>
                                 </section>
 

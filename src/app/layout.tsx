@@ -22,20 +22,20 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "MusicMarket | Votre Spécialiste Musique en Côte d'Ivoire",
+  title: "Chez le musicien | Votre Spécialiste Musique en Côte d'Ivoire",
   description: "Découvrez le meilleur des instruments de musique, sonorisation et studio. Importation express en 10 jours depuis l'Europe. Livraison sécurisée partout en Côte d'Ivoire.",
-  keywords: "instrument de musique, guitare, piano, batterie, sonorisation, studio, abidjan, côte d'ivoire, musicmarket, yamaha, fender, gibson",
+  keywords: "instrument de musique, guitare, piano, batterie, sonorisation, studio, abidjan, côte d'ivoire, chezlemusicien, yamaha, fender, gibson",
   openGraph: {
-    title: "MusicMarket | Votre Spécialiste Musique en Côte d'Ivoire",
+    title: "Chez le musicien | Votre Spécialiste Musique en Côte d'Ivoire",
     description: "Le meilleur du son européen livré chez vous en 10 jours. Qualité garantie.",
-    url: "https://musicmarket.ci",
-    siteName: "MusicMarket",
+    url: "https://chezlemusicien.ci",
+    siteName: "Chez le musicien",
     locale: "fr_CI",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MusicMarket | Votre Spécialiste Musique",
+    title: "Chez le musicien | Votre Spécialiste Musique",
     description: "Instruments de musique et sonorisation en Côte d'Ivoire.",
   },
 };

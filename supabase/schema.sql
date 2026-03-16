@@ -1,5 +1,5 @@
 -- ============================================
--- MusicMarket - Schéma de base de données
+-- Chez le musicien - Schéma de base de données
 -- À exécuter dans Supabase > SQL Editor
 -- ============================================
 

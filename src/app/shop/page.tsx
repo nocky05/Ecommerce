@@ -11,15 +11,15 @@ export async function generateMetadata({
     const category = sp.category as string | undefined;
     const search = sp.search as string | undefined;
 
-    let title = "Boutique | MusicMarket Côte d'Ivoire";
+    let title = "Boutique | Chez le musicien Côte d'Ivoire";
     let description = "Explorez notre catalogue complet d'instruments de musique et de sonorisation en Côte d'Ivoire. Qualité garantie.";
 
     if (category) {
-        title = `${category} | MusicMarket`;
+        title = `${category} | Chez le musicien`;
         description = `Découvrez notre sélection de ${category}. Importation express et livraison partout en Côte d'Ivoire.`;
     } else if (search) {
-        title = `Résultats pour "${search}" | MusicMarket`;
-        description = `Résultats de recherche pour "${search}" dans le catalogue MusicMarket.`;
+        title = `Résultats pour "${search}" | Chez le musicien`;
+        description = `Résultats de recherche pour "${search}" dans le catalogue Chez le musicien.`;
     }
 
     return {

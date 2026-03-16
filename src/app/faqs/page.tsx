@@ -19,7 +19,7 @@ const faqCategories = [
             },
             {
                 q: "Comment suivre ma commande ?",
-                a: "Après confirmation, un conseiller MusicMarket vous contactera directement par téléphone ou WhatsApp pour coordonner la livraison. Vous pouvez également consulter votre espace profil sur notre site."
+                a: "Après confirmation, un conseiller Chez le musicien vous contactera directement par téléphone ou WhatsApp pour coordonner la livraison. Vous pouvez également consulter votre espace profil sur notre site."
             },
             {
                 q: "Puis-je modifier ou annuler ma commande ?",
@@ -74,7 +74,7 @@ const faqCategories = [
             },
             {
                 q: "Que faire si mon produit est endommagé à la livraison ?",
-                a: "Vérifiez l'état du colis à la réception en présence du livreur. Si vous constatez des dommages, refusez le colis et contactez-nous immédiatement au +225 07 77 000 000 ou par email à contact@musicmarket.ci."
+                a: "Vérifiez l'état du colis à la réception en présence du livreur. Si vous constatez des dommages, refusez le colis et contactez-nous immédiatement au +225 07 77 000 000 ou par email à contact@chezlemusicien.ci."
             },
             {
                 q: "Proposez-vous un service de réparation ?",
@@ -164,7 +164,7 @@ export default function FAQsPage() {
                     <div style={{ fontSize: '48px', marginBottom: '15px' }}>❓</div>
                     <h1 style={{ fontSize: '52px', fontWeight: '900', marginBottom: '15px', letterSpacing: '-2px' }}>Questions Fréquentes</h1>
                     <p style={{ fontSize: '18px', opacity: 0.85, maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
-                        Toutes les réponses aux questions les plus posées sur MusicMarket.
+                        Toutes les réponses aux questions les plus posées sur Chez le musicien.
                     </p>
                 </div>
             </section>

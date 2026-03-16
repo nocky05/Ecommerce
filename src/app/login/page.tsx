@@ -133,7 +133,7 @@ export default function LoginPage() {
                         Bon retour !
                     </h1>
                     <p style={{ color: '#888', fontSize: '14px', marginBottom: '35px', lineHeight: '1.6' }}>
-                        Connectez-vous à votre compte <strong style={{ color: 'var(--primary)' }}>MusicMarket</strong>
+                        Connectez-vous à votre compte <strong style={{ color: 'var(--primary)' }}>Chez le musicien</strong>
                     </p>
 
                     {error && (

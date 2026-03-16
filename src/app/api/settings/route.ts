@@ -19,7 +19,7 @@ export async function GET(request: Request) {
 
         // Default fallbacks
         const defaults: any = {
-            general: { name: "MusicMarket Côte d'Ivoire", email: "contact@musicmarket.ci" },
+            general: { name: "Chez le musicien Côte d'Ivoire", email: "contact@chezlemusicien.ci" },
             homepage: {
                 side_cards: [
                     { title: "Pianos Yamaha Série P", subtitle: "", image: "/images/products/product-4-yamaha-dgx-670-piano-numerique-88-touches.jpg", link: "/shop?category=PIANOS%20%26%20CLAVIERS", bg_color: "#f8f9fa", text_color: "#111" },
