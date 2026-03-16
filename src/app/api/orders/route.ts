@@ -25,13 +25,23 @@ export async function POST(request: Request) {
 
         // Update order status (from admin panel)
         if (action === 'updateStatus') {
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('orders')
                 .update({ status, updated_at: new Date().toISOString() })
-                .eq('id', orderId);
+                .eq('id', orderId)
+                .select(); // Ensure we get the updated row back
 
-            if (error) throw error;
-            return NextResponse.json({ success: true, status });
+            if (error) {
+                console.error("Erreur DB updateStatus:", error);
+                throw error;
+            }
+
+            if (!data || data.length === 0) {
+                console.error("Aucune commande mise à jour. L'ID n'a pas été trouvé ou RLS bloque.");
+                return NextResponse.json({ success: false, error: 'Order not found or access denied' }, { status: 404 });
+            }
+
+            return NextResponse.json({ success: true, status, order: data[0] });
         }
 
         // Create new order (from checkout)

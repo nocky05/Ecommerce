@@ -169,11 +169,12 @@ export default function AdminPage() {
 
     // Stats dynamiques calculées
     const stats = useMemo(() => {
-        const totalSales = orders.reduce((acc, order) => acc + (Number(order.total) || 0), 0);
-        const uniqueCustomers = new Set(orders.map(order => order.customer_email)).size;
+        const validOrders = orders.filter(o => o.status !== 'Annulée' && o.status !== 'Refusée');
+        const totalSales = validOrders.reduce((acc, order) => acc + (Number(order.total) || 0), 0);
+        const uniqueCustomers = new Set(validOrders.map(order => order.customer_email)).size;
         return {
             sales: totalSales.toLocaleString() + "F",
-            orders: orders.length,
+            orders: validOrders.length,
             customers: uniqueCustomers,
             products: managedProducts.length
         };
