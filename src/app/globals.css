@@ -977,82 +977,90 @@ h6 {
 .hero-main {
   background-color: #0a0a0a;
   border-radius: var(--radius);
-  padding: 0; /* Removed global padding for edge-to-edge */
-  min-height: 480px;
+  padding: 0;
+  min-height: 360px; /* Reduced from 480px for better proportion */
   display: flex !important;
-  align-items: stretch; /* Ensure children take full height */
+  align-items: stretch;
   overflow: hidden;
 }
 
 .hero-content {
-  flex: 1;
-  max-width: 50%;
+  flex: 0 0 46%; /* Slightly less than half — cleaner design */
+  max-width: 46%;
   position: relative;
   z-index: 20;
-  padding: 4rem 3rem 4rem 4rem; /* Specific padding for the text area */
+  padding: 2.5rem 2.5rem 2.5rem 3rem; /* Tighter, more balanced padding */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #0a0a0a; /* Solid black background */
+  gap: 0.6rem;
+  background-color: #0a0a0a;
 }
 
 .hero-image-box {
   position: relative !important;
-  flex: 1;
-  width: 50%;
-  height: 480px;
+  flex: 0 0 54%; /* Slightly wider image area */
+  overflow: hidden; /* Clip the badge inside the image area */
   z-index: 10;
-  /* Removed overflow: hidden here so the badge can reach the parent hero-main bounds */
 }
 
 .hero-eyebrow {
   font-family: var(--font-poppins), sans-serif;
-  letter-spacing: 2px;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
 }
 
 .hero-title {
   font-family: var(--font-poppins), sans-serif;
-  font-size: 3.5rem;
-  font-weight: 800; /* Extra Bold */
-  letter-spacing: -1.5px;
-  line-height: 1.1;
+  font-size: 2.2rem; /* Reduced from 3.5rem — much more balanced */
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
 }
 
 .hero-description {
   font-family: var(--font-poppins), sans-serif;
-  font-size: 1.1rem;
-  font-weight: 400; /* Regular */
-  max-width: 520px;
-  color: #a0a0a0;
-  line-height: 1.6;
+  font-size: 0.875rem; /* Clean, readable, not overwhelming */
+  font-weight: 400;
+  max-width: 400px;
+  color: #9a9a9a;
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
 }
 
 .hero-btn {
   font-family: var(--font-poppins), sans-serif;
   text-decoration: none;
   width: fit-content;
-  border-radius: 12px;
-  font-size: 12px;
-  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
-  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.25);
+  padding: 0.75rem 1.75rem;
 }
 
 .hero-badge-sale {
-  top: 60px;
-  right: -30px; /* Pushed to the right edge to be clipped by hero-main */
-  width: 140px;
-  height: 140px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 210, 0, 0.2);
+  top: 20px;
+  right: 20px; /* Fully visible inside the image area */
+  width: 90px; /* Reduced from 140px */
+  height: 90px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 210, 0, 0.15);
   transition: transform 0.3s ease;
   z-index: 30;
 }
 
 .hero-badge-sale:hover {
-  transform: rotate(15deg) scale(1.05);
+  transform: rotate(15deg) scale(1.08);
 }
 
-.hero-badge-sale .sale-text { font-family: var(--font-poppins), sans-serif; font-weight: 900; font-size: 2.5rem; line-height: 0.8; }
-.hero-badge-sale .hot-text { font-family: var(--font-poppins), sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
+.hero-badge-sale .sale-text { font-family: var(--font-poppins), sans-serif; font-weight: 900; font-size: 1.6rem; line-height: 0.9; }
+.hero-badge-sale .hot-text { font-family: var(--font-poppins), sans-serif; font-weight: 700; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
 
 .side-card {
   border-radius: var(--radius);
