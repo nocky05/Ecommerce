@@ -975,12 +975,13 @@ h6 {
 
 /* Specific Home Sections */
 .hero-main {
-  background-color: var(--secondary);
+  background-color: #0a0a0a;
   border-radius: var(--radius);
-  padding: 4rem;
+  padding: 0; /* Removed global padding for edge-to-edge */
   min-height: 480px;
   display: flex !important;
-  align-items: center;
+  align-items: stretch; /* Ensure children take full height */
+  overflow: hidden;
 }
 
 .hero-content {
@@ -988,6 +989,11 @@ h6 {
   max-width: 50%;
   position: relative;
   z-index: 20;
+  padding: 4rem 3rem 4rem 4rem; /* Specific padding for the text area */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #0a0a0a; /* Solid black background */
 }
 
 .hero-image-box {
@@ -996,35 +1002,57 @@ h6 {
   width: 50%;
   height: 480px;
   z-index: 10;
-  overflow: hidden;
+  /* Removed overflow: hidden here so the badge can reach the parent hero-main bounds */
+}
+
+.hero-eyebrow {
+  font-family: var(--font-poppins), sans-serif;
+  letter-spacing: 2px;
 }
 
 .hero-title {
+  font-family: var(--font-poppins), sans-serif;
   font-size: 3.5rem;
-  letter-spacing: -2px;
+  font-weight: 800; /* Extra Bold */
+  letter-spacing: -1.5px;
+  line-height: 1.1;
 }
 
 .hero-description {
-  font-size: 1.15rem;
-  max-width: 550px;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400; /* Regular */
+  max-width: 520px;
   color: #a0a0a0;
+  line-height: 1.6;
+}
+
+.hero-btn {
+  font-family: var(--font-poppins), sans-serif;
+  text-decoration: none;
+  width: fit-content;
+  border-radius: 12px;
+  font-size: 12px;
+  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
+  padding: 1rem 2rem;
 }
 
 .hero-badge-sale {
-  top: 30px;
-  right: 30px;
+  top: 60px;
+  right: -30px; /* Pushed to the right edge to be clipped by hero-main */
   width: 140px;
   height: 140px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 210, 0, 0.2);
   transition: transform 0.3s ease;
+  z-index: 30;
 }
 
 .hero-badge-sale:hover {
   transform: rotate(15deg) scale(1.05);
 }
 
-.hero-badge-sale .sale-text { font-size: 2.5rem; line-height: 0.8; }
-.hero-badge-sale .hot-text { font-size: 0.9rem; text-transform: uppercase; }
+.hero-badge-sale .sale-text { font-family: var(--font-poppins), sans-serif; font-weight: 900; font-size: 2.5rem; line-height: 0.8; }
+.hero-badge-sale .hot-text { font-family: var(--font-poppins), sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
 
 .side-card {
   border-radius: var(--radius);
@@ -1742,16 +1770,26 @@ h6 {
     flex-direction: column !important;
     justify-content: center !important;
     text-align: center !important;
+    background-color: transparent !important; /* Override desktop solid background */
   }
 
   .hero-main {
     margin-top: 0 !important;
+    padding: 0 !important;
+    align-items: center !important; /* Reset stretch for mobile overlay */
   }
 
   .hero-content {
     max-width: 100% !important;
     z-index: 20;
     margin: 0 auto;
+    padding: 0 15px !important; /* Restore mobile padding */
+    background-color: transparent !important; /* Remove desktop black box */
+  }
+
+  .hero-eyebrow, .hero-btn {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-image-box {
@@ -1822,29 +1860,28 @@ h6 {
     display: block !important;
   }
 
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 1.8rem !important;
-      margin-bottom: 1rem !important;
-    }
-    .hero-description {
-      font-size: 0.9rem !important;
-      margin-bottom: 1.5rem !important;
-      line-height: 1.5 !important;
-    }
-    .hero-badge-sale {
-      top: 15px !important;
-      right: 15px !important;
-      width: 70px !important;
-      height: 70px !important;
-      box-shadow: 0 5px 15px rgba(255, 210, 0, 0.2) !important;
-    }
-    .hero-badge-sale .sale-text { font-size: 1.4rem !important; }
-    .hero-badge-sale .hot-text { font-size: 0.6rem !important; }
+  /* Keep mobile typography consistent with new fonts */
+  .hero-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .hero-description {
+    font-size: 0.9rem !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.5 !important;
+  }
+  .hero-badge-sale {
+    top: 15px !important;
+    right: 15px !important;
+    width: 70px !important;
+    height: 70px !important;
+    box-shadow: 0 5px 15px rgba(255, 210, 0, 0.2) !important;
+  }
+  .hero-badge-sale .sale-text { font-size: 1.4rem !important; }
+  .hero-badge-sale .hot-text { font-size: 0.6rem !important; }
 
-    .hero-content {
-      padding: 0 15px !important;
-    }
+  .hero-content {
+    padding: 0 15px !important;
   }
 
   .hero-slider-dots {

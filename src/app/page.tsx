@@ -224,12 +224,12 @@ export default function HomePage() {
           }}
         >
           <div className="hero-main relative overflow-hidden text-white" style={{ background: '#0a0a0a' }}>
-            <div className="hero-content" style={{ position: 'relative', zIndex: 10, padding: '0 20px' }}>
-              <span className="text-primary font-bold uppercase tracking-widest text-xs mb-3 d-flex">PROMOTION EXCLUSIVE</span>
-              <h1 className="hero-title font-bold mb-4" style={{ lineHeight: 1.2 }}>{heroBanner?.title || "Chargement..."}</h1>
-              <p className="hero-description text-gray-400 mb-8" style={{ lineHeight: 1.6 }}>{heroBanner?.description || ""}</p>
+            <div className="hero-content">
+              <span className="hero-eyebrow text-primary font-bold uppercase text-xs mb-3 d-flex">PROMOTION EXCLUSIVE</span>
+              <h1 className="hero-title mb-4">{heroBanner?.title || "Chargement..."}</h1>
+              <p className="hero-description text-gray-400 mb-8">{heroBanner?.description || ""}</p>
               {heroBanner && (
-                <Link href={heroBanner.button_link} className="btn btn-primary px-8 py-3 d-flex items-center gap-2 font-bold uppercase tracking-widest" style={{ textDecoration: 'none', width: 'fit-content', borderRadius: '12px', fontSize: '12px', boxShadow: '0 10px 25px rgba(0, 123, 255, 0.3)' }}>
+                <Link href={heroBanner.button_link} className="hero-btn btn btn-primary d-flex items-center gap-2 font-bold uppercase tracking-widest">
                   DÉCOUVRIR LES OFFRES
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </Link>
