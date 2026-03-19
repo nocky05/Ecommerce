@@ -998,6 +998,44 @@ h6 {
   z-index: 10;
 }
 
+.hero-image-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 150px;
+  background: linear-gradient(to right, #0a0a0a, transparent);
+  z-index: 11;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  letter-spacing: -2px;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  max-width: 550px;
+  color: #a0a0a0;
+}
+
+.hero-badge-sale {
+  top: 30px;
+  right: 30px;
+  width: 140px;
+  height: 140px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 210, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.hero-badge-sale:hover {
+  transform: rotate(15deg) scale(1.05);
+}
+
+.hero-badge-sale .sale-text { font-size: 2.5rem; line-height: 0.8; }
+.hero-badge-sale .hot-text { font-size: 0.9rem; text-transform: uppercase; }
+
 .side-card {
   border-radius: var(--radius);
   padding: 2rem;
@@ -1793,24 +1831,6 @@ h6 {
     height: 100% !important;
     display: block !important;
   }
-
-  /* Hero Slider Typography & Badge - Global */
-  .hero-title {
-    font-size: 3.5rem;
-  }
-  .hero-description {
-    font-size: 1.1rem;
-    max-width: 600px;
-  }
-  .hero-badge-sale {
-    top: 20%;
-    right: 10%;
-    width: 110px;
-    height: 110px;
-    box-shadow: 0 0 50px rgba(255, 210, 0, 0.3);
-  }
-  .hero-badge-sale .sale-text { font-size: 2.2rem; line-height: 0.8; }
-  .hero-badge-sale .hot-text { font-size: 0.8rem; text-transform: uppercase; }
 
   @media (max-width: 768px) {
     .hero-title {

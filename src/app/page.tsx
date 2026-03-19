@@ -236,7 +236,7 @@ export default function HomePage() {
               )}
             </div>
             {heroBanner && (
-              <div className="hero-image-box d-flex justify-center items-center">
+              <div className="hero-image-box">
                 <Image
                   src={heroBanner.image_url}
                   alt={heroBanner.title}
