@@ -38,13 +38,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 .eq("id", userId)
                 .single();
 
-            const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || '').toLowerCase().trim();
-            const userEmail = (email || '').toLowerCase().trim();
+            const adminEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || "").toLowerCase().trim();
+            const userEmail = (email || "").toLowerCase().trim();
             const isEmailAdmin = userEmail === adminEmail && !!adminEmail;
 
             if (isEmailAdmin) {
-                // If it's the admin email, force the role to admin regardless of DB value
-                const adminProfile = data ? { ...data, role: 'admin' } : { id: userId, role: 'admin', email: userEmail, full_name: 'Administrateur' };
+                const adminProfile = data ? { ...data, role: "admin" } : { id: userId, role: "admin", email: userEmail, full_name: "Administrateur" };
                 setProfile(adminProfile);
             } else {
                 setProfile(data || null);
@@ -56,7 +55,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     useEffect(() => {
-        // Get initial session
         supabase.auth.getSession().then(async ({ data: { session } }) => {
             setSession(session);
             setUser(session?.user ?? null);
@@ -66,7 +64,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setLoading(false);
         });
 
-        // Listen for auth changes (login, logout, token refresh)
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session);
             setUser(session?.user ?? null);

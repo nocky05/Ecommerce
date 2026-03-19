@@ -16,10 +16,10 @@ envContent.split(/\r?\n/).forEach(line => {
 });
 
 const supabaseUrl = envVars.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseServiceKey = envVars.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseServiceKey = envVars.SUPABASE_SERVICE_ROLE_KEY || envVars.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseServiceKey) {
-    console.error('Erreur: NEXT_PUBLIC_SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY manquant dans .env.local');
+    console.error('Erreur: NEXT_PUBLIC_SUPABASE_URL ou clé d\'API manquante dans .env.local');
     process.exit(1);
 }
 

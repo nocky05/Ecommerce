@@ -471,10 +471,7 @@ h6 {
     gap: 8px !important;
     padding: 0 !important;
     width: 100% !important;
-<<<<<<< HEAD
     background: #000 !important; /* Fond noir forcé sur mobile */
-=======
->>>>>>> origin/main
   }
 
   /* Row 1: Logo + Icons on the same line */
@@ -515,7 +512,6 @@ h6 {
   }
 
   .logo-icon-box {
-<<<<<<< HEAD
     width: 38px !important;
     height: 38px !important;
   }
@@ -524,8 +520,8 @@ h6 {
   .user-actions-container span.absolute {
     border: none !important;
     background: #000 !important;
-=======
-    width: 32px !important;
+  }
+
   .py-4-mobile {
     padding-top: 1.2rem !important;
     padding-bottom: 1.2rem !important;
@@ -535,6 +531,7 @@ h6 {
   .search-bar-container {
     padding: 0 15px !important;
     margin-top: 5px !important;
+    width: 100% !important;
   }
 
   .search-wrapper {
@@ -828,7 +825,6 @@ h6 {
   background-color: var(--primary-dark);
 }
 
-<<<<<<< HEAD
 /* Badges notifications - Uniforme */
 .badge-counter {
   background-color: #000 !important;
@@ -843,7 +839,7 @@ h6 {
   border-radius: 50% !important;
   line-height: 1 !important;
   position: absolute !important;
-  border: none !important; /* Suppression de la bordure bleue gênante */
+  border: none !important;
   box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
 }
 
@@ -878,8 +874,6 @@ h6 {
   transform: translateX(0) !important;
 }
 
-=======
->>>>>>> origin/main
 .btn-dark {
   background-color: var(--secondary);
   color: white;

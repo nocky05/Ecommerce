@@ -103,7 +103,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="w-full sticky top-0" style={{ zIndex: 1000 }}>
+    <header className="w-full" style={{ zIndex: 1000 }}>
       {/* 1. Top Bar - Professional Blue */}
       <div className="py-2 hidden-mobile" style={{ background: '#004a99', color: 'white', fontSize: '12px' }}>
         <div className="container d-flex justify-between items-center">
@@ -126,13 +126,8 @@ export default function Navbar() {
         </div>
       </div>
 
-<<<<<<< HEAD
       {/* 2. Main Header - Black (All Screens) */}
-      <div className="py-6 py-4-mobile" style={{ background: '#000', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-=======
-      {/* 2. Main Header - Blue */}
-      <div className="py-6 py-4-mobile" style={{ background: '#007BFF', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
->>>>>>> origin/main
+      <div className="pt-6 pb-2 py-4-mobile" style={{ background: '#000', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
         <div className="container header-main-grid">
           {/* Row 1 on mobile: Logo + Icons together */}
           <div className="header-top-row d-flex items-center" style={{ gap: '0' }}>
@@ -145,34 +140,22 @@ export default function Navbar() {
               >
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
               </button>
-<<<<<<< HEAD
               <Link href="/" className="d-flex items-center gap-2" style={{ textDecoration: 'none', justifySelf: 'center' }}>
-              <div className="bg-primary rounded-full d-flex items-center justify-center logo-icon-box" style={{ boxShadow: '0 4px 10px rgba(0, 123, 255, 0.3)' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg>
-              </div>
-              <span className="text-xl font-black tracking-tighter text-white uppercase ml-1">
-                CHEZ LE <span style={{ color: '#FFD200' }}>MUSICIEN</span>
-              </span>
-            </Link>
-          </div>
-=======
-              <Link href="/" className="d-flex items-center gap-2" style={{ textDecoration: 'none' }}>
-                <div className="bg-white rounded-full d-flex items-center justify-center logo-icon-box" style={{ width: '45px', height: '45px' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#007BFF" strokeWidth="3">
-                    <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
-                  </svg>
+                <div className="bg-primary rounded-full d-flex items-center justify-center logo-icon-box" style={{ boxShadow: '0 4px 10px rgba(0, 123, 255, 0.3)' }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg>
                 </div>
-                <span className="text-2xl font-black text-white logo-text">Chez le <span style={{ color: '#FFD200' }}>musicien</span></span>
+                <span className="text-xl font-black tracking-tighter text-white uppercase ml-1">
+                  CHEZ LE <span style={{ color: '#FFD200' }}>MUSICIEN</span>
+                </span>
               </Link>
             </div>
->>>>>>> origin/main
 
             {/* Action Zone - Right (inside top row on mobile) */}
             <div className="d-flex items-center justify-end user-actions-container" style={{ gap: '2rem', color: 'white' }}>
               <div className="d-flex items-center gap-3 group hidden-mobile">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                 <div className="text-[9px] font-black uppercase d-flex flex-row items-center gap-2 transition">
-                  {user && !isAdmin ? (
+                  {user ? (
                     <div className="d-flex items-center gap-3">
                       <Link href={profileLink} className="hover:text-yellow-300 transition block font-bold" style={{ textDecoration: 'none', color: 'inherit', fontSize: '11px' }}>
                         {profile?.full_name || user.email?.split("@")[0]}
@@ -217,12 +200,15 @@ export default function Navbar() {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
 
+      <div className="container">
           {/* Row 2 on mobile: Search Bar (full width) */}
           <form
             onSubmit={handleSearch}
             className="d-flex relative search-form-container"
-            style={{ height: '44px', background: 'white', borderRadius: '4px', overflow: 'visible' }}
+            style={{ height: '44px', background: 'white', borderRadius: '0 0 4px 4px', overflow: 'visible' }}
             onBlur={(e) => {
               if (!e.currentTarget.contains(e.relatedTarget as Node)) {
                 setShowSuggestions(false);
@@ -298,16 +284,21 @@ export default function Navbar() {
                     >
                       {cat}
                     </div>
-                  className="h-full bg-white d-flex items-center justify-center search-icon-box"
-                  style={{ borderLeft: '1px solid #eee', cursor: 'pointer', transition: 'background 0.2s', padding: '0 15px' }}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-                </button>
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        </div>
-      </div>
+
+            <button
+              type="submit"
+              className="px-5 d-flex items-center justify-center search-icon-button"
+              style={{ background: 'black', border: 'none', color: 'white', cursor: 'pointer' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+              </svg>
+            </button>
+          </form>
 
       {/* 3. Navigation Bar - Professional Blue */}
       <div className="py-0 hidden-mobile" style={{ background: '#0056b3', position: 'relative', zIndex: 100 }}>
@@ -376,9 +367,9 @@ export default function Navbar() {
           </nav>
         </div>
       </div>
+      </div>
 
       {/* Mobile Hamburger Menu Overlay */}
-<<<<<<< HEAD
       <div 
         className={`mobile-menu-overlay d-block-mobile ${mobileMenuOpen ? 'open' : ''}`} 
         onClick={() => setMobileMenuOpen(false)}
@@ -395,7 +386,7 @@ export default function Navbar() {
           </div>
           <div className="flex-1 overflow-y-auto" style={{ borderRight: '1px solid #eee' }}>
             <div className="py-4 px-6 border-b" style={{ borderBottom: '1px solid #f0f0f0' }}>
-              {user && !isAdmin ? (
+              {user ? (
                 <div className="d-flex items-center gap-3 text-sm flex-wrap whitespace-nowrap">
                   <Link href={profileLink} className="font-bold text-gray-900 block" style={{ textDecoration: 'none' }} onClick={() => setMobileMenuOpen(false)}>
                     {profile?.full_name || user?.email?.split("@")[0]}
@@ -432,60 +423,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-=======
-      {
-        mobileMenuOpen && (
-          <div className="absolute inset-0 d-block-mobile" style={{ position: 'fixed', zIndex: 2000, background: 'rgba(0,0,0,0.5)' }} onClick={() => setMobileMenuOpen(false)}>
-            <div
-              className="h-full bg-white flex-col-mobile"
-              style={{ width: '80%', maxWidth: '300px', transform: 'translateX(0)', transition: 'transform 0.3s ease-in-out', display: 'flex', flexDirection: 'column' }}
-              onClick={e => e.stopPropagation()}
-            >
-              <div className="py-4 px-6" style={{ background: '#007BFF', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="text-xl font-black">Menu</span>
-                <button onClick={() => setMobileMenuOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6 6 18M6 6l12 12" /></svg>
-                </button>
-              </div>
-              <div className="flex-1 overflow-y-auto" style={{ borderRight: '1px solid #eee' }}>
-                <div className="py-4 px-6 border-b" style={{ borderBottom: '1px solid #f0f0f0' }}>
-                  {user && !isAdmin ? (
-                    <div className="d-flex items-center gap-3 text-sm">
-                      <Link href={profileLink} className="font-bold text-gray-900 block" style={{ textDecoration: 'none' }} onClick={() => setMobileMenuOpen(false)}>
-                        {profile?.full_name || user?.email?.split("@")[0]}
-                      </Link>
-                      <span style={{ opacity: 0.3 }}>|</span>
-                      <button onClick={() => { signOut(); setMobileMenuOpen(false); }} style={{ background: 'transparent', border: 'none', color: '#b22222', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold' }}>
-                        Déconnexion
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="d-flex items-center gap-4 text-sm font-bold">
-                      <Link href="/login" style={{ textDecoration: 'none', color: '#007BFF' }} onClick={() => setMobileMenuOpen(false)}>Connexion</Link>
-                      <Link href="/register" style={{ textDecoration: 'none', color: '#007BFF' }} onClick={() => setMobileMenuOpen(false)}>S'inscrire</Link>
-                    </div>
-                  )}
-                </div>
-
-                <div className="py-2 flex-col-mobile" style={{ display: 'flex', flexDirection: 'column' }}>
-                  {mainLinks.map(link => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className="px-6 py-4 text-base font-black uppercase tracking-wide border-b"
-                      style={{ textDecoration: 'none', display: 'block', color: '#111', borderBottom: '1px solid #f0f0f0' }}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )
-      }
->>>>>>> origin/main
     </header>
   );
 }

@@ -20,14 +20,6 @@ export default function HomePage() {
   const { homepage, loading: settingsLoading } = useSettings();
 
   // Dynamic state
-<<<<<<< HEAD
-  interface CategoryItem {
-    name: string;
-    category: string;
-    image: string;
-  }
-=======
->>>>>>> origin/main
   const [dynamicBanners, setDynamicBanners] = useState<any[]>([]);
   const [dynamicPromos, setDynamicPromos] = useState<any[]>([]);
   const [recentProducts, setRecentProducts] = useState<any[]>([]);
@@ -37,9 +29,6 @@ export default function HomePage() {
 
   const categories_tabs = ["Tous les produits", "Guitares", "Pianos", "Batteries", "Sono", "Studio"];
 
-<<<<<<< HEAD
-  const instruments_categories: CategoryItem[] = [];
-=======
   const instruments_categories = [
     { name: "Pianos", category: "PIANOS & CLAVIERS", image: "/images/products/product-4-yamaha-dgx-670-piano-num-rique-88-touches.jpg" },
     { name: "Guitares", category: "GUITARES & BASSES", image: "/images/products/product-1-harley-benton-hqs-el-10-46-jeu-de-6-cordes-pour.jpg" },
@@ -50,7 +39,6 @@ export default function HomePage() {
     { name: "DJ Gear", category: "ÉQUIPEMENT DJ", image: "/images/products/product-109-denon-dj-sc-live-4-standalone-dj-controller-cont.jpg" },
     { name: "Micros", category: "MICROPHONES", image: "/images/products/product-24-audio-technica-at2020-micro-condensateur-cardi.jpg" },
   ];
->>>>>>> origin/main
 
   useEffect(() => {
     const fetchData = async () => {
@@ -169,20 +157,8 @@ export default function HomePage() {
     }
   }, [isBannerVisible]);
 
-<<<<<<< HEAD
-  // Use the first active banner or null
+  // Use the first active banner from DB only (null if none)
   const heroBanner = dynamicBanners.length > 0 ? dynamicBanners[0] : null;
-=======
-  // Use the first active banner or fallback to static
-  const heroBanner = dynamicBanners.length > 0
-    ? dynamicBanners[0]
-    : {
-      title: "Importation Express 10J",
-      description: "Besoin d'un instrument spécifique ? Nous l'importons pour vous en un temps record. Devis gratuit et livraison sécurisée garantie partout en Côte d'Ivoire.",
-      image_url: "https://images.unsplash.com/photo-1550291652-6ea9114a47b1?q=80&w=800",
-      button_link: "/about"
-    };
->>>>>>> origin/main
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -220,7 +196,6 @@ export default function HomePage() {
           <div className="hero-main relative overflow-hidden text-white" style={{ background: '#0a0a0a' }}>
             <div className="hero-content" style={{ position: 'relative', zIndex: 10 }}>
               <span className="text-primary font-bold uppercase tracking-widest text-xs mb-4 d-flex">PROMOTION EXCLUSIVE</span>
-<<<<<<< HEAD
               <h1 className="text-5xl font-bold mb-6" style={{ lineHeight: 1.1 }}>{heroBanner?.title || "Chargement..."}</h1>
               <p className="text-gray-400 mb-8" style={{ fontSize: '1.1rem', lineHeight: 1.6 }}>{heroBanner?.description || ""}</p>
               {heroBanner && (
@@ -259,51 +234,12 @@ export default function HomePage() {
                 </div>
               </div>
             )}
-=======
-              <h1 className="text-5xl font-bold mb-6" style={{ lineHeight: 1.1 }}>{heroBanner.title}</h1>
-              <p className="text-gray-400 mb-8" style={{ fontSize: '1.1rem', lineHeight: 1.6 }}>{heroBanner.description}</p>
-              <Link href={heroBanner.button_link} className="btn btn-primary px-10 py-4 d-flex items-center gap-2 font-bold uppercase tracking-widest" style={{ textDecoration: 'none', width: 'fit-content', borderRadius: '12px', fontSize: '13px', boxShadow: '0 10px 25px rgba(0, 123, 255, 0.3)' }}>
-                DÉCOUVRIR LES OFFRES
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-              </Link>
-            </div>
-            <div className="hero-image-box d-flex justify-center items-center" style={{ left: '50%', opacity: 1 }}>
-              <Image
-                src={heroBanner.image_url}
-                alt={heroBanner.title}
-                fill
-                className="img-cover"
-                style={{ mixBlendMode: 'screen', opacity: 0.5, objectFit: 'cover' }}
-                priority
-              />
-              <div className="absolute d-flex flex-column items-center justify-center font-bold rounded-full"
-                style={{
-                  top: '20%',
-                  right: '10%',
-                  width: '110px',
-                  height: '110px',
-                  background: '#FFD200',
-                  color: 'black',
-                  border: '8px solid rgba(255,255,255,0.1)',
-                  fontSize: '1.2rem',
-                  boxShadow: '0 0 50px rgba(255, 210, 0, 0.3)',
-                  zIndex: 30,
-                  transform: 'rotate(12deg)'
-                }}>
-                <span style={{ fontSize: '2.2rem', lineHeight: '0.8' }}>SALE</span>
-                <span style={{ fontSize: '0.8rem', textTransform: 'uppercase' }}>HOT</span>
-              </div>
-            </div>
->>>>>>> origin/main
           </div>
 
           <div className="d-flex flex-column gap-6">
             {homepage.side_cards.map((card, i) => (
               <div key={i} className="side-card" style={{ background: card.bg_color, color: card.text_color }}>
-<<<<<<< HEAD
                 <span className="absolute badge badge-red font-bold px-3 py-1 animate-pulse" style={{ top: '15px', right: '15px', zIndex: 30, fontSize: '10px', boxShadow: '0 4px 10px rgba(230, 57, 70, 0.3)' }}>OFFRE SP</span>
-=======
->>>>>>> origin/main
                 <div className="side-card-content">
                   <h3 className="text-xl font-bold mb-2" style={{ color: 'inherit' }}>{card.title}</h3>
                   {card.subtitle && <p className="font-bold mb-4" style={{ fontSize: '14px', color: card.text_color === '#fff' ? 'var(--primary)' : 'inherit', opacity: 0.9 }}>{card.subtitle}</p>}
