@@ -11,7 +11,21 @@ function PaymentErrorContent() {
 
     return (
         <div className="bg-[#fff8f8] min-h-screen">
-            <main className="container" style={{ maxWidth: '800px', margin: '0 auto', padding: '100px 20px', textAlign: 'center' }}>
+            {/* Standardized Black Banner */}
+            <div style={{ background: '#111111', color: 'white', padding: '60px 0', marginBottom: '40px' }}>
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
+                    <h1 className="error-banner-title font-black mb-4 uppercase tracking-widest animate-fade-up">Paiement Échoué</h1>
+                    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '13px', color: '#999' }}>
+                        <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Accueil</Link>
+                        <span>/</span>
+                        <Link href="/checkout" style={{ color: 'inherit', textDecoration: 'none' }}>Checkout</Link>
+                        <span>/</span>
+                        <span style={{ color: 'white', fontWeight: '700' }}>Erreur</span>
+                    </nav>
+                </div>
+            </div>
+
+            <main className="container" style={{ maxWidth: '800px', margin: '0 auto', paddingBottom: '100px', textAlign: 'center' }}>
                 <div style={{
                     background: 'white',
                     borderRadius: '24px',

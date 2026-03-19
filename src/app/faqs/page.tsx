@@ -158,16 +158,17 @@ export default function FAQsPage() {
     const { settings } = useSettings();
     return (
         <main className="bg-white min-h-screen">
-            {/* Hero */}
-            <section style={{ background: 'linear-gradient(135deg, #007BFF 0%, #0056b3 100%)', padding: '70px 0', textAlign: 'center', color: 'white' }}>
-                <div className="container">
-                    <div style={{ fontSize: '48px', marginBottom: '15px' }}>❓</div>
-                    <h1 style={{ fontSize: '52px', fontWeight: '900', marginBottom: '15px', letterSpacing: '-2px' }}>Questions Fréquentes</h1>
-                    <p style={{ fontSize: '18px', opacity: 0.85, maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
-                        Toutes les réponses aux questions les plus posées sur Chez le musicien.
-                    </p>
+            {/* Standardized Black Banner */}
+            <div style={{ background: '#111111', color: 'white', padding: '60px 0', marginBottom: '40px' }}>
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
+                    <h1 className="faq-banner-title font-black mb-4 uppercase tracking-widest animate-fade-up">Questions Fréquentes</h1>
+                    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '13px', color: '#999' }}>
+                        <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Accueil</Link>
+                        <span>/</span>
+                        <span style={{ color: 'white', fontWeight: '700' }}>FAQ</span>
+                    </nav>
                 </div>
-            </section>
+            </div>
 
             {/* Quick Contact Bar */}
             <div style={{ background: '#FFD200', padding: '15px 0' }}>

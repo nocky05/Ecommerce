@@ -4,7 +4,20 @@ import Link from "next/link";
 
 export default function NotFound() {
     return (
-        <div className="min-h-screen bg-white d-flex items-center justify-center p-4 text-center">
+        <div className="min-h-screen bg-white text-center">
+            {/* Standardized Black Banner */}
+            <div style={{ background: '#111111', color: 'white', padding: '60px 0', marginBottom: '40px' }}>
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
+                    <h1 className="error-banner-title font-black mb-4 uppercase tracking-widest animate-fade-up">Page non trouvée</h1>
+                    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '13px', color: '#999' }}>
+                        <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Accueil</Link>
+                        <span>/</span>
+                        <span style={{ color: 'white', fontWeight: '700' }}>404</span>
+                    </nav>
+                </div>
+            </div>
+
+            <div className="d-flex items-center justify-center p-4">
             <div style={{ maxWidth: '600px' }}>
                 {/* Animated Musical Icon */}
                 <div className="mb-8 relative d-flex justify-center">
@@ -64,6 +77,7 @@ export default function NotFound() {
           50% { transform: translateY(-20px); }
         }
       `}</style>
+            </div>
         </div>
     );
 }
