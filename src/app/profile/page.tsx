@@ -60,28 +60,59 @@ export default function ProfilePage() {
     const joinDate = new Date(user.created_at).toLocaleDateString("fr-CI", { year: "numeric", month: "long" });
 
     return (
-        <div style={{ background: '#f8fafc', minHeight: '100vh', paddingTop: '30px', paddingBottom: '80px', fontFamily: "'Inter', system-ui" }}>
+        <div style={{ background: '#f8fafc', minHeight: '100vh', paddingBottom: '80px', fontFamily: "'Inter', system-ui" }}>
+            {/* Professional Black Banner */}
+            <div style={{ background: '#111111', color: 'white', padding: '60px 0', marginBottom: '40px' }}>
+                <div className="container" style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
+                    <h1 className="profile-banner-title font-black mb-4 uppercase tracking-widest animate-fade-up">Mon Compte</h1>
+                    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '13px', color: '#999' }}>
+                        <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Accueil</Link>
+                        <span>/</span>
+                        <span style={{ color: 'white', fontWeight: '700' }}>Mon Compte</span>
+                    </nav>
+                </div>
+            </div>
+
             <div className="container" style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 20px' }}>
 
-                {/* Profile Header */}
-                <div style={{ background: 'linear-gradient(135deg, #007BFF, #0040cc)', borderRadius: '24px', padding: '40px 40px', color: 'white', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '30px', flexWrap: 'wrap' }}>
+                {/* Refined Profile Card */}
+                <div style={{ 
+                    background: 'white', 
+                    borderRadius: '20px', 
+                    padding: '30px', 
+                    color: '#111', 
+                    marginBottom: '30px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '25px', 
+                    flexWrap: 'wrap',
+                    border: '1px solid #f0f4f8',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.03)'
+                }}>
                     <div style={{
-                        width: '90px', height: '90px', borderRadius: '50%', flexShrink: 0,
-                        background: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '38px', fontWeight: '900', border: '3px solid rgba(255,255,255,0.6)'
+                        width: '80px', height: '80px', borderRadius: '20px', flexShrink: 0,
+                        background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '32px', fontWeight: '900', border: '1px solid #e5e7eb', color: '#111'
                     }}>
                         {displayName.charAt(0).toUpperCase()}
                     </div>
                     <div style={{ flex: 1 }}>
-                        <h1 style={{ fontSize: '26px', fontWeight: '900', margin: '0 0 4px' }}>{displayName}</h1>
-                        <p style={{ margin: '0 0 4px', opacity: 0.8, fontSize: '14px' }}>{user.email}</p>
-                        <p style={{ margin: 0, opacity: 0.6, fontSize: '12px' }}>Membre depuis {joinDate}</p>
+                        <h2 style={{ fontSize: '22px', fontWeight: '900', margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{displayName}</h2>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                            <p style={{ margin: 0, color: '#666', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <span style={{ opacity: 0.6 }}>✉️</span> {user.email}
+                            </p>
+                            <p style={{ margin: 0, color: '#999', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <span style={{ opacity: 0.6 }}>📅</span> Membre depuis {joinDate}
+                            </p>
+                        </div>
                     </div>
                     <button
                         onClick={signOut}
-                        style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '10px 22px', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontSize: '13px', backdropFilter: 'blur(5px)' }}
+                        style={{ background: '#111', border: 'none', color: 'white', padding: '12px 24px', borderRadius: '10px', fontWeight: '800', cursor: 'pointer', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', transition: 'all 0.2s' }}
+                        className="btn-logout"
                     >
-                        🚪 Déconnexion
+                        Deconnexion
                     </button>
                 </div>
 

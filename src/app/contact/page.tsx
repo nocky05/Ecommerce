@@ -68,13 +68,10 @@ export default function ContactPage() {
     return (
         <main className="bg-white min-h-screen">
             {/* Colorful Hero Section */}
-            <section className="bg-primary py-16 text-white text-center animate-fade-in" style={{ background: 'linear-gradient(135deg, #007BFF 0%, #0056b3 100%)' }}>
-                <div className="container">
+            <section className="text-white text-center animate-fade-in" style={{ background: '#111111', padding: '60px 20px' }}>
+                <div className="container" style={{ margin: '0 auto' }}>
                     <span className="badge badge-yellow mb-4 animate-fade-up delay-100" style={{ display: 'inline-block' }}>SERVICE CLIENT EXPERT</span>
-                    <h1 className="text-5xl font-black mb-4 uppercase tracking-widest animate-fade-up delay-200">Contactez Chez le musicien</h1>
-                    <p className="text-lg mx-auto animate-fade-up delay-300" style={{ maxWidth: '700px', opacity: 0.9 }}>
-                        Notre équipe de passionnés est à votre écoute pour vous conseiller et vous accompagner dans votre projet musical.
-                    </p>
+                    <h1 className="contact-banner-title font-black mb-0 uppercase tracking-widest animate-fade-up delay-200">Contactez Chez le musicien</h1>
                 </div>
             </section>
 

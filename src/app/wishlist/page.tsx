@@ -14,8 +14,8 @@ export default function WishlistPage() {
             {/* Page Header */}
             <div style={{ background: '#111111', color: 'white', padding: '60px 0' }}>
                 <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
-                    <h1 style={{ fontSize: '64px', fontWeight: '800', margin: 0, letterSpacing: '-2px' }}>Mes Coups de Cœur</h1>
-                    <nav style={{ fontSize: '14px', color: '#999', marginTop: '20px', fontWeight: '500' }}>
+                    <h1 className="wishlist-banner-title font-black uppercase tracking-widest animate-fade-up" style={{ margin: 0 }}>Mes Coups de Cœur</h1>
+                    <nav style={{ fontSize: '14px', color: '#999', marginTop: '15px', fontWeight: '500' }}>
                         <Link href="/" style={{ color: '#999', textDecoration: 'none' }}>Accueil</Link>
                         <span style={{ margin: '0 10px' }}>/</span>
                         <span style={{ color: 'white', fontWeight: '700' }}>Ma Liste</span>

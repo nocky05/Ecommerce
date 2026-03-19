@@ -9,13 +9,14 @@ export default function CartPage() {
 
     return (
         <div className="bg-[#fbfbfb] min-h-screen">
-            {/* Breadcrumbs */}
-            <div className="border-bottom border-gray-100 py-4 mb-10 bg-white">
-                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <nav style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#999' }}>
+            {/* Professional Black Banner */}
+            <div style={{ background: '#111111', color: 'white', padding: '60px 0' }}>
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
+                    <h1 className="cart-banner-title font-black mb-4 uppercase tracking-widest animate-fade-up">Mon Panier</h1>
+                    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '13px', color: '#999' }}>
                         <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Accueil</Link>
                         <span>/</span>
-                        <span style={{ color: '#111', fontWeight: '500' }}>Mon Panier</span>
+                        <span style={{ color: 'white', fontWeight: '700' }}>Mon Panier</span>
                     </nav>
                 </div>
             </div>

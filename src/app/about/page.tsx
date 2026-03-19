@@ -6,9 +6,9 @@ export default function AboutPage() {
     return (
         <main className="bg-white min-h-screen">
             {/* Professional Hero Section */}
-            <section className="bg-primary py-20 text-white text-center animate-fade-in" style={{ background: 'linear-gradient(135deg, #007BFF 0%, #0056b3 100%)' }}>
-                <div className="container">
-                    <h1 className="text-5xl font-black mb-4 uppercase tracking-widest animate-fade-up delay-100">À PROPOS DE CHEZ LE MUSICIEN</h1>
+            <section className="text-white text-center animate-fade-in" style={{ background: '#111111', padding: '60px 20px' }}>
+                <div className="container" style={{ margin: '0 auto' }}>
+                    <h1 className="about-banner-title font-black mb-4 uppercase tracking-widest animate-fade-up delay-100">À PROPOS DE CHEZ LE MUSICIEN</h1>
                 </div>
             </section>
 

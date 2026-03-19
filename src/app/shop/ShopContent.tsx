@@ -152,7 +152,7 @@ export default function ShopContent() {
         <div className="animate-fade-in" style={{ background: 'white', minHeight: '100vh' }}>
             <div style={{ background: '#111111', color: 'white', padding: '60px 0' }}>
                 <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
-                    <h1 style={{ fontSize: '60px', fontWeight: '800', margin: '0 0 40px 0', letterSpacing: '-2px' }}>{selectedCategory || "Boutique"}</h1>
+                    <h1 className="shop-banner-title" style={{ fontWeight: '800', margin: '0 0 30px 0', letterSpacing: '-2px' }}>{selectedCategory || "Boutique"}</h1>
                     <div className="top-nav-categories" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '30px', maxWidth: '1200px', margin: '0 auto' }}>
                         {topNavCategories.map((cat, i) => {
                             // Sum counts if it's a group, or just get single count

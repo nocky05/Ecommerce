@@ -11,6 +11,8 @@ import Footer from "@/components/Footer";
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("Tous les produits");
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const heroSliderRef = useRef<HTMLDivElement>(null);
   const [discount, setDiscount] = useState(0);
   const [isBannerVisible, setIsBannerVisible] = useState(false);
   const bannerRef = useRef<HTMLDivElement>(null);
@@ -26,6 +28,24 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false);
+
+  // Auto-play for Mobile Hero Slider
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (heroSliderRef.current && window.innerWidth <= 768) {
+        setActiveHeroSlide((prev) => {
+          const nextIndex = (prev + 1) % 3;
+          heroSliderRef.current?.scrollTo({
+            left: nextIndex * heroSliderRef.current.offsetWidth,
+            behavior: 'smooth'
+          });
+          return nextIndex;
+        });
+      }
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(interval);
+  }, [activeHeroSlide]);
 
   const categories_tabs = ["Tous les produits", "Guitares", "Pianos", "Batteries", "Sono", "Studio"];
 
@@ -191,72 +211,92 @@ export default function HomePage() {
   return (
     <main className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="container py-8">
-        <div className="grid-main-side">
+      <section className="container hero-section-mobile py-8">
+        <div 
+          className="hero-slider-container"
+          ref={heroSliderRef}
+          onScroll={(e) => {
+            const element = e.currentTarget;
+            const slideWidth = element.offsetWidth;
+            const scrollPosition = element.scrollLeft;
+            const index = Math.round(scrollPosition / slideWidth);
+            if (index !== activeHeroSlide) setActiveHeroSlide(index);
+          }}
+        >
           <div className="hero-main relative overflow-hidden text-white" style={{ background: '#0a0a0a' }}>
-            <div className="hero-content" style={{ position: 'relative', zIndex: 10 }}>
-              <span className="text-primary font-bold uppercase tracking-widest text-xs mb-4 d-flex">PROMOTION EXCLUSIVE</span>
-              <h1 className="text-5xl font-bold mb-6" style={{ lineHeight: 1.1 }}>{heroBanner?.title || "Chargement..."}</h1>
-              <p className="text-gray-400 mb-8" style={{ fontSize: '1.1rem', lineHeight: 1.6 }}>{heroBanner?.description || ""}</p>
+            <div className="hero-content" style={{ position: 'relative', zIndex: 10, padding: '0 20px' }}>
+              <span className="text-primary font-bold uppercase tracking-widest text-xs mb-3 d-flex">PROMOTION EXCLUSIVE</span>
+              <h1 className="hero-title font-bold mb-4" style={{ lineHeight: 1.2 }}>{heroBanner?.title || "Chargement..."}</h1>
+              <p className="hero-description text-gray-400 mb-8" style={{ lineHeight: 1.6 }}>{heroBanner?.description || ""}</p>
               {heroBanner && (
-                <Link href={heroBanner.button_link} className="btn btn-primary px-10 py-4 d-flex items-center gap-2 font-bold uppercase tracking-widest" style={{ textDecoration: 'none', width: 'fit-content', borderRadius: '12px', fontSize: '13px', boxShadow: '0 10px 25px rgba(0, 123, 255, 0.3)' }}>
+                <Link href={heroBanner.button_link} className="btn btn-primary px-8 py-3 d-flex items-center gap-2 font-bold uppercase tracking-widest" style={{ textDecoration: 'none', width: 'fit-content', borderRadius: '12px', fontSize: '12px', boxShadow: '0 10px 25px rgba(0, 123, 255, 0.3)' }}>
                   DÉCOUVRIR LES OFFRES
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </Link>
               )}
             </div>
             {heroBanner && (
-              <div className="hero-image-box d-flex justify-center items-center" style={{ left: '50%', opacity: 1 }}>
+              <div className="hero-image-box d-flex justify-center items-center">
                 <Image
                   src={heroBanner.image_url}
                   alt={heroBanner.title}
                   fill
                   className="img-cover"
-                  style={{ mixBlendMode: 'screen', opacity: 0.5, objectFit: 'cover' }}
+                  style={{ opacity: 0.5, objectFit: 'cover' }}
                   priority
                 />
-                <div className="absolute d-flex flex-column items-center justify-center font-bold rounded-full"
+                <div className="hero-badge-sale absolute d-flex flex-column items-center justify-center font-bold rounded-full"
                   style={{
-                    top: '20%',
-                    right: '10%',
-                    width: '110px',
-                    height: '110px',
                     background: '#FFD200',
                     color: 'black',
                     border: '8px solid rgba(255,255,255,0.1)',
-                    fontSize: '1.2rem',
-                    boxShadow: '0 0 50px rgba(255, 210, 0, 0.3)',
                     zIndex: 30,
                     transform: 'rotate(12deg)'
                   }}>
-                  <span style={{ fontSize: '2.2rem', lineHeight: '0.8' }}>SALE</span>
-                  <span style={{ fontSize: '0.8rem', textTransform: 'uppercase' }}>HOT</span>
+                  <span className="sale-text">SALE</span>
+                  <span className="hot-text">HOT</span>
                 </div>
               </div>
             )}
           </div>
 
-          <div className="d-flex flex-column gap-6">
-            {homepage.side_cards.map((card, i) => (
-              <div key={i} className="side-card" style={{ background: card.bg_color, color: card.text_color }}>
-                <span className="absolute badge badge-red font-bold px-3 py-1 animate-pulse" style={{ top: '15px', right: '15px', zIndex: 30, fontSize: '10px', boxShadow: '0 4px 10px rgba(230, 57, 70, 0.3)' }}>OFFRE SP</span>
-                <div className="side-card-content">
-                  <h3 className="text-xl font-bold mb-2" style={{ color: 'inherit' }}>{card.title}</h3>
-                  {card.subtitle && <p className="font-bold mb-4" style={{ fontSize: '14px', color: card.text_color === '#fff' ? 'var(--primary)' : 'inherit', opacity: 0.9 }}>{card.subtitle}</p>}
-                  <Link href={card.link} className="btn btn-primary text-xs font-bold uppercase tracking-widest" style={{ width: 'fit-content', padding: '0.8rem 1.5rem', textDecoration: 'none', borderRadius: '8px' }}>DÉCOUVRIR →</Link>
-                </div>
-                <div className="side-card-image" style={{ opacity: card.bg_color === '#000' ? 0.7 : 0.9 }}>
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    fill
-                    className="img-contain"
-                    style={{ mixBlendMode: card.bg_color === '#000' ? 'normal' : 'multiply', objectFit: 'contain' }}
-                  />
-                </div>
+          {homepage.side_cards.map((card, i) => (
+            <div key={i} className={`side-card side-card-${i + 1}`} style={{ background: card.bg_color, color: card.text_color }}>
+              <span className="absolute badge badge-red font-bold px-3 py-1 animate-pulse" style={{ top: '15px', right: '15px', zIndex: 30, fontSize: '10px', boxShadow: '0 4px 10px rgba(230, 57, 70, 0.3)' }}>OFFRE SP</span>
+              <div className="side-card-content">
+                <h3 className="text-xl font-bold mb-2" style={{ color: 'inherit' }}>{card.title}</h3>
+                {card.subtitle && <p className="font-bold mb-4" style={{ fontSize: '14px', color: card.text_color === '#fff' ? 'var(--primary)' : 'inherit', opacity: 0.9 }}>{card.subtitle}</p>}
+                <Link href={card.link} className="btn btn-primary text-xs font-bold uppercase tracking-widest" style={{ width: 'fit-content', padding: '0.8rem 1.5rem', textDecoration: 'none', borderRadius: '8px' }}>DÉCOUVRIR →</Link>
               </div>
-            ))}
-          </div>
+              <div className="side-card-image" style={{ opacity: card.bg_color === '#000' ? 0.7 : 0.9 }}>
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="img-cover"
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile Slider Dots */}
+        <div className="hero-slider-dots d-block-mobile">
+          {[0, 1, 2].map((i) => (
+            <div 
+              key={i} 
+              className={`dot ${activeHeroSlide === i ? 'active' : ''}`}
+              onClick={() => {
+                if (heroSliderRef.current) {
+                  heroSliderRef.current.scrollTo({
+                    left: i * heroSliderRef.current.offsetWidth,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+            />
+          ))}
         </div>
       </section>
 
