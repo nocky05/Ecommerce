@@ -33,21 +33,21 @@ export default function CheckoutPage() {
 
     return (
         <div className="bg-[#fbfcff] min-h-screen animate-fade-in">
-            {/* Breadcrumbs */}
-            <div className="border-bottom border-gray-100 py-4 mb-10 bg-white">
-                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '13px', color: '#999' }}>
+            {/* Standardized Black Banner */}
+            <div style={{ background: '#111111', color: 'white', padding: '60px 0', marginBottom: '40px' }}>
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
+                    <h1 className="checkout-banner-title font-black mb-4 uppercase tracking-widest animate-fade-up">Vérification de la commande</h1>
+                    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '13px', color: '#999' }}>
                         <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Accueil</Link>
                         <span>/</span>
                         <Link href="/cart" style={{ color: 'inherit', textDecoration: 'none' }}>Panier</Link>
                         <span>/</span>
-                        <span style={{ color: '#111', fontWeight: '500' }}>Vérification</span>
+                        <span style={{ color: 'white', fontWeight: '700' }}>Vérification</span>
                     </nav>
                 </div>
             </div>
 
             <main className="container" style={{ maxWidth: '1200px', margin: '0 auto', paddingBottom: '100px' }}>
-                <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#111', marginBottom: '40px', textAlign: 'center' }}>VÉRIFICATION DE LA COMMANDE</h1>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '50px', alignItems: 'start' }} className="checkout-grid">
 

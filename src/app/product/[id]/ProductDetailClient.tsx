@@ -102,15 +102,16 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
 
     return (
         <div className="bg-white min-h-screen">
-            {/* Breadcrumbs */}
-            <div className="border-bottom border-gray-100 py-4 mb-8">
-                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '13px', color: '#999' }}>
+            {/* Standardized Black Banner */}
+            <div style={{ background: '#111111', color: 'white', padding: '60px 0', marginBottom: '40px' }}>
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }}>
+                    <h1 className="product-banner-title font-black mb-4 uppercase tracking-widest animate-fade-up">Détails du produit</h1>
+                    <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '13px', color: '#999' }}>
                         <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>Accueil</Link>
                         <span>/</span>
                         <Link href={`/shop?category=${encodeURIComponent(product.category)}`} style={{ color: 'inherit', textDecoration: 'none' }}>{product.category}</Link>
                         <span>/</span>
-                        <span style={{ color: '#111', fontWeight: '500' }}>{product.name}</span>
+                        <span style={{ color: 'white', fontWeight: '700' }}>{product.name}</span>
                     </nav>
                 </div>
             </div>
