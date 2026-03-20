@@ -136,7 +136,24 @@ export async function POST(request: Request) {
             return NextResponse.json({ success: true, product: data });
         }
 
+        if (action === 'delete') {
+            const { id } = product;
+            if (!id) {
+                return NextResponse.json({ error: 'Product ID is required for deletion' }, { status: 400 });
+            }
+
+            // Soft delete: set is_active to false to preserve order history integrity
+            const { error } = await supabaseServer
+                .from('products')
+                .update({ is_active: false })
+                .eq('id', id);
+
+            if (error) throw error;
+            return NextResponse.json({ success: true });
+        }
+
         return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
+
     } catch (error: any) {
         console.error('API POST Products ERROR:', error);
         return NextResponse.json({
