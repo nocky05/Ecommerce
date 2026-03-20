@@ -9,13 +9,17 @@ import { supabase } from "@/lib/supabase";
 
 
 const CATEGORIES = [
-    "PIANOS & CLAVIERS",
-    "GUITARES & BASSES",
-    "BATTERIES & PERCUSSIONS",
-    "STUDIO & ENREGISTREMENT",
-    "SONORISATION",
-    "BOUTIQUE"
+    "Batteries & percussions",
+    "Piano & Clavier",
+    "Guitares & basses",
+    "Sonorisation",
+    "Studio & Enregistrement",
+    "Microphones",
+    "Instruments à vent",
+    "Violons",
+    "Boutique"
 ];
+
 
 export default function AdminPage() {
     const router = useRouter();
@@ -193,11 +197,13 @@ export default function AdminPage() {
     // Filtrage des produits
     const filteredProducts = useMemo(() => {
         return managedProducts.filter(p => {
-            const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-            const matchesCategory = categoryFilter === "Tous les rayons" || p.category.toUpperCase().includes(categoryFilter.toUpperCase());
-            return matchesSearch && matchesCategory;
+            const nameMatch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+            const catMatch = categoryFilter === "Tous les rayons" || 
+                           (p.category && p.category.toLowerCase().trim() === categoryFilter.toLowerCase().trim());
+            return nameMatch && catMatch;
         });
     }, [searchQuery, categoryFilter, managedProducts]);
+
 
     const handleUpdateProduct = async (product: any) => {
         // Optimistic update
@@ -550,19 +556,8 @@ export default function AdminPage() {
             {/* Zone de Contenu */}
             <main className="content-main">
                 <header className="content-topbar">
-                    {activeTab === "products" ? (
-                        <div className="search-pill">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="3"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-                            <input
-                                type="text"
-                                placeholder="Recherche dans le catalogue..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                        </div>
-                    ) : (
-                        <div className="search-pill-empty"></div>
-                    )}
+                    <div className="search-pill-empty"></div>
+
                     <div className="topbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                         <button
                             onClick={() => router.push("/")}
@@ -650,26 +645,39 @@ export default function AdminPage() {
 
                     {activeTab === "products" && (
                         <div className="tab-fade">
-                            <div className="v-head with-btn">
-                                <div><h1>Catalogue & Prix</h1><p>Gérez vos tarifs de revente ici.</p></div>
-                                <button className="p-btn" onClick={() => setIsAddModalOpen(true)}>+ Ajouter instrument</button>
-                            </div>
-                            <div className="catalog-box shadow">
-                                <div className="filters">
-                                    <input
-                                        type="text"
-                                        placeholder="Filtrer par nom..."
-                                        value={searchQuery}
-                                        onChange={(e) => setSearchQuery(e.target.value)}
-                                    />
-                                    <select
-                                        value={categoryFilter}
-                                        onChange={(e) => setCategoryFilter(e.target.value)}
-                                    >
-                                        <option>Tous les rayons</option>
-                                        {CATEGORIES.map(c => <option key={c}>{c}</option>)}
-                                    </select>
+                            <div className="v-head catalog-header">
+                                <div className="v-title">
+                                    <h1>Catalogue & Prix</h1>
+                                    <p>Gérez vos tarifs et votre inventaire.</p>
                                 </div>
+                                <button className="p-btn gold extra-visible" onClick={() => setIsAddModalOpen(true)}>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    Ajouter un instrument
+                                </button>
+                            </div>
+
+                            <div className="catalog-box shadow">
+                                <div className="filter-bar">
+                                    <div className="search-input">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#707EAE" strokeWidth="2.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                                        <input
+                                            type="text"
+                                            placeholder="Rechercher par nom..."
+                                            value={searchQuery}
+                                            onChange={(e) => setSearchQuery(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="category-select">
+                                        <select
+                                            value={categoryFilter}
+                                            onChange={(e) => setCategoryFilter(e.target.value)}
+                                        >
+                                            <option>Tous les rayons</option>
+                                            {CATEGORIES.map(c => <option key={c}>{c}</option>)}
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div className="p-list">
                                     {filteredProducts.slice(0, 20).map(p => (
                                         <div className="p-row" key={p.id}>
@@ -1457,7 +1465,10 @@ export default function AdminPage() {
                                 ></textarea>
                             </div>
 
-                            <button className="p-btn dark w-full" onClick={handleAddProduct}>AJOUTER MAINTENANT</button>
+                            <button className="p-btn gold extra-visible w-full" style={{ justifyContent: 'center', marginTop: '1rem' }} onClick={handleAddProduct}>
+                                AJOUTER MAINTENANT
+                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -1640,36 +1651,75 @@ export default function AdminPage() {
                 .pill.gold { background: #FFF9F4; color: #FFB547; }
                 .bold { font-weight: 900; }
 
-                .p-btn { border: none; padding: 1.2rem 2.5rem; border-radius: 16px; font-weight: 800; color: white; cursor: pointer; transition: 0.3s; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-                .p-btn.dark { background: #1B2559; }
-                .p-btn.gold { background: #D4AF37; color: black; }
-                .p-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(27, 37, 89, 0.15); }
-
-                .catalog-box { background: white; border-radius: 24px; padding: 2.5rem; box-shadow: 14px 17px 40px 4px rgba(112, 144, 176, 0.08); }
-                .filters { display: flex; gap: 1.5rem; margin-bottom: 3rem; }
-                .filters input, .filters select { flex: 1; padding: 1rem 1.5rem; border: none; background: #F4F7FE; border-radius: 14px; outline: none; font-weight: 700; color: #1B2559; }
-
-                .p-row { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid #F4F7FE; }
-                .p-info { display: flex; align-items: center; gap: 2rem; }
-                .p-img { width: 70px; height: 70px; border: 1px solid #F4F7FE; border-radius: 14px; padding: 8px; background: white; }
-                .p-img img { width: 100%; height: 100%; object-fit: contain; }
-                .p-meta h4 { margin: 0; font-size: 1.2rem; font-weight: 900; color: #1B2559; margin-bottom: 0.3rem; }
-                .p-status-tags { display: flex; align-items: center; gap: 0.8rem; }
-                .p-status-tags span { font-size: 0.8rem; color: #707EAE; font-weight: 700; text-transform: uppercase; }
-                
-                .avail-select { 
-                    border: none; background: transparent; font-size: 0.7rem; font-weight: 900; 
-                    text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; outline: none;
-                    padding: 4px 10px; border-radius: 6px;
+                .p-btn { border: none; padding: 1rem 2rem; border-radius: 14px; font-weight: 800; color: white; cursor: pointer; transition: 0.3s; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; }
+                .p-btn.gold.extra-visible { 
+                    background: #111; 
+                    color: #D4AF37; 
+                    border: 2px solid #D4AF37; 
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
                 }
-                .avail-select.green { background: #E6F8F0; color: #01B574; }
-                .avail-select.orange { background: #FFF9E6; color: #FFB547; }
+                .p-btn.gold.extra-visible:hover { 
+                    background: #D4AF37; 
+                    color: #111; 
+                    transform: translateY(-2px);
+                }
 
-                .p-actions { display: flex; align-items: center; gap: 2.5rem; }
-                .price-box label { display: block; font-size: 0.65rem; color: #A3AED0; font-weight: 800; margin-bottom: 0.5rem; text-transform: uppercase; }
-                .input-grp { display: flex; align-items: center; gap: 0.8rem; }
-                .input-grp input { width: 120px; padding: 0.6rem 1rem; border: 1px solid #E9EDF7; border-radius: 10px; text-align: right; font-weight: 900; color: #1B2559; }
-                .icon-btn { width: 48px; height: 48px; background: white; border: 1px solid #E9EDF7; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+                .catalog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+                .catalog-box { background: white; border-radius: 24px; padding: 2rem; box-shadow: 14px 17px 40px 4px rgba(112, 144, 176, 0.08); }
+                
+                .filter-bar { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; }
+                .search-input { flex: 2; display: flex; align-items: center; gap: 1rem; background: #F4F7FE; padding: 0.8rem 1.5rem; border-radius: 14px; border: 1.5px solid transparent; transition: 0.3s; }
+                .search-input:focus-within { background: white; border-color: #D4AF37; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+                .search-input input { border: none; background: transparent; outline: none; width: 100%; font-weight: 600; color: #1B2559; font-size: 0.95rem; }
+                
+                .category-select { flex: 1; position: relative; }
+                .category-select select { 
+                    width: 100%; padding: 0.8rem 1.5rem; border: 1.5px solid transparent; background: #F4F7FE; 
+                    border-radius: 14px; outline: none; font-weight: 700; color: #1B2559; font-size: 0.95rem;
+                    cursor: pointer; transition: 0.3s;
+                }
+                .category-select select:focus { background: white; border-color: #D4AF37; }
+
+                .p-list { display: flex; flex-direction: column; gap: 0.5rem; }
+                .p-row { 
+                    display: flex; justify-content: space-between; align-items: center; padding: 1.2rem; 
+                    border-radius: 16px; transition: 0.2s; border: 1px solid transparent;
+                }
+                .p-row:hover { background: #F9FBFF; border-color: #E9EDF7; }
+                .p-info { display: flex; align-items: center; gap: 1.5rem; flex: 1; }
+                .p-img { width: 64px; height: 64px; border-radius: 12px; overflow: hidden; background: white; border: 1px solid #F4F7FE; }
+                .p-img img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+                
+                .p-meta h4 { margin: 0; font-size: 1.05rem; font-weight: 800; color: #1B2559; margin-bottom: 0.2rem; }
+                .p-status-tags { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+                .p-status-tags span { font-size: 0.7rem; color: #A3AED0; font-weight: 800; text-transform: uppercase; }
+
+                .p-actions { display: flex; align-items: center; gap: 2rem; justify-content: flex-end; }
+                .input-grp { display: flex; align-items: center; gap: 0.6rem; background: #F4F7FE; padding: 0.5rem 1rem; border-radius: 10px; }
+                .input-grp input { width: 100px; border: none; background: transparent; outline: none; text-align: right; font-weight: 800; color: #1B2559; font-size: 1rem; }
+                .input-grp span { font-size: 0.7rem; font-weight: 800; color: #A3AED0; }
+                
+                .price-box label { display: block; font-size: 0.6rem; font-weight: 800; color: #A3AED0; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+                
+                .icon-btn { 
+                    width: 40px; height: 40px; background: white; border: 1.5px solid #E9EDF7; 
+                    border-radius: 10px; cursor: pointer; display: flex; align-items: center; 
+                    justify-content: center; transition: 0.2s;
+                }
+                .icon-btn:hover { border-color: #D4AF37; transform: scale(1.05); }
+
+                @media (max-width: 992px) {
+                    .catalog-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+                    .filter-bar { flex-direction: column; gap: 1rem; }
+                    .p-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; padding: 1.5rem; }
+                    .p-actions { width: 100%; justify-content: space-between; border-top: 1px solid #F4F7FE; padding-top: 1rem; }
+                    .search-pill-empty { display: none; }
+                    .content-topbar { padding: 0 1.5rem; height: 80px; }
+                    .content-view { padding: 0 1.5rem 2rem; }
+                }
+
 
                 .tile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
                 .tile { padding: 4rem; border-radius: 30px; text-align: center; }
