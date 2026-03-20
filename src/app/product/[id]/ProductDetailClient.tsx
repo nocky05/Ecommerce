@@ -160,7 +160,7 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
 
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '15px', marginBottom: '30px' }}>
                             <span style={{ fontSize: '32px', fontWeight: '900', color: '#b22222' }}>{Number(product.price).toLocaleString()}F CFA</span>
-                            {product.oldPrice && (
+                            {product.oldPrice && Number(product.oldPrice) > Number(product.price) && (
                                 <span style={{ fontSize: '18px', color: '#aaa', textDecoration: 'line-through', fontWeight: '500' }}>{Number(product.oldPrice).toLocaleString()}F CFA</span>
                             )}
                         </div>

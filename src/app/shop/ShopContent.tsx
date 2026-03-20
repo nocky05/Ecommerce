@@ -352,7 +352,7 @@ export default function ShopContent() {
                                                 </div>
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                                     <span style={{ fontSize: '16px', fontWeight: '800', color: '#b22222' }}>{product.price.toLocaleString()}F CFA</span>
-                                                    {product.old_price && (
+                                                    {product.old_price && product.old_price > product.price && (
                                                         <span style={{ fontSize: '12px', textDecoration: 'line-through', color: '#999' }}>{product.old_price.toLocaleString()}F</span>
                                                     )}
                                                 </div>

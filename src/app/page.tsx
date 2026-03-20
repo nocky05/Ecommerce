@@ -122,7 +122,7 @@ export default function HomePage() {
       id: p.id,
       name: p.name,
       price: p.price,
-      oldPrice: p.old_price || Math.round(p.price * 1.15),
+      oldPrice: p.old_price,
       discount: p.promo || 0,
       rating: p.rating || 0,
       reviewCount: p.reviewCount || 0,
@@ -417,7 +417,9 @@ export default function HomePage() {
                   <h4 className="text-sm font-bold line-clamp-2" style={{ minHeight: '42px', lineHeight: '1.4' }}>{prod.name}</h4>
                 </Link>
                 <div className="d-flex items-center gap-2 mt-2">
-                  <span className="text-gray-400 line-through text-sm">{prod.oldPrice.toLocaleString()}F</span>
+                  {prod.oldPrice && prod.oldPrice > prod.price && (
+                    <span className="text-gray-400 line-through text-sm">{prod.oldPrice.toLocaleString()}F</span>
+                  )}
                   <span className="price-now" style={{ color: '#b22222', fontSize: '1.1rem', fontWeight: '800' }}>{prod.price.toLocaleString()}F</span>
                 </div>
 
