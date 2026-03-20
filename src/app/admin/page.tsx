@@ -747,29 +747,76 @@ export default function AdminPage() {
 
                     {activeTab === "history" && (
                         <div className="tab-fade">
-                            <div className="v-head"><h1>Historique Complet</h1><p>Archive de toutes vos ventes passées.</p></div>
-                            <div className="section-card shadow">
-                                <table className="elite-table">
-                                    <thead><tr><th>Date</th><th>Référence</th><th>Nom Client</th><th>Total Cash</th><th>Statut</th></tr></thead>
-                                    <tbody>
-                                        {orders.length > 0 ? (
-                                            orders.map(order => (
-                                                <tr key={order.id} onClick={() => setSelectedOrder(order)} style={{ cursor: 'pointer' }}>
-                                                    <td>{new Date(order.created_at).toLocaleDateString('fr-FR')}</td>
-                                                    <td style={{ fontWeight: '800', color: '#007BFF' }}>{order.id}</td>
-                                                    <td>{order.customer_name}</td>
-                                                    <td style={{ fontWeight: '800' }}>{(Number(order.total) || 0).toLocaleString()}F CFA</td>
-                                                    <td><span className={`pill ${order.status === 'Livré' ? 'green' : 'orange'}`}>{order.status}</span></td>
+                            <div className="v-head">
+                                <h1>Historique Complet</h1>
+                                <p>Archive détaillée de toutes vos ventes.</p>
+                            </div>
+                            <div className="section-card shadow no-padding overflow-hidden">
+                                <div className="table-wrapper">
+                                    <table className="elite-table professional">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Référence</th>
+                                                <th>Nom Client</th>
+                                                <th style={{ textAlign: 'right' }}>Total Cash</th>
+                                                <th style={{ textAlign: 'center' }}>Statut</th>
+                                                <th style={{ width: '50px' }}></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {orders.length > 0 ? (
+                                                orders.map(order => (
+                                                    <tr key={order.id} onClick={() => setSelectedOrder(order)} className="order-row">
+                                                        <td>
+                                                            <div className="date-box">
+                                                                <span className="d-day">{new Date(order.created_at).getDate()}</span>
+                                                                <span className="d-month">{new Date(order.created_at).toLocaleDateString('fr-FR', { month: 'short' }).replace('.', '').toUpperCase()}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span className="order-ref">#{order.id.toString().substring(0, 8)}</span>
+                                                        </td>
+                                                        <td>
+                                                            <div className="cust-info">
+                                                                <div className="cust-av">{order.customer_name?.[0].toUpperCase()}</div>
+                                                                <span>{order.customer_name}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td style={{ textAlign: 'right' }}>
+                                                            <span className="order-total">{(Number(order.total) || 0).toLocaleString()}F CFA</span>
+                                                        </td>
+                                                        <td style={{ textAlign: 'center' }}>
+                                                            <span className={`pill ${
+                                                                order.status === 'Livré' ? 'green' : 
+                                                                order.status === 'Annulé' || order.status === 'Annulée' ? 'red' :
+                                                                order.status === 'Expédié' ? 'gold' : 'blue'
+                                                            }`}>
+                                                                {order.status}
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <div className="row-action">
+                                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m9 18 6-6-6-6"/></svg>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            ) : (
+                                                <tr>
+                                                    <td colSpan={6} style={{ textAlign: 'center', padding: '60px', color: '#707EAE', fontSize: '1rem', fontWeight: 600 }}>
+                                                        <div style={{ opacity: 0.5, marginBottom: '1rem' }}>📦</div>
+                                                        Aucune commande enregistrée pour le moment.
+                                                    </td>
                                                 </tr>
-                                            ))
-                                        ) : (
-                                            <tr><td colSpan={5} style={{ textAlign: 'center', padding: '40px', color: '#707EAE' }}>Aucune commande enregistrée.</td></tr>
-                                        )}
-                                    </tbody>
-                                </table>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     )}
+
 
                     {activeTab === "promotions" && (
                         <div className="tab-fade">
@@ -1639,7 +1686,35 @@ export default function AdminPage() {
                 .c-stat .d h3 { font-size: 1.6rem; font-weight: 800; margin: 0; color: #1B2559; }
 
                 .section-card { background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 14px 17px 40px 4px rgba(112, 144, 176, 0.08); }
+                .section-card.no-padding { padding: 0; }
                 .sc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+
+                .table-wrapper { width: 100%; overflow-x: auto; }
+                .elite-table.professional { border-spacing: 0; }
+                .elite-table.professional th { background: #F9FBFF; padding: 1.2rem 1.5rem; border-bottom: 2px solid #F4F7FE; }
+                .order-row { cursor: pointer; transition: 0.2s; }
+                .order-row:hover { background: #F9FBFF; }
+                .order-row:hover .row-action { opacity: 1; transform: translateX(5px); }
+
+                .date-box { display: flex; flex-direction: column; align-items: flex-start; }
+                .d-day { font-size: 1.1rem; font-weight: 900; color: #1B2559; line-height: 1; }
+                .d-month { font-size: 0.65rem; font-weight: 800; color: #A3AED0; margin-top: 2px; }
+
+                .order-ref { font-family: 'DM Sans', sans-serif; font-weight: 800; color: #422AFB; background: #F4F7FE; padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; }
+                
+                .cust-info { display: flex; align-items: center; gap: 1rem; }
+                .cust-av { width: 32px; height: 32px; background: #E9EDF7; color: #422AFB; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 900; }
+                
+                .order-total { font-weight: 900; color: #1B2559; font-size: 1rem; }
+                
+                .pill.red { background: #FFF5F4; color: #FF3B30; }
+                .pill.blue { background: #F0F7FF; color: #007BFF; }
+                .pill.gold { background: #FFF9E6; color: #FFB547; }
+                
+                .row-action { opacity: 0; color: #A3AED0; transition: 0.3s; display: flex; justify-content: flex-end; padding-right: 1.5rem; }
+
+                .overflow-hidden { overflow: hidden; }
+
                 .sc-head h2 { font-size: 1.4rem; font-weight: 800; color: #1B2559; }
 
                 .elite-table { width: 100%; border-collapse: collapse; }
