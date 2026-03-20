@@ -704,11 +704,11 @@ export default function AdminPage() {
                                                     <label>Prix CFA</label>
                                                     <div className="input-grp">
                                                         <input
-                                                            type="text"
-                                                            value={p.price.toLocaleString()}
+                                                            type="number"
+                                                            value={p.price || 0}
                                                             onChange={(e) => {
-                                                                const val = parseInt(e.target.value.replace(/\D/g, ''));
-                                                                if (!isNaN(val)) handleUpdateProduct({ ...p, price: val });
+                                                                const val = e.target.value === '' ? 0 : parseInt(e.target.value);
+                                                                handleUpdateProduct({ ...p, price: val });
                                                             }}
                                                         />
                                                         <span>CFA</span>
@@ -1441,8 +1441,9 @@ export default function AdminPage() {
                                 <input
                                     type="number"
                                     className="m-select w-full"
-                                    value={newProduct.price}
-                                    onChange={e => setNewProduct({ ...newProduct, price: parseInt(e.target.value) || 0 })}
+                                    placeholder="0"
+                                    value={newProduct.price === 0 ? '' : newProduct.price}
+                                    onChange={e => setNewProduct({ ...newProduct, price: e.target.value === '' ? 0 : parseInt(e.target.value) })}
                                 />
                             </div>
 
@@ -1537,8 +1538,9 @@ export default function AdminPage() {
                                 <input
                                     type="number"
                                     className="m-select w-full"
-                                    value={editingProduct.price}
-                                    onChange={e => setEditingProduct({ ...editingProduct, price: parseInt(e.target.value) || 0 })}
+                                    placeholder="0"
+                                    value={editingProduct.price === 0 ? '' : editingProduct.price}
+                                    onChange={e => setEditingProduct({ ...editingProduct, price: e.target.value === '' ? 0 : parseInt(e.target.value) })}
                                 />
                             </div>
 
