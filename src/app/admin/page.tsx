@@ -1209,13 +1209,21 @@ export default function AdminPage() {
                                 <p>Gérez la configuration de votre console et la sécurité.</p>
                             </div>
 
-                            <div className="settings-container shadow">
-                                <section className="settings-group">
-                                    <div className="group-title">Configuration Boutique</div>
+                            <div className="settings-cards-grid">
+                                <section className="settings-card">
+                                    <div className="sc-header">
+                                        <div className="sc-icon blue">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
+                                        </div>
+                                        <div className="sc-title-group">
+                                            <h3>Identité Boutique</h3>
+                                            <p>Nom public et informations légales.</p>
+                                        </div>
+                                    </div>
                                     <div className="f-row">
                                         <div className="label-box">
-                                            <span className="main-lab">Nom de la Boutique</span>
-                                            <span className="sub-lab">Utilisé pour les factures et emails.</span>
+                                            <span className="main-lab">Nom de l'Enseigne</span>
+                                            <span className="sub-lab">Apparaît sur vos documents.</span>
                                         </div>
                                         <input
                                             type="text"
@@ -1224,21 +1232,29 @@ export default function AdminPage() {
                                             onChange={(e) => setShopSettings({ ...shopSettings, name: e.target.value })}
                                         />
                                     </div>
-                                    <div className="f-row">
+                                    <div className="f-row no-border">
                                         <div className="label-box">
-                                            <span className="main-lab">URL du Site</span>
-                                            <span className="sub-lab">Adresse publique de votre boutique.</span>
+                                            <span className="main-lab">Domaine Web</span>
+                                            <span className="sub-lab">Adresse officielle du site.</span>
                                         </div>
                                         <div className="val-box">chezlemusicien.ci</div>
                                     </div>
                                 </section>
 
-                                <section className="settings-group">
-                                    <div className="group-title">Informations de Contact</div>
+                                <section className="settings-card">
+                                    <div className="sc-header">
+                                        <div className="sc-icon orange">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                                        </div>
+                                        <div className="sc-title-group">
+                                            <h3>Contact & Support</h3>
+                                            <p>Gérez vos canaux de communication.</p>
+                                        </div>
+                                    </div>
                                     <div className="f-row">
                                         <div className="label-box">
-                                            <span className="main-lab">Email Administrateur</span>
-                                            <span className="sub-lab">Pour les notifications critiques.</span>
+                                            <span className="main-lab">Email Admin</span>
+                                            <span className="sub-lab">Pour vos notifications privées.</span>
                                         </div>
                                         <input
                                             type="text"
@@ -1249,8 +1265,8 @@ export default function AdminPage() {
                                     </div>
                                     <div className="f-row">
                                         <div className="label-box">
-                                            <span className="main-lab">Numéro de Téléphone</span>
-                                            <span className="sub-lab">Affiché sur le header et contact.</span>
+                                            <span className="main-lab">Téléphone Client</span>
+                                            <span className="sub-lab">Affiché sur le header public.</span>
                                         </div>
                                         <input
                                             type="text"
@@ -1261,8 +1277,8 @@ export default function AdminPage() {
                                     </div>
                                     <div className="f-row">
                                         <div className="label-box">
-                                            <span className="main-lab">Lien WhatsApp</span>
-                                            <span className="sub-lab">Numéro pour le chat direct.</span>
+                                            <span className="main-lab">Numéro WhatsApp</span>
+                                            <span className="sub-lab">Utilisé pour le bouton de chat.</span>
                                         </div>
                                         <input
                                             type="text"
@@ -1271,10 +1287,10 @@ export default function AdminPage() {
                                             onChange={(e) => setShopSettings({ ...shopSettings, whatsapp: e.target.value })}
                                         />
                                     </div>
-                                    <div className="f-row">
+                                    <div className="f-row no-border">
                                         <div className="label-box">
-                                            <span className="main-lab">Adresse Physique</span>
-                                            <span className="sub-lab">Localisation du showroom.</span>
+                                            <span className="main-lab">Adresse Showroom</span>
+                                            <span className="sub-lab">Localisation google maps.</span>
                                         </div>
                                         <input
                                             type="text"
@@ -1285,11 +1301,19 @@ export default function AdminPage() {
                                     </div>
                                 </section>
 
-                                <section className="settings-group">
-                                    <div className="group-title">Réseaux Sociaux</div>
+                                <section className="settings-card">
+                                    <div className="sc-header">
+                                        <div className="sc-icon purple">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
+                                        </div>
+                                        <div className="sc-title-group">
+                                            <h3>Présence Sociale</h3>
+                                            <p>Liens vers vos réseaux officiels.</p>
+                                        </div>
+                                    </div>
                                     <div className="f-row">
                                         <div className="label-box">
-                                            <span className="main-lab">Facebook (URL)</span>
+                                            <span className="main-lab">Lien Facebook</span>
                                         </div>
                                         <input
                                             type="text"
@@ -1298,9 +1322,9 @@ export default function AdminPage() {
                                             onChange={(e) => setShopSettings({ ...shopSettings, facebook: e.target.value })}
                                         />
                                     </div>
-                                    <div className="f-row">
+                                    <div className="f-row no-border">
                                         <div className="label-box">
-                                            <span className="main-lab">Instagram (URL)</span>
+                                            <span className="main-lab">Lien Instagram</span>
                                         </div>
                                         <input
                                             type="text"
@@ -1311,25 +1335,35 @@ export default function AdminPage() {
                                     </div>
                                 </section>
 
-                                <div className="save-bar">
+                                <div className="save-bar-floating shadow">
                                     <button
-                                        className="p-btn dark shadow-lg"
+                                        className="p-btn gold extra-visible shadow-gold"
                                         onClick={handleSaveSettings}
                                         disabled={isSaving}
+                                        style={{ minWidth: '300px', justifyContent: 'center' }}
                                     >
-                                        {isSaving ? "ENREGISTREMENT..." : "SAUVEGARDER LES PARAMÈTRES"}
+                                        {isSaving ? "ENREGISTREMENT..." : "SAUVEGARDER TOUTES LES MODIFS"}
                                     </button>
                                 </div>
 
-                                <section className="settings-group last">
-                                    <div className="group-title">Session & Sécurité</div>
-                                    <p className="danger-text">Attention : La déconnexion fermera votre session de pilotage actuelle.</p>
-                                    <button className="logout-btn-elite">
+                                <section className="settings-card danger">
+                                    <div className="sc-header">
+                                        <div className="sc-icon red">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                                        </div>
+                                        <div className="sc-title-group">
+                                            <h3 style={{ color: '#FF3B30' }}>Session & Sécurité</h3>
+                                            <p>Pilotage de l'accès administrateur.</p>
+                                        </div>
+                                    </div>
+                                    <p className="danger-text">Attention : La déconnexion mettra fin à vos accès privilégiés immédiats.</p>
+                                    <button className="logout-btn-elite" onClick={signOut}>
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></svg>
-                                        SE DÉCONNECTER DE LA CONSOLE
+                                        QUITTER LA CONSOLE DÉFINITIVEMENT
                                     </button>
                                 </section>
                             </div>
+
                         </div>
                     )}
                 </div>
@@ -1922,27 +1956,39 @@ export default function AdminPage() {
 
                 .mb-6 { margin-bottom: 1.5rem; }
                 .mb-8 { margin-bottom: 2rem; }
-                .settings-container { background: white; border-radius: 30px; padding: 3rem; box-shadow: 14px 17px 40px 4px rgba(112, 144, 176, 0.08); }
-                .settings-group { margin-bottom: 4rem; }
-                .group-title { font-size: 1rem; font-weight: 900; color: #1B2559; text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px solid #F4F7FE; padding-bottom: 1rem; margin-bottom: 2.5rem; }
-                .f-row { display: flex; align-items: center; justify-content: space-between; padding: 2rem 0; border-bottom: 1px solid #F4F7FE; }
-                .label-box { display: flex; flex-direction: column; gap: 0.3rem; }
-                .main-lab { font-size: 1rem; font-weight: 800; color: #1B2559; }
-                .sub-lab { font-size: 0.85rem; color: #A3AED0; font-weight: 500; }
-                .val-box { font-weight: 900; color: #1B2559; font-size: 1.1rem; }
-                .elite-input { width: 350px; padding: 1rem 1.5rem; background: #F4F7FE; border: none; border-radius: 14px; outline: none; font-weight: 700; color: #1B2559; font-size: 1rem; }
-                .danger-text { color: #FF3B30; font-weight: 700; font-size: 0.9rem; margin-bottom: 1.5rem; }
-                .logout-btn-elite { display: flex; align-items: center; gap: 1rem; background: #FFF5F4; border: 1.5px solid #FFEBE9; color: #FF3B30; padding: 1.2rem 2.5rem; border-radius: 16px; font-weight: 800; cursor: pointer; transition: 0.3s; width: fit-content; font-size: 0.85rem; letter-spacing: 0.5px; }
-                .logout-btn-elite:hover { background: #FF3B30; color: white; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 59, 48, 0.15); }
+                .settings-cards-grid { display: grid; gap: 2.5rem; }
+                .settings-card { background: white; border-radius: 30px; padding: 3rem; box-shadow: 14px 17px 40px 4px rgba(112, 144, 176, 0.08); position: relative; overflow: hidden; }
+                .settings-card.danger { border: 2px solid #FFEBE9; background: #FFF9F8; }
+                
+                .sc-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; }
+                .sc-icon { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+                .sc-icon.blue { background: #E9EDF7; color: #422AFB; }
+                .sc-icon.orange { background: #FFF9F4; color: #FFB547; }
+                .sc-icon.purple { background: #F4F7FE; color: #A855F7; }
+                .sc-icon.red { background: #FFF5F4; color: #FF3B30; }
+                
+                .sc-title-group h3 { font-size: 1.25rem; font-weight: 800; color: #1B2559; margin: 0; }
+                .sc-title-group p { font-size: 0.85rem; color: #A3AED0; margin: 0; font-weight: 600; }
 
-                .save-bar { 
-                    padding: 2.5rem; 
-                    background: #F4F7FE; 
-                    margin: 0 -3rem 4rem -3rem; 
-                    display: flex; 
-                    justify-content: center;
-                    border-top: 1px solid #E9EDF7;
-                    border-bottom: 1px solid #E9EDF7;
+                .f-row { display: flex; align-items: center; justify-content: space-between; padding: 1.8rem 0; border-bottom: 1px solid #F4F7FE; transition: 0.2s; }
+                .f-row.no-border { border-bottom: none; }
+                .label-box { display: flex; flex-direction: column; gap: 0.3rem; flex: 1; }
+                .main-lab { font-size: 0.95rem; font-weight: 800; color: #1B2559; }
+                .sub-lab { font-size: 0.75rem; color: #A3AED0; font-weight: 600; }
+                
+                .elite-input { width: 400px; padding: 1rem 1.5rem; background: #F4F7FE; border: 1.5px solid transparent; border-radius: 14px; outline: none; font-weight: 700; color: #1B2559; font-size: 0.95rem; transition: 0.3s; }
+                .elite-input:focus { background: white; border-color: #D4AF37; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+                
+                .save-bar-floating { position: sticky; bottom: 2rem; left: 0; right: 0; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 24px; border: 1.5px solid #E9EDF7; display: flex; justify-content: center; z-index: 100; margin: 2rem 0; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+                @media (max-width: 768px) {
+                    .settings-cards-grid { gap: 1.5rem; }
+                    .settings-card { padding: 2rem; border-radius: 20px; }
+                    .f-row { flex-direction: column; align-items: flex-start; gap: 1.2rem; padding: 1.5rem 0; }
+                    .elite-input { width: 100% !important; }
+                    .save-bar-floating { bottom: 1rem; padding: 1rem; }
+                    .save-bar-floating button { width: 100% !important; min-width: auto !important; }
+                    .v-head h1 { font-size: 2rem; }
                 }
                 .p-btn.success { background: #01B574; color: white; }
 
