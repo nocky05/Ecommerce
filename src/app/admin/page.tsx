@@ -48,6 +48,16 @@ export default function AdminPage() {
     const [shopSettings, setShopSettings] = useState(settings);
     const [homepageSettings, setHomepageSettings] = useState(homepage);
     const [promotions, setPromotions] = useState<any[]>([]);
+
+    // Sync local state with context whenever the context reloads (after refreshSettings).
+    // This ensures that saved data is reflected correctly without overwriting unsaved edits.
+    useEffect(() => {
+        setShopSettings(settings);
+    }, [settings]);
+
+    useEffect(() => {
+        setHomepageSettings(homepage);
+    }, [homepage]);
     const [banners, setBanners] = useState<any[]>([]);
     const [newBanner, setNewBanner] = useState({
         title: "NOUVELLE BANNIÈRE",
