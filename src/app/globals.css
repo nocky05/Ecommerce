@@ -2145,3 +2145,33 @@ h6 {
     justify-content: center !important;
   }
 }
+.promo-badge-float {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #FF3B30;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(255,59,48,0.3);
+}
+
+.tag-cat {
+    background: #E9EDF7;
+    color: #422AFB;
+    padding: 0.3rem 0.8rem !important;
+    border-radius: 30px !important;
+    font-size: 0.55rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+}
+
+.promo-lbl-small { 
+    color: #FF3B30; 
+    font-weight: 800; 
+    margin-right: 8px; 
+}
+

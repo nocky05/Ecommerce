@@ -71,8 +71,11 @@ export async function GET(request: Request) {
         supabaseQuery = supabaseQuery.range(from, to);
 
         const { data, count, error } = await supabaseQuery;
-
         if (error) throw error;
+
+        // Fetch active promotions via utility
+        const { getActivePromotions, applyPromotionToProduct } = await import('@/lib/promotions');
+        const activePromos = await getActivePromotions();
 
         const productsWithMeta = data?.map((p: any) => {
             const reviews = p.reviews || [];
@@ -80,8 +83,11 @@ export async function GET(request: Request) {
                 ? reviews.reduce((acc: number, r: any) => acc + r.rating, 0) / reviews.length
                 : 0;
 
+            // Apply promotion via utility
+            const productWithPromo = applyPromotionToProduct(p, activePromos);
+
             // Remove reviews from the object to keep payload small
-            const { reviews: _, ...productData } = p;
+            const { reviews: _, ...productData } = productWithPromo;
 
             return {
                 ...productData,
@@ -89,6 +95,8 @@ export async function GET(request: Request) {
                 reviewCount: reviews.length
             };
         }) || [];
+
+
 
         return NextResponse.json({
             products: productsWithMeta,

@@ -26,6 +26,7 @@ interface Product {
     brand: string | null;
     rating?: number;
     reviewCount?: number;
+    promo_label?: string | null;
 }
 
 
@@ -311,6 +312,12 @@ export default function ShopContent() {
                                                         className="shop-card-image"
                                                         style={{ objectFit: 'contain', padding: '15px' }}
                                                     />
+                                                    {product.promo_label && (
+                                                        <div className="promo-badge-float">
+                                                            {product.promo_label}
+                                                        </div>
+                                                    )}
+
                                                     <button
                                                         onClick={(e) => {
                                                             e.preventDefault();

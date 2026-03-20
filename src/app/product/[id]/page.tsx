@@ -6,8 +6,10 @@ import { Metadata } from "next";
 const mapProduct = (p: any) => ({
     ...p,
     oldPrice: p.old_price,
+    promoLabel: p.promo_label,
     deliveryTime: p.delivery_time
 });
+
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
     const { id } = await params;
@@ -39,15 +41,16 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
+    const { getActivePromotions, applyPromotionToProduct } = await import('@/lib/promotions');
 
     // Fetch the product from Supabase
-    const { data: product, error } = await supabase
+    const { data: rawProduct, error } = await supabase
         .from('products')
         .select('*')
         .eq('id', id)
         .single();
 
-    if (error || !product) {
+    if (error || !rawProduct) {
         return (
             <div className="container py-20 text-center">
                 <h1 className="text-2xl font-bold mb-4" style={{ color: '#111' }}>Produit non trouvé</h1>
@@ -59,18 +62,24 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         );
     }
 
+    const activePromos = await getActivePromotions();
+    const product = applyPromotionToProduct(rawProduct, activePromos);
+
     // Related products (same category)
-    const { data: related } = await supabase
+    const { data: rawRelated } = await supabase
         .from('products')
         .select('*')
         .eq('category', product.category)
         .neq('id', id)
         .limit(4);
 
+    const relatedProducts = (rawRelated || []).map(p => applyPromotionToProduct(p, activePromos));
+
     return (
         <ProductDetailClient
             product={mapProduct(product)}
-            relatedProducts={(related || []).map(mapProduct)}
+            relatedProducts={relatedProducts.map(mapProduct)}
         />
     );
 }
+

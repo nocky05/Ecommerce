@@ -18,7 +18,9 @@ interface Product {
     description: string;
     availability: string;
     deliveryTime: string;
+    promoLabel?: string | null;
 }
+
 
 interface Review {
     id: number;
@@ -158,12 +160,16 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                             </Link>
                         </div>
 
-                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '15px', marginBottom: '30px' }}>
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '15px', marginBottom: '30px', position: 'relative' }}>
                             <span style={{ fontSize: '32px', fontWeight: '900', color: '#b22222' }}>{Number(product.price).toLocaleString()}F CFA</span>
                             {product.oldPrice && Number(product.oldPrice) > Number(product.price) && (
-                                <span style={{ fontSize: '18px', color: '#aaa', textDecoration: 'line-through', fontWeight: '500' }}>{Number(product.oldPrice).toLocaleString()}F CFA</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <span style={{ fontSize: '18px', color: '#aaa', textDecoration: 'line-through', fontWeight: '500' }}>{Number(product.oldPrice).toLocaleString()}F CFA</span>
+                                    {product.promoLabel && <span className="promo-badge-float" style={{ position: 'static', padding: '2px 8px' }}>{product.promoLabel}</span>}
+                                </div>
                             )}
                         </div>
+
 
                         {/* Description Short */}
                         <div style={{ borderTop: '1px solid #eee', paddingTop: '25px', marginBottom: '40px' }}>

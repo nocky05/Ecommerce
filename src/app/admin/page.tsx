@@ -921,14 +921,22 @@ export default function AdminPage() {
                                             <div className="active-card" key={promo.id}>
                                                 <div className="ac-main">
                                                     <div className="ac-info">
-                                                        <span className="tag-flash">{promo.label || 'PROMO'}</span>
-                                                        <h4>{promo.products?.name || 'Produit inconnu'}</h4>
+                                                        <span className={promo.type === 'category' ? "tag-cat" : "tag-flash"}>
+                                                            {promo.type === 'category' ? 'PROMO RAYON' : 'VENTE FLASH'}
+                                                        </span>
+                                                        <h4>
+                                                            {promo.type === 'category' 
+                                                                ? `Rayon: ${promo.category}` 
+                                                                : (promo.products?.name || 'Produit Spécifique')}
+                                                        </h4>
                                                         <p className="timer">
+                                                            {promo.label && <span className="promo-lbl-small">[{promo.label}]</span>}
                                                             {promo.expires_at
                                                                 ? `Expire le: ${new Date(promo.expires_at).toLocaleDateString()}`
                                                                 : 'Permanent'}
                                                         </p>
                                                     </div>
+
                                                     <div className="ac-value">-{promo.discount_percent}%</div>
                                                 </div>
                                                 <button
@@ -1836,6 +1844,23 @@ export default function AdminPage() {
                 
                 .stop-btn { background: white; border: 1px solid #E9EDF7; color: #FF3B30; padding: 0.5rem 1rem; border-radius: 10px; font-weight: 800; font-size: 0.7rem; cursor: pointer; transition: 0.3s; }
                 .stop-btn:hover { background: #FF3B30; color: white; border-color: #FF3B30; }
+
+                .promo-badge-float {
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                    background: #FF3B30;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 6px;
+                    font-size: 0.7rem;
+                    font-weight: 800;
+                    z-index: 5;
+                    box-shadow: 0 2px 8px rgba(255,59,48,0.3);
+                }
+                .promo-lbl-small { color: #FF3B30; font-weight: 800; margin-right: 8px; }
+                .ac-main h4 { margin-top: 5px; }
+
 
                 .flex-row { display: flex; }
                 .gap-6 { gap: 1.5rem; }

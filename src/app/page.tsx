@@ -128,9 +128,10 @@ export default function HomePage() {
       reviewCount: p.reviewCount || 0,
       category: p.category,
       image: p.image || "/images/products/placeholder.jpg",
-      promoLabel: "NOUVEAUTÉ",
+      promoLabel: p.promo_label || "NOUVEAUTÉ",
       delivery_time: p.delivery_time
     }));
+
 
   const filteredProducts = activeTab === "Tous les produits"
     ? displayProducts.slice(0, 8)
