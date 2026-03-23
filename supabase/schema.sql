@@ -1,5 +1,5 @@
 -- ============================================
--- Chez le musicien - Schéma de base de données
+-- Chez le musicien - Schéma de base de données Complet
 -- À exécuter dans Supabase > SQL Editor
 -- ============================================
 
@@ -19,11 +19,9 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 
--- Nettoyer les anciennes politiques
 DROP POLICY IF EXISTS "Profiles: own read" ON public.profiles;
 DROP POLICY IF EXISTS "Profiles: own update" ON public.profiles;
 
--- Un utilisateur ne peut voir et modifier que son propre profil
 CREATE POLICY "Profiles: own read" ON public.profiles
     FOR SELECT USING ((SELECT auth.uid()) = id);
 
@@ -73,16 +71,13 @@ CREATE TABLE IF NOT EXISTS public.orders (
 
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 
--- Nettoyer les anciennes politiques pour éviter les erreurs
 DROP POLICY IF EXISTS "Orders: own read" ON public.orders;
 DROP POLICY IF EXISTS "Orders: public insert" ON public.orders;
 DROP POLICY IF EXISTS "Orders: admin all" ON public.orders;
 
--- Un utilisateur voit ses propres commandes (ou les commandes sans user_id pour les invités dans la même session, etc.)
 CREATE POLICY "Orders: own read" ON public.orders
     FOR SELECT USING ((SELECT auth.uid()) = user_id OR user_id IS NULL);
 
--- Autoriser l'insertion (checkout) pour tout le monde (anon et authenticated)
 CREATE POLICY "Orders: public insert" ON public.orders
     FOR INSERT WITH CHECK (
         ((SELECT auth.uid()) IS NULL AND user_id IS NULL)
@@ -90,7 +85,6 @@ CREATE POLICY "Orders: public insert" ON public.orders
         ((SELECT auth.uid()) = user_id)
     );
 
--- Les admins voient/modifient toutes les commandes
 CREATE POLICY "Orders: admin all" ON public.orders
     FOR ALL USING (
         EXISTS (
@@ -135,15 +129,12 @@ CREATE TABLE IF NOT EXISTS public.products (
 
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
 
--- Nettoyer les anciennes politiques
 DROP POLICY IF EXISTS "Products: public read" ON public.products;
 DROP POLICY IF EXISTS "Products: admin write" ON public.products;
 
--- Tout le monde peut lire les produits actifs
 CREATE POLICY "Products: public read" ON public.products
     FOR SELECT USING (is_active = TRUE);
 
--- Seuls les admins peuvent modifier les produits
 CREATE POLICY "Products: admin write" ON public.products
     FOR ALL USING (
         EXISTS (
@@ -154,7 +145,105 @@ CREATE POLICY "Products: admin write" ON public.products
 
 
 -- ============================
--- 4. TABLE WISHLISTS (favoris)
+-- 4. TABLE PROMOTIONS
+-- ============================
+CREATE TABLE IF NOT EXISTS public.promotions (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES public.products(id) ON DELETE CASCADE,
+    discount_percent INTEGER NOT NULL CHECK (discount_percent > 0 AND discount_percent <= 100),
+    label TEXT,
+    expires_at TIMESTAMP WITH TIME ZONE,
+    active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE public.promotions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Promotions: public read" ON public.promotions;
+DROP POLICY IF EXISTS "Promotions: admin write" ON public.promotions;
+
+CREATE POLICY "Promotions: public read" ON public.promotions FOR SELECT USING (TRUE);
+CREATE POLICY "Promotions: admin write" ON public.promotions FOR ALL USING (
+    EXISTS (
+        SELECT 1 FROM public.profiles
+        WHERE id = (SELECT auth.uid()) AND role = 'admin'
+    )
+);
+
+
+-- ============================
+-- 5. TABLE BANNERS (Accueil / Posts)
+-- ============================
+CREATE TABLE IF NOT EXISTS public.banners (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT,
+    image_url TEXT NOT NULL,
+    button_link TEXT DEFAULT '/shop',
+    active BOOLEAN DEFAULT TRUE,
+    "order" INTEGER DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE public.banners ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Banners: public read" ON public.banners;
+DROP POLICY IF EXISTS "Banners: admin write" ON public.banners;
+
+CREATE POLICY "Banners: public read" ON public.banners FOR SELECT USING (TRUE);
+CREATE POLICY "Banners: admin write" ON public.banners FOR ALL USING (
+    EXISTS (
+        SELECT 1 FROM public.profiles
+        WHERE id = (SELECT auth.uid()) AND role = 'admin'
+    )
+);
+
+
+-- ============================
+-- 6. TABLE SITE_SETTINGS
+-- ============================
+CREATE TABLE IF NOT EXISTS public.site_settings (
+    id TEXT PRIMARY KEY DEFAULT 'general',
+    data JSONB NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Settings: public read" ON public.site_settings;
+DROP POLICY IF EXISTS "Settings: admin update" ON public.site_settings;
+
+CREATE POLICY "Settings: public read" ON public.site_settings FOR SELECT USING (TRUE);
+CREATE POLICY "Settings: admin update" ON public.site_settings FOR ALL USING (
+    EXISTS (
+        SELECT 1 FROM public.profiles
+        WHERE id = (SELECT auth.uid()) AND role = 'admin'
+    )
+);
+
+
+-- ============================
+-- 7. TABLE REVIEWS (avis clients)
+-- ============================
+CREATE TABLE IF NOT EXISTS public.reviews (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES public.products(id) ON DELETE CASCADE,
+    user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+    user_name TEXT NOT NULL,
+    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE public.reviews ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Reviews: public read" ON public.reviews;
+DROP POLICY IF EXISTS "Reviews: authenticated insert" ON public.reviews;
+DROP POLICY IF EXISTS "Reviews: own delete" ON public.reviews;
+
+CREATE POLICY "Reviews: public read" ON public.reviews FOR SELECT USING (TRUE);
+CREATE POLICY "Reviews: authenticated insert" ON public.reviews FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Reviews: own delete" ON public.reviews FOR DELETE USING ((SELECT auth.uid()) = user_id);
+
+
+-- ============================
+-- 8. TABLE WISHLISTS (favoris)
 -- ============================
 CREATE TABLE IF NOT EXISTS public.wishlists (
     id SERIAL PRIMARY KEY,
@@ -165,8 +254,6 @@ CREATE TABLE IF NOT EXISTS public.wishlists (
 );
 
 ALTER TABLE public.wishlists ENABLE ROW LEVEL SECURITY;
-
--- Nettoyer les anciennes politiques
 DROP POLICY IF EXISTS "Wishlists: own" ON public.wishlists;
 
 CREATE POLICY "Wishlists: own" ON public.wishlists
@@ -174,12 +261,55 @@ CREATE POLICY "Wishlists: own" ON public.wishlists
 
 
 -- ============================
--- GRANT API access
+-- 9. TABLE NEWSLETTER (Abonnés)
+-- ============================
+CREATE TABLE IF NOT EXISTS public.newsletter_subscribers (
+    id SERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE public.newsletter_subscribers ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Newsletter: admin read" ON public.newsletter_subscribers;
+
+CREATE POLICY "Newsletter: admin read" ON public.newsletter_subscribers
+    FOR SELECT USING (
+        EXISTS (
+            SELECT 1 FROM public.profiles
+            WHERE id = (SELECT auth.uid()) AND role = 'admin'
+        )
+    );
+
+
+-- ============================
+-- 10. GRANTS & PERMISSIONS
 -- ============================
 GRANT USAGE ON SCHEMA public TO anon, authenticated;
+
 GRANT SELECT ON public.products TO anon, authenticated;
+GRANT ALL ON public.products TO authenticated;
+
 GRANT ALL ON public.orders TO anon, authenticated;
+
 GRANT ALL ON public.profiles TO authenticated;
+GRANT SELECT ON public.profiles TO anon;
+
+GRANT SELECT ON public.promotions TO anon, authenticated;
+GRANT ALL ON public.promotions TO authenticated;
+
+GRANT SELECT ON public.banners TO anon, authenticated;
+GRANT ALL ON public.banners TO authenticated;
+
+GRANT SELECT ON public.site_settings TO anon, authenticated;
+GRANT ALL ON public.site_settings TO authenticated;
+
+GRANT SELECT ON public.reviews TO anon, authenticated;
+GRANT ALL ON public.reviews TO authenticated;
+
 GRANT ALL ON public.wishlists TO authenticated;
-GRANT USAGE, SELECT ON SEQUENCE public.products_id_seq TO authenticated;
-GRANT USAGE, SELECT ON SEQUENCE public.wishlists_id_seq TO authenticated;
+
+GRANT INSERT ON public.newsletter_subscribers TO anon, authenticated;
+GRANT SELECT ON public.newsletter_subscribers TO authenticated;
+
+-- Sequences
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
