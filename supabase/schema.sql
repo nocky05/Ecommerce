@@ -38,7 +38,7 @@ BEGIN
     VALUES (NEW.id, NEW.raw_user_meta_data->>'full_name');
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, pg_catalog;
 
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
@@ -84,7 +84,11 @@ CREATE POLICY "Orders: own read" ON public.orders
 
 -- Autoriser l'insertion (checkout) pour tout le monde (anon et authenticated)
 CREATE POLICY "Orders: public insert" ON public.orders
-    FOR INSERT WITH CHECK (TRUE);
+    FOR INSERT WITH CHECK (
+        ((SELECT auth.uid()) IS NULL AND user_id IS NULL)
+        OR 
+        ((SELECT auth.uid()) = user_id)
+    );
 
 -- Les admins voient/modifient toutes les commandes
 CREATE POLICY "Orders: admin all" ON public.orders
@@ -102,7 +106,7 @@ BEGIN
     NEW.updated_at = NOW();
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SET search_path = public, pg_temp;
 
 DROP TRIGGER IF EXISTS orders_updated_at ON public.orders;
 CREATE TRIGGER orders_updated_at
