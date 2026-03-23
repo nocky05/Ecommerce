@@ -362,18 +362,18 @@ h6 {
   display: none !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   .grid-2,
   .grid-3,
   .grid-4 {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
   .grid-6,
   .grid-8 {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
 
@@ -588,6 +588,33 @@ h6 {
     margin: 0 !important;
     box-sizing: border-box !important;
     box-shadow: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-top-row .text-xl {
+    font-size: 0.85rem !important;
+    line-height: 1.1 !important;
+    white-space: normal !important;
+  }
+  .user-actions-container {
+    gap: 8px !important;
+  }
+  .user-actions-container svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .logo-icon-box {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .logo-icon-box svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .container {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
   }
 }
 
@@ -1647,7 +1674,7 @@ h6 {
   font-size: 48px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .auth-banner-title {
     font-size: 24px !important;
     margin-bottom: 20px !important;
@@ -1670,7 +1697,7 @@ h6 {
   font-size: 48px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .profile-banner-title,
   .checkout-banner-title,
   .product-banner-title,
@@ -1687,7 +1714,7 @@ h6 {
   font-size: 48px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .cart-banner-title {
     font-size: 24px !important;
     margin-bottom: 20px !important;
@@ -1699,7 +1726,7 @@ h6 {
   font-size: 64px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .wishlist-banner-title {
     font-size: 24px !important;
     margin-bottom: 10px !important;
@@ -1711,7 +1738,7 @@ h6 {
   font-size: 48px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .contact-banner-title {
     font-size: 24px !important;
     margin-bottom: 0px !important;
@@ -1723,7 +1750,7 @@ h6 {
   font-size: 48px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .about-banner-title {
     font-size: 24px !important;
     margin-bottom: 10px !important;
@@ -1735,7 +1762,7 @@ h6 {
   font-size: 60px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .shop-banner-title {
     font-size: 28px !important;
     margin-bottom: 20px !important;
@@ -1743,7 +1770,7 @@ h6 {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Hero & Slider Mobile Refinements */
   .hero-section-mobile {
@@ -2087,7 +2114,7 @@ h6 {
 }
 
 /* FINAL MOBILE OVERRIDES - ICON VISIBILITY */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Zone des icônes - Visibilité améliorée */
   .user-actions-container svg {
@@ -2175,3 +2202,47 @@ h6 {
     margin-right: 8px; 
 }
 
+/* --- FIX MOBILE CARDS (Overrides previous !important rules) --- */
+@media (max-width: 767px) {
+  /* Ensure grids are strictly 1 column on small mobiles */
+  .product-grid,
+  .shop-layout-grid,
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-6,
+  .grid-8 {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+  
+  /* Fix vertical stretching of cards */
+  .card {
+    min-height: auto !important;
+    padding: 1rem !important;
+  }
+  
+  /* Keep images from disappearing while fixing the vertical stretch */
+  .card-image-wrapper {
+    height: 250px !important;
+    aspect-ratio: auto !important; /* overrides 1/1 square */
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Fix the extra spacing before the add to cart button */
+  .card .card-actions, 
+  .card-actions, 
+  .product-actions {
+    margin-top: 0.5rem !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* Prevent 'Ajouter au panier' from wrapping */
+  .btn-add-cart,
+  .product-actions .btn {
+    padding: 0.5rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    white-space: nowrap !important;
+    flex: 1 !important;
+  }
+}

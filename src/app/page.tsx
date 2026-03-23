@@ -32,7 +32,7 @@ export default function HomePage() {
   // Auto-play for Mobile Hero Slider
   useEffect(() => {
     const interval = setInterval(() => {
-      if (heroSliderRef.current && window.innerWidth <= 768) {
+      if (heroSliderRef.current && window.innerWidth <= 1024) {
         setActiveHeroSlide((prev) => {
           const nextIndex = (prev + 1) % 3;
           heroSliderRef.current?.scrollTo({
@@ -243,9 +243,14 @@ export default function HomePage() {
                   alt={heroBanner.title}
                   fill
                   className="img-cover"
-                  style={{ opacity: 0.5, objectFit: 'cover' }}
+                  style={{ opacity: 0.4, objectFit: 'cover' }}
                   priority
                 />
+                {/* Dark Overlay for better text readability */}
+                <div className="absolute inset-0" style={{ 
+                  background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%)',
+                  zIndex: 2
+                }}></div>
                 <div className="hero-badge-sale absolute d-flex flex-column items-center justify-center font-bold rounded-full"
                   style={{
                     background: '#FFD200',
@@ -269,7 +274,7 @@ export default function HomePage() {
                 {card.subtitle && <p className="font-bold mb-4" style={{ fontSize: '14px', color: card.text_color === '#fff' ? 'var(--primary)' : 'inherit', opacity: 0.9 }}>{card.subtitle}</p>}
                 <Link href={card.link} className="btn btn-primary text-xs font-bold uppercase tracking-widest" style={{ width: 'fit-content', padding: '0.8rem 1.5rem', textDecoration: 'none', borderRadius: '8px' }}>DÉCOUVRIR →</Link>
               </div>
-              <div className="side-card-image" style={{ opacity: card.bg_color === '#000' ? 0.7 : 0.9 }}>
+              <div className="side-card-image" style={{ opacity: card.bg_color === '#000' ? 0.4 : 0.6 }}>
                 <Image
                   src={card.image}
                   alt={card.title}
@@ -277,6 +282,10 @@ export default function HomePage() {
                   className="img-cover"
                   style={{ objectFit: 'cover' }}
                 />
+                <div className="absolute inset-0" style={{ 
+                  background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%)',
+                  zIndex: 2
+                }}></div>
               </div>
             </div>
           ))}

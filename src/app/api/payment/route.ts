@@ -22,15 +22,23 @@ export async function POST(request: Request) {
             );
         }
 
+        // Use the live public key for authentication
+        // GeniusPay pk_live_ keys use Authorization: Bearer header
+        const authHeaders: Record<string, string> = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${GENIUSPAY_PUBLIC_KEY}`,
+        };
+
+        // If secret key is available, add it as additional header
+        if (GENIUSPAY_SECRET_KEY) {
+            authHeaders['X-API-Secret'] = GENIUSPAY_SECRET_KEY;
+        }
+
         // Create payment session on GeniusPay
         const response = await fetch(GENIUSPAY_API_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-API-Key': GENIUSPAY_PUBLIC_KEY,
-                'X-API-Secret': GENIUSPAY_SECRET_KEY,
-            },
+            headers: authHeaders,
             body: JSON.stringify({
                 amount: Math.round(Number(amount)), // Ensure integer for XOF
                 currency: 'XOF',

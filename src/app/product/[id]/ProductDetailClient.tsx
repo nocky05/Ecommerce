@@ -194,7 +194,7 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                             <button
                                 onClick={() => addToCart(product)}
                                 className="btn-add-cart force-visible"
-                                style={{ minWidth: '240px', flex: 1 }}
+                                style={{ minWidth: '240px', flex: 1, whiteSpace: 'nowrap' }}
                             >
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                     <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
@@ -372,9 +372,9 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                             <h2 style={{ fontSize: '24px', fontWeight: '900', color: '#111' }}>PRODUITS SIMILAIRES</h2>
                             <Link href={`/shop?category=${encodeURIComponent(product.category)}`} style={{ color: '#007BFF', fontWeight: '700', textDecoration: 'none', fontSize: '14px' }}>Voir tout</Link>
                         </div>
-                        <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '30px' }}>
+                        <div className="related-products-slider" style={{ display: 'flex', overflowX: 'auto', gap: '30px', paddingBottom: '20px', scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
                             {relatedProducts.map(prod => (
-                                <div key={prod.id} className="shop-card">
+                                <div key={prod.id} className="shop-card" style={{ flex: '0 0 auto', width: '250px', scrollSnapAlign: 'start' }}>
                                     <Link href={`/product/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                         <div className="shop-card-image-wrapper">
                                             <Image
@@ -428,6 +428,7 @@ export default function ProductDetailClient({ product, relatedProducts }: { prod
                                                 addToCart(prod);
                                             }}
                                             className="btn-add-cart force-visible"
+                                            style={{ whiteSpace: 'nowrap' }}
                                         >
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                                 <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
