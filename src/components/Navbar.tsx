@@ -140,13 +140,18 @@ export default function Navbar() {
               >
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
               </button>
-              <Link href="/" className="d-flex items-center gap-2" style={{ textDecoration: 'none', justifySelf: 'center' }}>
-                <div className="bg-primary rounded-full d-flex items-center justify-center logo-icon-box" style={{ boxShadow: '0 4px 10px rgba(0, 123, 255, 0.3)' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg>
-                </div>
-                <span className="text-xl font-black tracking-tighter text-white uppercase ml-1">
-                  CHEZ LE <span style={{ color: '#FFD200' }}>MUSICIEN</span>
-                </span>
+              <Link href="/" className="d-flex items-center" style={{ textDecoration: 'none' }}>
+                <img 
+                  src="/logo.png" 
+                  alt="CHEZ LE MUSICIEN Logo" 
+                  className="logo-img"
+                  style={{ 
+                    height: '55px', 
+                    width: 'auto',
+                    objectFit: 'contain',
+                    filter: 'brightness(1.1)'
+                  }} 
+                />
               </Link>
             </div>
 

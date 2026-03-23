@@ -496,9 +496,17 @@ export default function AdminPage() {
         <div className="admin-base">
             {/* Barre Latérale Fixe */}
             <aside className="fixed-sidebar">
-                <div className="sb-header">
-                    <div className="sb-logo">M</div>
-                    <span className="sb-name">Chez le musicien<span className="dot">.</span></span>
+                <div className="sb-header" style={{ padding: '0 1rem 3rem', justifyContent: 'center' }}>
+                    <img 
+                        src="/logo.png" 
+                        alt="Logo" 
+                        style={{ 
+                            height: '80px', 
+                            width: 'auto',
+                            objectFit: 'contain',
+                            filter: 'brightness(1.1)'
+                        }} 
+                    />
                 </div>
 
                 <nav className="sb-nav">

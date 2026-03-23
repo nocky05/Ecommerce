@@ -10,13 +10,17 @@ export default function Footer() {
             <div className="container footer-grid">
                 {/* Column 1: Brand & Social */}
                 <div className="d-flex flex-column items-start">
-                    <div className="d-flex items-center gap-3 mb-8 text-white">
-                        <div className="bg-primary rounded-full d-flex items-center justify-center p-2" style={{ width: '42px', height: '42px', boxShadow: '0 4px 10px rgba(0, 123, 255, 0.3)' }}>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg>
-                        </div>
-                        <span className="text-2xl font-black tracking-tight uppercase">
-                            CHEZ LE <span style={{ color: '#FFD200' }}>MUSICIEN</span>
-                        </span>
+                    <div className="d-flex items-center text-white mb-2">
+                        <img 
+                            src="/logo.png" 
+                            alt="CHEZ LE MUSICIEN Logo" 
+                            style={{ 
+                                height: '80px', 
+                                width: 'auto',
+                                objectFit: 'contain',
+                                filter: 'brightness(1.1)'
+                            }} 
+                        />
                     </div>
                     <p className="text-xs text-gray-400 mb-10 leading-loose" style={{ textAlign: 'justify' }}>
                         CHEZ LE MUSICIEN est une plateforme leader spécialisée dans la vente d'instruments et équipements de musique, matériel de sonorisation, et équipements pour studio d'enregistrement et de répétition.
