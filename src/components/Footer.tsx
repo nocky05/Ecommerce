@@ -15,7 +15,7 @@ export default function Footer() {
                             src="/logo.png" 
                             alt="CHEZ LE MUSICIEN Logo" 
                             style={{ 
-                                height: '80px', 
+                                height: '150px', 
                                 width: 'auto',
                                 objectFit: 'contain',
                                 filter: 'brightness(1.1)'

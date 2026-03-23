@@ -321,6 +321,20 @@ h6 {
   /* On desktop, children flow as grid items inside header-main-grid */
 }
 
+/* Logo Image Styling */
+.logo-img {
+  height: 100px;
+  width: auto;
+  transition: height 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .logo-img {
+    height: 70px !important;
+  }
+}
+
+
 .header-main-grid {
   display: grid;
   grid-template-columns: auto 1fr auto;

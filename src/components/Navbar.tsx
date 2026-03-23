@@ -146,8 +146,6 @@ export default function Navbar() {
                   alt="CHEZ LE MUSICIEN Logo" 
                   className="logo-img"
                   style={{ 
-                    height: '55px', 
-                    width: 'auto',
                     objectFit: 'contain',
                     filter: 'brightness(1.1)'
                   }} 
