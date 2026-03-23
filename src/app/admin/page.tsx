@@ -1769,6 +1769,8 @@ export default function AdminPage() {
                 .bold { font-weight: 900; }
 
                 .p-btn { border: none; padding: 1rem 2rem; border-radius: 14px; font-weight: 800; color: white; cursor: pointer; transition: 0.3s; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; }
+                .p-btn.gold { background: #D4AF37; color: white; }
+                .p-btn.gold:hover { background: #111; color: #D4AF37; }
                 .p-btn.gold.extra-visible { 
                     background: #111; 
                     color: #D4AF37; 
