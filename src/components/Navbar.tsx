@@ -143,7 +143,7 @@ export default function Navbar() {
             </div>
 
             {/* Column 2: Centered Logo */}
-            <div className="d-flex justify-center">
+            <div className="d-flex justify-center" style={{ flex: '0 0 auto' }}>
               <Link href="/" className="d-flex items-center" style={{ textDecoration: 'none' }}>
                 <img 
                   src="/logo.png" 
@@ -158,7 +158,7 @@ export default function Navbar() {
             </div>
 
             {/* Column 3: Action Zone - Right (inside top row on mobile) */}
-            <div className="d-flex items-center justify-end user-actions-container flex-1-mobile" style={{ gap: '2rem', color: 'white' }}>
+            <div className="d-flex items-center justify-end user-actions-container flex-1-mobile nav-actions-gap" style={{ color: 'white' }}>
               <div className="d-flex items-center gap-3 group hidden-mobile">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                 <div className="text-[9px] font-black uppercase d-flex flex-row items-center gap-2 transition">

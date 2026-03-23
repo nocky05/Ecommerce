@@ -333,8 +333,15 @@ h6 {
     height: 85px !important;
   }
   .flex-1-mobile {
-    flex: 1 !important;
+    flex: 1 0 0 !important;
   }
+  .nav-actions-gap {
+    gap: 1rem !important;
+  }
+}
+
+.nav-actions-gap {
+  gap: 2rem;
 }
 
 
