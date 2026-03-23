@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 
 export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
-    const isAdminPage = pathname?.startsWith('/admin');
+    const isAdminPage = pathname?.toLowerCase().startsWith('/admin');
 
     return (
         <>

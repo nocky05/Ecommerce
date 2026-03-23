@@ -103,7 +103,11 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="w-full" style={{ zIndex: 1000 }}>
+    <header className="w-full" style={{ 
+      zIndex: 1000, 
+      background: '#000', 
+      paddingTop: 'env(safe-area-inset-top)' 
+    }}>
       {/* 1. Top Bar - Professional Blue */}
       <div className="py-2 hidden-mobile" style={{ background: '#004a99', color: 'white', fontSize: '12px' }}>
         <div className="container d-flex justify-between items-center">
