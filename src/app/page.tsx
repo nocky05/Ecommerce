@@ -246,7 +246,7 @@ export default function HomePage() {
                   alt={heroBanner.title}
                   fill
                   className="img-cover"
-                  style={{ opacity: 0.4, objectFit: 'cover' }}
+                  style={{ opacity: 0.7, objectFit: 'cover' }}
                   priority
                 />
                 {/* Dark Overlay for better text readability */}
@@ -277,7 +277,7 @@ export default function HomePage() {
                 {card.subtitle && <p className="font-bold mb-4" style={{ fontSize: '14px', color: card.text_color === '#fff' ? 'var(--primary)' : 'inherit', opacity: 0.9 }}>{card.subtitle}</p>}
                 <Link href={card.link} className="btn btn-primary text-xs font-bold uppercase tracking-widest" style={{ width: 'fit-content', padding: '0.8rem 1.5rem', textDecoration: 'none', borderRadius: '8px' }}>DÉCOUVRIR →</Link>
               </div>
-              <div className="side-card-image" style={{ opacity: card.bg_color === '#000' ? 0.4 : 0.6 }}>
+              <div className="side-card-image" style={{ opacity: card.bg_color === '#000' ? 0.7 : 0.85 }}>
                 <Image
                   src={card.image}
                   alt={card.title}

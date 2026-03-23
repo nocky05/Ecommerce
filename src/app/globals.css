@@ -1873,7 +1873,7 @@ h6 {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5); /* Slightly darker for hero text readability */
+    background: rgba(0, 0, 0, 0.3); /* Slightly lighter for hero image visibility */
     z-index: 6;
   }
 
@@ -1915,7 +1915,7 @@ h6 {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45); /* Slightly darker for better contrast */
+    background: rgba(0, 0, 0, 0.3); /* Slightly lighter for better visibility */
     z-index: 2;
   }
 
