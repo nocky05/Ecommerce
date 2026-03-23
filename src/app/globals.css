@@ -330,7 +330,10 @@ h6 {
 
 @media (max-width: 767px) {
   .logo-img {
-    height: 70px !important;
+    height: 85px !important;
+  }
+  .flex-1-mobile {
+    flex: 1 !important;
   }
 }
 

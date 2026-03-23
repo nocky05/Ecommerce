@@ -131,8 +131,8 @@ export default function Navbar() {
         <div className="container header-main-grid">
           {/* Row 1 on mobile: Logo + Icons together */}
           <div className="header-top-row d-flex items-center" style={{ gap: '0' }}>
-            {/* Logo & Hamburger Section */}
-            <div className="d-flex items-center gap-3">
+            {/* Column 1: Hamburger (Mobile Only) */}
+            <div className="d-flex items-center flex-1-mobile">
               <button
                 className="d-block-mobile"
                 style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', padding: '0.25rem' }}
@@ -140,6 +140,10 @@ export default function Navbar() {
               >
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
               </button>
+            </div>
+
+            {/* Column 2: Centered Logo */}
+            <div className="d-flex justify-center">
               <Link href="/" className="d-flex items-center" style={{ textDecoration: 'none' }}>
                 <img 
                   src="/logo.png" 
@@ -153,8 +157,8 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Action Zone - Right (inside top row on mobile) */}
-            <div className="d-flex items-center justify-end user-actions-container" style={{ gap: '2rem', color: 'white' }}>
+            {/* Column 3: Action Zone - Right (inside top row on mobile) */}
+            <div className="d-flex items-center justify-end user-actions-container flex-1-mobile" style={{ gap: '2rem', color: 'white' }}>
               <div className="d-flex items-center gap-3 group hidden-mobile">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                 <div className="text-[9px] font-black uppercase d-flex flex-row items-center gap-2 transition">
