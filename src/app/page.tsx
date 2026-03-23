@@ -115,10 +115,8 @@ export default function HomePage() {
     };
   });
 
-  // Fallback to recent products if no promotions exist
-  const displayProducts = promoProducts.length > 0
-    ? promoProducts
-    : recentProducts.map(p => ({
+  // Merge promotions with recent products
+  const formattedRecent = recentProducts.map(p => ({
       id: p.id,
       name: p.name,
       price: p.price,
@@ -130,7 +128,12 @@ export default function HomePage() {
       image: p.image || "/images/products/placeholder.jpg",
       promoLabel: p.promo_label || "NOUVEAUTÉ",
       delivery_time: p.delivery_time
-    }));
+  }));
+
+  const displayProducts = [
+    ...promoProducts,
+    ...formattedRecent.filter(rp => !promoProducts.some(pp => pp.id === rp.id))
+  ];
 
 
   const filteredProducts = activeTab === "Tous les produits"
