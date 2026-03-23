@@ -501,7 +501,7 @@ export default function AdminPage() {
                         src="/logo.png" 
                         alt="Logo" 
                         style={{ 
-                            height: '140px', 
+                            height: '100px', 
                             width: 'auto',
                             objectFit: 'contain',
                             filter: 'brightness(1.1)'
